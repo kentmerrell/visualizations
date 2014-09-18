@@ -1,23 +1,24 @@
-var app = angular.module('createReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource']);
+var appCreateReport = angular.module('AppCreateReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource']);
 
-app.config(['$httpProvider', function ($httpProvider) {
+appCreateReport.config(['$httpProvider', function ($httpProvider) {
     $.support.cors = true;
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
-app.controller('MainCtrl', function ($scope, layoutservice, ReportDataService, chartservice) {
+
+appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService,chartservice) {
 
     $scope.spots = layoutservice.allSpots;
     $scope.reportdataservice = ReportDataService;
-    //$scope.allQuestions = ReportDataService.getAllQuestions;// questionservice.allquestions;
+    $scope.allQuestions = ReportDataService.getAllQuestions;// questionservice.allquestions;
     $scope.$watch(
-        function(){
+        function () {
             return ReportDataService.surveyTemplateId;
         }, function (dta) {
             console.log(arguments);
             $scope.allQuestions = ReportDataService.getAllQuestions(ReportDataService.surveyTemplateId);
-            console.log($scope.allQuestions);
+            //console.log($scope.allQuestions);
         });
     $scope.chartsvc = chartservice;
     $scope.questionfiltertest = function (item) {
@@ -27,9 +28,11 @@ app.controller('MainCtrl', function ($scope, layoutservice, ReportDataService, c
 });
 
 
-
-
-app.directive('questionSelector', function (layoutservice) {
+/*---------------------- QUESTION-SELECTOR DIRECTIVE ---------------------
+*   Each question in the survey shows up as a question-selector directive.
+*   question-selector directives are dragged and dropped on spot-container directives.
+*                                                                           */
+appCreateReport.directive('questionSelector', function (layoutservice) {
     return {
         restrict: "E",
         replace: true,
@@ -40,46 +43,23 @@ app.directive('questionSelector', function (layoutservice) {
             scp.jqoptions = { revert: 'invalid' };
 
             scp.startdragging = function () {
-                console.log('scp.startdragging', arguments, scp.question)
+                alert('dragging');
+                console.log('scp.startdragging', arguments, scp.question);
                 angular.copy(scp.question, layoutservice.questionInDrag)
+            };
+
+            scp.testme=function(){
+                alert('hello');
             }
         }
     }
-})
+});
 
 
-
-
-var ExpansionSet = function (originatorRow, originatorCol, terminalRow, terminalCol) {
-    _originatorRow = originatorRow;
-    _originatorCol = originatorCol;
-    _terminalRow = terminalRow;
-    _terminalCol = terminalCol;;
-    return {
-        originatorRow: _originatorRow,
-        originatorCol: _originatorCol,
-        terminalRow: _terminalRow,
-        terminalCol: _terminalCol
-    }
-}
-
-
-var Spot = function (row, col) {
-    _col = col;
-    _row = row;
-    _rowspan = 1; //should always be 1 unless this is exapansionsetoriginator
-    _colspan = 1; //should always be 1 unless this is exapansionsetoriginator
-
-    return {
-        col: _col,
-        row: _row,
-        rowspan: _rowspan,
-        colspan: _colspan,
-    }
-}
-
-
-app.directive('spotContainer', function ($compile, $rootScope, layoutservice) {
+/* -----------------SPOT-CONTAINER DIRECTIVE-----------------
+*The spotContainer directive sets up the initial grid.
+*                                                             */
+appCreateReport.directive('spotContainer', function ($compile, $rootScope, layoutservice) {
     return {
         restrict: "E",
         scope: {
@@ -95,14 +75,14 @@ app.directive('spotContainer', function ($compile, $rootScope, layoutservice) {
                 return layoutservice.layoutmode
             }, function (val) {
                 scp.layoutmode = val;
-            })
+            });
             //let layoutservice know how many columns to expect (for layoutindicator logic)
             layoutservice.registercolumncount(scp.columns);
             scp.addRow = function () {
                 scp.rows++;
                 //add a spot for each column 
                 var row = $("<span/>").addClass("row");
-                for (var colnum = 1; colnum <= parseInt(attrs.columns) ; colnum++) {
+                for (var colnum = 1; colnum <= parseInt(attrs.columns); colnum++) {
                     var newscope = $rootScope.$new(true);
                     //newscope.rownumber=scp.rows;
                     var newspot = $compile("<spot rownumber='" + scp.rows + "' columnnumber='" + colnum + "'></spot>")(scp);
@@ -111,24 +91,21 @@ app.directive('spotContainer', function ($compile, $rootScope, layoutservice) {
                 }
                 el.find('.ChildrenArea').append(row);
                 //console.log(layoutservice.getallspots());
-            }
+            };
 
-            for (var j = 1; j <= parseInt(attrs.rows) ; j++) {
+            for (var j = 1; j <= parseInt(attrs.rows); j++) {
                 scp.addRow();
-
             }
-
 
             scp.togglelayoutmode = function () {
-
                 layoutservice.layoutmode = !layoutservice.layoutmode; // !layoutservice.layoutmode;
             }
         }
     }
-})
+});
 
 
-app.directive('spot', function (layoutservice, $compile, $rootScope,chartservice) {
+appCreateReport.directive('spot', function (layoutservice, $compile, $rootScope, chartservice) {
     return {
         restrict: "E",
         replace: true,
@@ -161,7 +138,6 @@ app.directive('spot', function (layoutservice, $compile, $rootScope,chartservice
                 accept: '.questionselector, .chartcontainer', revert: true
             };
 
-           
 
             scp.mousedownstartselecting = function () {
                 if (layoutservice.layoutmode) {
@@ -220,7 +196,7 @@ app.directive('spot', function (layoutservice, $compile, $rootScope,chartservice
                         // if thischartcontainer is an empty object, then move the chart to this location
                         if (thischartcontainer.length == 0) {
                             layoutservice.moveChartToLocation(layoutservice.sourceChartContainer(), elem.find('.panelarea1'));
-                            
+
                         }
                         else {
                             //if thischartcontainer is an actual object, swap locations.
@@ -238,8 +214,7 @@ app.directive('spot', function (layoutservice, $compile, $rootScope,chartservice
 })
 
 
-
-app.directive("textlabel", function () {
+appCreateReport.directive("textlabel", function () {
     return {
         restrict: "E",
         replace: true,
@@ -258,7 +233,8 @@ app.directive("textlabel", function () {
     }
 })
 
-app.directive("chartcontainer", function (layoutservice, chartservice) {
+
+appCreateReport.directive("chartcontainer", function (layoutservice, chartservice) {
     return {
         restrict: "E",
         replace: true,
@@ -308,24 +284,7 @@ app.directive("chartcontainer", function (layoutservice, chartservice) {
 })
 
 
-var guid = function () {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-                   .toString(16)
-                   .substring(1);
-    }
-    return 'q' + s4() + s4() + s4();
-};
-
-var getrandom = function () {
-    var min = 10;
-    var max = 100;
-    // and the formula is:
-    var random = Math.floor(Math.random() * (max - min + 1)) + min;
-    return random;
-}
-
-app.directive("paneloptions", function (layoutservice, $rootScope) {
+appCreateReport.directive("paneloptions", function (layoutservice, $rootScope) {
     return {
         restrict: "E",
         replace: true,
@@ -341,68 +300,113 @@ app.directive("paneloptions", function (layoutservice, $rootScope) {
             }
         }
     }
-})
+});
 
 
+appCreateReport.directive('chartjs', ['$filter',
+    function ($filter) {
+        return {
+            restrict: "E",
+            replace: true,
+            transclude: true,
+            scope: {
+                data: '=data',
+                options: '=options',
+                width: "=width",
+                height: "=height",
+                responsive: "@"
+            },
+            template: '<canvas></canvas>',
+            link: function ($scope, element, attr /*, ctrl */) {
+                var ctx = element[0].getContext('2d');
+                $scope.references = {
+                    parent: {
+                        obj: $(element[0]).parent()[0],
+                        width: $(element[0]).parent()[0].clientWidth,
+                        height: $(element[0]).parent()[0].clientHeight
+                    },
+                    self: {
+                        width: $scope.width,
+                        height: $scope.height
+                    }
+                };
 
-app.directive('chartjs', ['$filter',
-  function ($filter) {
-      return {
-          restrict: "E",
-          replace: true,
-          transclude: true,
-          scope: {
-              data: '=data',
-              options: '=options',
-              width: "=width",
-              height: "=height",
-              responsive: "@"
-          },
-          template: '<canvas></canvas>',
-          link: function ($scope, element, attr /*, ctrl */) {
-              var ctx = element[0].getContext('2d');
-              $scope.references = {
-                  parent: {
-                      obj: $(element[0]).parent()[0],
-                      width: $(element[0]).parent()[0].clientWidth,
-                      height: $(element[0]).parent()[0].clientHeight
-                  },
-                  self: {
-                      width: $scope.width,
-                      height: $scope.height
-                  }
-              };
-
-              //black magic :)
-              if ($scope.width === "100%") {
-                  $scope.width = $scope.references.parent.width;
-                  $scope.references.self.width = $scope.width;
-                  $scope.$watch("references.parent.obj.clientWidth", function (newValue, old) {
-                      if (newValue != old)
-                          $scope.width = (newValue * $scope.references.self.width) / $scope.references.parent.width;
-                  })
-              }
+                //black magic :)
+                if ($scope.width === "100%") {
+                    $scope.width = $scope.references.parent.width;
+                    $scope.references.self.width = $scope.width;
+                    $scope.$watch("references.parent.obj.clientWidth", function (newValue, old) {
+                        if (newValue != old)
+                            $scope.width = (newValue * $scope.references.self.width) / $scope.references.parent.width;
+                    })
+                }
 
 
-              $scope.generate = function () {
-                  $scope.instance = eval('new Chart(ctx).' + attr.isType + '($scope.data,$scope.options)');
-              }
+                $scope.generate = function () {
+                    $scope.instance = eval('new Chart(ctx).' + attr.isType + '($scope.data,$scope.options)');
+                }
 
-              $scope.$watch('width', function (newValue, oldValue) {
-                  element[0].width = newValue;
-                  $scope.generate()
-              });
+                $scope.$watch('width', function (newValue, oldValue) {
+                    element[0].width = newValue;
+                    $scope.generate()
+                });
 
-              $scope.$watch('height', function (newValue, oldValue) {
-                  element[0].height = newValue;
-                  $scope.generate();
-              });
+                $scope.$watch('height', function (newValue, oldValue) {
+                    element[0].height = newValue;
+                    $scope.generate();
+                });
 
-              $scope.$watch('data', function (newValue, oldValue) {
-                  $scope.generate();
-              }, true);
-          }
-      }
-  }
+                $scope.$watch('data', function (newValue, oldValue) {
+                    $scope.generate();
+                }, true);
+            }
+        }
+    }
 ]);
 
+
+var guid = function () {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+
+    return 'q' + s4() + s4() + s4();
+};
+
+var getrandom = function () {
+    var min = 10;
+    var max = 100;
+    // and the formula is:
+    var random = Math.floor(Math.random() * (max - min + 1)) + min;
+    return random;
+}
+
+var ExpansionSet = function (originatorRow, originatorCol, terminalRow, terminalCol) {
+    _originatorRow = originatorRow;
+    _originatorCol = originatorCol;
+    _terminalRow = terminalRow;
+    _terminalCol = terminalCol;
+
+    return {
+        originatorRow: _originatorRow,
+        originatorCol: _originatorCol,
+        terminalRow: _terminalRow,
+        terminalCol: _terminalCol
+    }
+};
+
+var Spot = function (row, col) {
+    _col = col;
+    _row = row;
+    _rowspan = 1; //should always be 1 unless this is exapansionsetoriginator
+    _colspan = 1; //should always be 1 unless this is exapansionsetoriginator
+
+    return {
+        col: _col,
+        row: _row,
+        rowspan: _rowspan,
+        colspan: _colspan
+    }
+};

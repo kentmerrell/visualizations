@@ -1,5 +1,5 @@
 
-app.factory('chartservice', function ($compile, $rootScope) {
+appCreateReport.factory('chartservice', function ($compile, $rootScope) {
     var _chartInEdit={};
     var _clearthreaddatatypes=[
     "Address",

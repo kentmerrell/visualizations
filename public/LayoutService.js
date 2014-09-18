@@ -1,4 +1,4 @@
-app.factory('layoutservice', function ($rootScope, $compile) {
+appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
     _allSpots = [];
     _expansionSets = []; //1-cell expansion-sets are not included
     _expansionsetInSelection = new ExpansionSet(0, 0, 0, 0);
