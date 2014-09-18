@@ -1,0 +1,382 @@
+/* Put your css in here */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  background-color: #fff;
+}
+.ReportHeader {
+  position: relative;
+  display: block;
+  background-color: #b4b4b4;
+  color: white;
+  font-size: large;
+  margin-bottom: 10px;
+  padding: 5px 0 5px 350px;
+  border-radius: 4px;
+  font-family: sans-serif;
+}
+.ReportHeader .presentationModeIcon {
+  position: absolute;
+  right: 10px;
+  width: 22px;
+}
+h3 {
+  font-family: sans-serif;
+  position: absolute;
+  left: 30px;
+  top: 120px;
+}
+.questionfilter {
+  margin-top: 10px;
+  margin-left: 5px;
+  border: solid 1px lightblue;
+  font-weight: normal;
+  font: 12px Arial;
+  padding: 3px;
+}
+.ReportControlPanelContainer {
+  background-color: white;
+  bottom: 70px;
+  left: 30px;
+  position: absolute;
+  float: left;
+  top: 200px;
+  width: 300px;
+  z-index: 7;
+  border: solid 1px #dddddd;
+  border-radius: 4px;
+}
+.ReportControlPanelContainer .searchcontainer {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.ReportControlPanelContainer .questionselector {
+  border: none;
+  margin-top: 6px;
+  display: inline-block;
+  position: relative;
+  width: 275px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: Georgia;
+  font-size: 13px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
+  line-height: 18px;
+}
+.panelcontainer {
+  background-color: white;
+  bottom: 20px;
+  color: #9f9c9c;
+  left: 350px;
+  padding: 10px;
+  position: absolute;
+  right: 100px;
+  top: 150px;
+}
+.chartcontainer {
+  background-color: white;
+  padding: 0 5px 5px;
+  top: 20px;
+  bottom: 10px;
+  word-wrap: break-word;
+  right: 10px;
+  position: absolute;
+  left: 10px;
+  overflow: visible;
+}
+.chartcontainer > .IconsContainer {
+  background-color: red;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  z-index: 10;
+}
+.chartcontainer > .IconsContainer span {
+  display: block;
+}
+.showIconContainerx {
+  visibility: visible;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.highlightedx {
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 5px 5px 5px lightblue;
+  top: 13px;
+}
+.chartcontainercontrolbox {
+  background-color: #f5f5f5;
+  position: relative;
+  display: inline-block;
+  border: solid 1px silver;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: larger;
+  z-index: 9;
+}
+.chartcontainercontrolbox .qid {
+  margin-right: 3px;
+}
+.chartcontainercontrolbox .paneloptionsroot .optionsbutton {
+  position: absolute;
+  right: 20px;
+}
+.chartcontainercontrolbox .paneloptionsroot .paneloptions {
+  display: inline-block;
+  position: absolute;
+  width: 55px;
+  right: 70px;
+  top: 2px;
+}
+.chartcontainercontrolbox .paneloptionsroot .paneloptions .charttypeicon {
+  color: gold;
+  cursor: pointer;
+  display: inline-block;
+  font-size: larger;
+  font-weight: bold;
+  margin: 2px;
+}
+.chartcontainercontrolbox .delete {
+  position: absolute;
+  right: 5px;
+  font-weight: bold;
+  color: gold;
+  font-size: larger;
+  cursor: pointer;
+  top: 4px;
+}
+.SpotContainer {
+  position: relative;
+  display: table;
+  background-color: blue;
+  width: 100%;
+  overflow: visible;
+}
+.row {
+  display: table-row;
+  overflow: visible;
+}
+.layoutmodeswitch {
+  /*position: absolute;*/
+  margin-left: 20px;
+  margin-right: 20px;
+  border: none;
+  padding: 3px;
+}
+.layoutmodeselected {
+  background-color: lawngreen;
+  color: white;
+}
+.layoutmodenotselected {
+  background-color: gray;
+  color: silver;
+}
+.spot {
+  display: table-cell;
+  border: 1px silver solid;
+  height: 200px;
+  width: 900px;
+  background-color: white;
+  position: relative;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  overflow: visible;
+}
+.spotcontainercontrollpanel {
+  background-color: gray;
+}
+.spotcontainer,
+.ChildrenArea {
+  background-color: blue;
+  border-right: 1px solid #ffffff;
+  border-top: 1px solid #ffffff;
+}
+.spotaddress {
+  position: relative;
+  float: right;
+}
+.panelarea1 {
+  background-color: #f5f5f5;
+  bottom: 0px;
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.cspan1 {
+  width: 100%;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.cspan2 {
+  width: 200%;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.cspan3 {
+  width: 300%;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.cspan4 {
+  width: 400%;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.rspan1 {
+  bottom: 0px;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.rspan2 {
+  bottom: -200px;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.rspan3 {
+  bottom: -400px;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.rspan4 {
+  bottom: -600px;
+  background-color: #f5f5f5;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.panelarea2 {
+  background-color: white;
+  bottom: -100px;
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 200%;
+  z-index: 0;
+}
+#createReport .on-drag-enter {
+  background-color: #ECF0F1;
+  border: 1px dashed #DBEAF9;
+}
+#createReport .on-drag-hoverX:before {
+  border: 1px dashed #DBEAF9;
+  display: block;
+  color: white;
+  font-size: x-large;
+  text-align: center;
+}
+.spothighlight {
+  background-color: aquamarine;
+}
+.li_rightside:before {
+  background-image: url(../Content/images/icoMoon/arrow-left.png);
+  content: ' ';
+  left: -30px;
+  position: inherit;
+  height: 100%;
+  width: 30px;
+}
+.li_leftside:before {
+  background-image: url(../Content/images/icoMoon/arrow-right.png);
+  content: ' ';
+  left: 10px;
+  position: inherit;
+  height: 100%;
+  width: 30px;
+}
+.li_topside:before {
+  background-image: url(../Content/images/icoMoon/arrow-down.png);
+  content: ' ';
+  position: inherit;
+  height: 32px;
+  width: 100%;
+  top: 10px;
+}
+.li_bottomside:before {
+  background-image: url(../Content/images/icoMoon/arrow-up.png);
+  content: ' ';
+  position: inherit;
+  height: 30px;
+  width: 100%;
+  bottom: 10px;
+}
+.hidden {
+  display: none;
+}
+.invisible {
+  visibility: hidden;
+}
+.ta-editor {
+  min-height: 100px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 50%;
+  margin: 20px 0;
+}
+.ta-scroll-window.form-control {
+  font-family: inherit;
+  font-size: 100%;
+  height: 150px;
+  overflow: auto;
+  padding: 0;
+  position: relative;
+}
+.ta-scroll-window.form-control h1 {
+  font-size: 24px;
+}
+.ta-scroll-window.form-control h2 {
+  font-size: 18px;
+}
+.ta-scroll-window.form-control h3 {
+  font-size: 14px;
+}
+.currentlydragging {
+  z-index: 1000000 !important;
+  /* The default is 100. !important overrides the default. */
+  background-color: lightyellow;
+  position: absolute;
+  width: 400px;
+  height: 150px;
+}
+.ui-front {
+  z-index: 1000000 !important;
+  /* The default is 100. !important overrides the default. */
+}
+.payload {
+  background-color: green;
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 15px;
+}

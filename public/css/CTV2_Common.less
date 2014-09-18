@@ -1,0 +1,79 @@
+@bordercolor1:gray;
+@finderHeadBackground:#383737;
+.findercontainer{
+  background-color:@finderHeadBackground;
+  position:relative;
+  display:block;
+  width:800px;
+  //border:1px solid @bordercolor1;
+  left: 144px;
+  top:-20px;
+}
+
+.findernavbar{
+  background-color:@finderHeadBackground;
+  display:block;
+  text-align:center;
+}
+
+.findercomponentcontainer{
+    background-color: #383737;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.componentName{
+  display:block;
+  text-align:center;
+}
+.componentFilterText{
+  display:block;
+   text-align:center;
+   
+
+}
+
+.componentFilterText input{
+  width:80px;
+  height:20px;
+  color:#726d6d;
+  background-color:#555454;
+  border:1px solid @finderHeadBackground;
+  margin-bottom:8px;
+}
+
+.itemscontainer{
+    display:block;
+    position:relative;
+    height:120px;
+    background-color:white;
+    
+    overflow:auto;
+}
+
+.thisitem{
+    position:relative;
+  display:block;
+  background-color:white;
+  padding-left:3px;
+
+}
+
+ .highlight{
+      color:red;
+  }
+
+
+.findercontainer table{
+  border-collapse:collapse;
+  width:100%;
+  padding:0px;
+  background-color: white;
+}
+
+.findercontainer td{
+    padding:0px;
+border:1px solid @bordercolor1;
+}
