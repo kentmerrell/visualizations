@@ -1,5 +1,6 @@
 var appCreateReport = angular.module('AppCreateReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource']);
 
+//configurations to enable cors
 appCreateReport.config(['$httpProvider', function ($httpProvider) {
     $.support.cors = true;
     $httpProvider.defaults.useXDomain = true;

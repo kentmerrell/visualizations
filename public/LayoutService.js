@@ -279,16 +279,7 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
 
             container.append($compile("<chartcontainer questionsel='questionsel' hostspot='spot'></chartcontainer>")(newscope));
 
-            //if (charttype.toLowerCase() == "bar")
-
-            //    container.append($compile("<panelbardirective questionsel='questionsel'></paneldirective>")(newscope));
-
-            //if (charttype.toLowerCase() == "line")
-            //    container.append($compile("<paneldirective questionsel='questionsel'></paneldirective>")(newscope));
-
-            //if (charttype.toLowerCase() == "pie")
-            //    container.append($compile("<panelpiedirective questionsel='questionsel'></paneldirective>")(newscope));
-        },
+             },
         triggerChartRedraw: function (rownumber, columnnumber) {
             var chartcontainer = _getChartContainer(rownumber, columnnumber);
             //(there may not be a chartcontainer on thespot)
