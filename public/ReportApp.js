@@ -8,13 +8,7 @@ appCreateReport.config(['$httpProvider', function ($httpProvider) {
 }]);
 
 
-appCreateReport.directive('superVisDrctv',function(){
-    "use strict";
-    return{
-        restrict:'E',
-        template:'<span style="width:100%;height: 100%; background-color: lightblue;display: inline-block;position: relative">super-vis</span>'
-    }
-})
+
 
 appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService,chartservice) {
 
