@@ -56,6 +56,46 @@
 </style>
 
 
+
+<!--
+--------------PARTIALS---------------
+These must be included on the cshtml page in prod.
+-------------------------------------->
+
+
+<!----------------sv-options-panel.html-------------------->
+<script type="text/ng-template" id="sv-options-panel.html">
+    <span>sv-options-panel.html</span>
+</script>
+
+
+
+<!----------------super-viz.html-------------------->
+<script type="text/ng-template" id="super-viz.html">
+    <span style="width:100%;height: 100%; background-color: lightblue;display: inline-block;position: relative">
+        super-viz directive
+        <sv-options-panel></sv-options-panel>
+    </span>
+</script>
+
+<!----------------testContainer.html-------------------->
+<script type="text/ng-template" id="testContainer.html">
+    <span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
+    <span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">this testContainer directive mimics a chartContainer directive</span>
+    <span style="margin-bottom: -6px; position: relative; display:block;">width:<input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px; border: 1px lightgray solid;">
+            height:<input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;" clearthreaddatatype="test"></span><br>
+    <span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
+            <super-viz></super-viz>
+            </span>
+    </span>
+</script>
+
+
+
+
+
+
+
 <!--------------SUPERVIZ DIRECTIVE---------------------->
 
 <h2>superViz directive</h2>
@@ -80,10 +120,10 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
     <li>
         <p>The svOptionsPanel directive is a child of the superViz directive. It is responsible for displaying options
             that are specific to the datatype assigned to it's parent superViz.
-
-        <p>svOptionsPanel shares scope with it's parent superViz.
-
-        <p>The datatype associated with a svOptionsPanel (or a superViz) never changes. If a user wants a different
+</p></li>
+        <li><p>svOptionsPanel shares scope with it's parent superViz.
+        </li>
+        <li><p>The datatype associated with a svOptionsPanel (or a superViz) never changes. If a user wants a different
             datatype associated with a chart, s/he must delete the chart and drag a different question onto the
             grid.</p>
     </li>
@@ -175,56 +215,52 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 <ul>
     <li>This page uses a special testcontainer directive that wraps the superViz directive in a postioned
         (and dynamically sized) span element. It looks like this:
-    <pre><code>&lt;test-container>&lt;/test-container>
+    <pre><code>&lt;test-container width="200" height="200" ctdatatype="SingleLineText" >&lt;/test-container>
     </code></pre>
     </li>
+    </ul>
+<!--------------BEHIND THE CURTAIN----------->
+<H4>Behind the Curtain</H4>
+<ul>
     <li>
         This is a listing of the testContainer directive to show how it is merely a wrapper around the superViz
         directive.
-    <pre><code>appCreateReport.directive('testContainer', function () {
-        "use strict";
-        return{
+<pre><code>
+appCreateReport.directive('testContainer', function () {
+    "use strict";
+    return{
         restrict: 'E',
         scope: true,
-        template: '&lt;span>' +
-        'width:&lt;input ng-model="mywidth" style="width:50px;margin-right:10px;">' +
-        'height:&lt;input ng-model="myheight" style="width:50px">&lt;/span>&lt;br>' +
-        '&lt;span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">' +
-        '&lt;super-viz>&lt;/super-viz>' +
-        '&lt;/span>',
+        templateUrl:'testContainer.html',
         link: function (scope, el, attrs) {
-        //set default width and height
-        scope.mywidth = attrs.width;
-        scope.myheight = attrs.height;
+            scope.mywidth = attrs.width;
+            scope.myheight = attrs.height;
+            scope.clearthreaddatatype=attrs.ctdatatype;
         }
-        }
-        }) </code></pre>
+    }
+})
+</code></pre>
+    </li>
+    <li>
+        <p>And the associated template, testContainer.html (inline styling used because this will never be deployed in prod)</p>
+ <pre><code>
+&lt;span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
+    &lt;span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">
+        this testContainer directive mimics a chartContainer directive&lt;/span>
+    &lt;span style="margin-bottom: -6px; position: relative; display:block;">
+        width:&lt;input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px;
+            border: 1px lightgray solid;">
+        height:&lt;input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;"
+                      clearthreaddatatype="test">&lt;/span>&lt;br>
+    &lt;span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
+         &lt;super-viz>&lt;/super-viz>
+    &lt;/span>
+&lt;/span>
+ </code></pre>
     </li>
 </ul>
 
-<!--
---------------PARTIALS---------------
-These must be included on the cshtml page in prod.
--------------------------------------->
 
-<!----------------super-viz.html-------------------->
-<script type="text/ng-template" id="super-viz.html">
-    <span style="width:100%;height: 100%; background-color: lightblue;display: inline-block;position: relative">
-        super-viz directive
-        <sv-options-panel></sv-options-panel>
-    </span>
-</script>
 
-<!----------------testContainer.html-------------------->
-<script type="text/ng-template" id="testContainer.html">
-    <span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
-    <span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">this testContainer directive mimics a chartContainer directive</span>
-    <span style="margin-bottom: -6px; position: relative; display:block;">width:<input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px; border: 1px lightgray solid;">
-            height:<input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;" clearthreaddatatype="test"></span><br>
-    <span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
-            <super-viz></super-viz>
-            </span>
-    </span>
-</script>
 </body>
 </html>
