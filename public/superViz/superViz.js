@@ -5,7 +5,9 @@ appCreateReport.directive('superViz',function(){
     "use strict";
     return{
         restrict:'E',
-        //template:'<span>super-viz.html</span>'
-        templateUrl:'super-viz.html'
+        templateUrl: 'super-viz.html'
     }
 })
+
+
+
