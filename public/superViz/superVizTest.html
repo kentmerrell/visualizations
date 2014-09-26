@@ -23,7 +23,7 @@
     <script src="../ng-google-chart.js"></script>
     <script src="superViz.js"></script>
     <script src="svOptionsPanel.js"></script>
-    <script src="testContainer.js"></script>
+    <script src="testChartContainer.js"></script>
 
     <script src="../textAngular.js"></script>
     <script src="../textAngular-sanitize.js"></script>
@@ -56,46 +56,6 @@
 </style>
 
 
-
-<!--
---------------PARTIALS---------------
-These must be included on the cshtml page in prod.
--------------------------------------->
-
-
-<!----------------sv-options-panel.html-------------------->
-<script type="text/ng-template" id="sv-options-panel.html">
-    <span>sv-options-panel.html</span>
-</script>
-
-
-
-<!----------------super-viz.html-------------------->
-<script type="text/ng-template" id="super-viz.html">
-    <span style="width:100%;height: 100%; background-color: lightblue;display: inline-block;position: relative">
-        super-viz directive
-        <sv-options-panel></sv-options-panel>
-    </span>
-</script>
-
-<!----------------testContainer.html-------------------->
-<script type="text/ng-template" id="testContainer.html">
-    <span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
-    <span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">this testContainer directive mimics a chartContainer directive</span>
-    <span style="margin-bottom: -6px; position: relative; display:block;">width:<input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px; border: 1px lightgray solid;">
-            height:<input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;" clearthreaddatatype="test"></span><br>
-    <span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
-            <super-viz></super-viz>
-            </span>
-    </span>
-</script>
-
-
-
-
-
-
-
 <!--------------SUPERVIZ DIRECTIVE---------------------->
 
 <h2>superViz directive</h2>
@@ -108,11 +68,45 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 <h4>General Case</h4>
 <ul>
     <li>
-        <test-container width="400" height="400"></test-container>
+        <test-chart-container width="400" height="400"></test-chart-container>
     </li>
 </ul>
 
 
+<!--------------RULES FOR SCOPE---------------------->
+<h4>Rules for Scope</h4>
+<ul>
+    <li>
+        <p>Scope Diagram</p>
+        <a href="https://www.lucidchart.com/invitations/accept/49216738-f3a8-4469-93c0-343cba0db27d">
+            <img src="https://www.lucidchart.com/publicSegments/view/5424330c-54c0-4c6d-a554-197d0a0099df/image.png"
+                 width="600px"></a>
+    </li>
+    <li>propertyBag is an object declared in chartContainer (testChartContainer in isolateddev) that holds dynamically
+        created properties available to all components within the shared scope.
+    </li>
+    <li><p>Scope can be tested by injecting a string representation of datatype it into the testChartContainer directive
+        via
+        a ctdatatype attribute.</p>
+        <pre style="width:700px"><code>&lt;test-chart-container width="400" height="200" ctdatatype="Boolean">&lt;/test-chart-container></code></pre>
+        <p>The datatype should propagate throughout the entire shared scope in
+            scope.propertyBag.clearthreaddatatype.</p>
+    </li>
+</ul>
+
+
+<h4>Services</h4>
+<ul>
+    <li><p>The superViz directive contains references to the ReportDataSrvc and MetricMakerSrvc services.</p>
+        <img src="https://www.lucidchart.com/publicSegments/view/54249488-92f8-4377-8ec6-2aa30a00c60b/image.png"
+             width="400"/>
+
+    </li>
+    <li>The MetricMakerSrvc service contains logic for defining options to display metrics as visualizations</li>
+    <li>The ReportDataSrvc service provides access to all data endpoints on the server. This includes questions,
+        metricresults, locations, saved uioptions, etc...
+    </li>
+</ul>
 <!--------------OPTIONS PANEL---------------------->
 
 <h4>svOptionsPanel</h4>
@@ -120,31 +114,40 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
     <li>
         <p>The svOptionsPanel directive is a child of the superViz directive. It is responsible for displaying options
             that are specific to the datatype assigned to it's parent superViz.
-</p></li>
-        <li><p>svOptionsPanel shares scope with it's parent superViz.
-        </li>
-        <li><p>The datatype associated with a svOptionsPanel (or a superViz) never changes. If a user wants a different
-            datatype associated with a chart, s/he must delete the chart and drag a different question onto the
-            grid.</p>
-    </li>
-    <li>svOptionsPanel Sizing
-        <p>Most of the time the svOptionsPanel is hidden. When it is activated it should float along the upper inside
-            right edge
-            of the parent superViz directive. </p>
+        </p></li>
 
+    <li><p>The svOptionsPanel shares scope with it's parent superViz.
+    </li>
+    <li><p>The datatype associated with a svOptionsPanel (or a superViz, for that matter) never changes. If a user wants
+        a different
+        datatype associated with a chart, s/he must delete the chart and drag a different question onto the
+        grid.</p>
+    </li>
+    <li>The visualization type associated with a svOptionsPanel <i>can</i> change, since a user may choose to change a
+        vizualization between different types (say, from verticalbar to linechart).
+    </li>
+    <li><p>The svOptionsPanel is the parent of svOptions[visualization type]. This means that depending on the datatype
+        associated with the current
+        chartContainer, a corresponding svOptionsPanel[visualization type] directive is instanciated. For example, if
+        the current datatype is SingleChoice, and the default visualization type for
+        SingleChoice is PieChart, the svOptionsPanel will instanciate a child sv-options-piechart directive.</p>
+        <a href="https://www.lucidchart.com/invitations/accept/cb3b4fb7-febe-4507-8dad-97a65eaa648b">
+            <img src="https://www.lucidchart.com/publicSegments/view/542489e2-1608-4ec0-8b67-46310a009686/image.png"
+                 width="400"/></a>
+    </li>
+    <li><p>svOptionsPanel Sizing --
+        Most of the time the svOptionsPanel is hidden. When it is activated it should float along the upper inside
+            right edge of the parent superViz directive. </p>
     </li>
 </ul>
 
 
-<!--------------HOST API / CLEARTHREAD DATATYPE---------------------->
+<!--------------ITERATE THROUGH ALL CLEARTHREAD DATATYPES---------------------->
 
-<h4>Host API and ClearThread Datatypes</h4>
+<h4>Iterate Through all ClearThread Datatypes</h4>
 <ul>
     <li>
-        <p>The host container (testContainer here, chartContainer in prod) tells the superViz directive what type of
-            ClearThread datatype it will use via an attribute on the host directive.</p>
-
-        <p>The superViz directive must know the default visualization for the given datatype.</p>
+        <p>Iterate through each of the clearthread datatypes and see what the rendered superViz directive.</p>
 
         <div ng-repeat='datatype in ["Address",
     "AlphaNumber",
@@ -164,7 +167,7 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
     "SingleChoice",
     "SingleLineText",
     "Title"]'><p style="margin-top: 40px; color:darkolivegreen; font-weight: bold">Datatype: {{datatype}}</p>
-            <test-container width="400" height="200" ctdatatype={{datatype}}></test-container>
+            <test-chart-container width="400" height="200" ctdatatype={{datatype}}></test-chart-container>
             <div style="font-size: smaller">* the panel should be appropriate for {{datatype}}</div>
         </div>
 
@@ -179,7 +182,7 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 <ul>
     <li>Should dynamically adjust size to fill it's parent container. This is a test container with default dimensions
         set to 200x200.<br/>
-        <test-container width="200" height="200"></test-container>
+        <test-chart-container width="200" height="200"></test-chart-container>
     </li>
     <li>An empty host (positioned div (200x200) with no child superViz directive)<br/>
 
@@ -213,53 +216,58 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 <!------------USAGE------------>
 <h4>Usage</h4>
 <ul>
-    <li>This page uses a special testcontainer directive that wraps the superViz directive in a postioned
+    <li>This page uses a special testChartContainer directive that wraps the superViz directive in a postioned
         (and dynamically sized) span element. It looks like this:
-    <pre><code>&lt;test-container width="200" height="200" ctdatatype="SingleLineText" >&lt;/test-container>
+    <pre style="width:900px"><code>&lt;test-chart-container width="200" height="200" ctdatatype="SingleLineText" >&lt;/test-chart-container>
     </code></pre>
     </li>
-    </ul>
+    <li><p>In the production environment, use a chartContainer instead of a testChartContainer.</p>
+        <pre style="width:900px"><code>&lt;chart-container width="200" height="200" ctdatatype="SingleLineText" >&lt;/chart-container>
+        </code></pre>
+    </li>
+
+</ul>
 <!--------------BEHIND THE CURTAIN----------->
 <H4>Behind the Curtain</H4>
 <ul>
     <li>
-        This is a listing of the testContainer directive to show how it is merely a wrapper around the superViz
+        This is a listing of the testChartContainer directive to show how it is merely a wrapper around the superViz
         directive.
-<pre><code>
-appCreateReport.directive('testContainer', function () {
+<pre style="width:900px"><code>
+    appCreateReport.directive('testChartContainer', function () {
     "use strict";
     return{
-        restrict: 'E',
-        scope: true,
-        templateUrl:'testContainer.html',
-        link: function (scope, el, attrs) {
-            scope.mywidth = attrs.width;
-            scope.myheight = attrs.height;
-            scope.clearthreaddatatype=attrs.ctdatatype;
-        }
+    restrict: 'E',
+    scope: true,
+    templateUrl:'test-container.html',
+    link: function (scope, el, attrs) {
+    scope.mywidth = attrs.width;
+    scope.myheight = attrs.height;
+    scope.clearthreaddatatype=attrs.ctdatatype;
     }
-})
+    }
+    })
 </code></pre>
     </li>
     <li>
-        <p>And the associated template, testContainer.html (inline styling used because this will never be deployed in prod)</p>
- <pre><code>
-&lt;span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
-    &lt;span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">
-        this testContainer directive mimics a chartContainer directive&lt;/span>
-    &lt;span style="margin-bottom: -6px; position: relative; display:block;">
-        width:&lt;input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px;
-            border: 1px lightgray solid;">
-        height:&lt;input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;"
-                      clearthreaddatatype="test">&lt;/span>&lt;br>
-    &lt;span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
-         &lt;super-viz>&lt;/super-viz>
-    &lt;/span>
-&lt;/span>
+        <p>And the associated template, test-container.html (inline styling used because this will never be deployed in
+            prod)</p>
+ <pre style="width:900px"><code>
+     &lt;span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
+     &lt;span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">
+     this testChartContainer directive mimics a chartContainer directive&lt;/span>
+     &lt;span style="margin-bottom: -6px; position: relative; display:block;">
+     width:&lt;input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px;
+     border: 1px lightgray solid;">
+     height:&lt;input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;"
+     clearthreaddatatype="test">&lt;/span>&lt;br>
+     &lt;span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
+     &lt;super-viz>&lt;/super-viz>
+     &lt;/span>
+     &lt;/span>
  </code></pre>
     </li>
 </ul>
-
 
 
 </body>

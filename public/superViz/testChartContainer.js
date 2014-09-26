@@ -1,16 +1,18 @@
 /**
  * Created by Kent on 9/24/2014.
  */
-appCreateReport.directive('testContainer', function () {
+appCreateReport.directive('testChartContainer', function () {
     "use strict";
     return{
         restrict: 'E',
         scope: true,
-        templateUrl:'testContainer.html',
+        templateUrl:'partials/test-chart-container.html',
         link: function (scope, el, attrs) {
+            scope.propertyBag={};
             scope.mywidth = attrs.width;
             scope.myheight = attrs.height;
-            scope.clearthreaddatatype=attrs.ctdatatype;
+            scope.propertyBag.clearthreaddatatype=attrs.ctdatatype;
+
         }
     }
 })

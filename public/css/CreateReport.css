@@ -380,3 +380,11 @@ h3 {
   right: 0;
   top: 15px;
 }
+sv-options-panel {
+  position: absolute;
+  display: inline-block;
+  border: 1px solid rosybrown;
+  background-color: rosybrown;
+  right: 0px;
+  top: 0px;
+}

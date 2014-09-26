@@ -5,6 +5,6 @@ appCreateReport.directive('svOptionsPanel',function(){
     "use strict";
     return{
         restrict:'E',
-        templateUrl:'sv-options-panel.html'
+        templateUrl:'partials/sv-options-panel.html'
     }
 })
