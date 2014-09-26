@@ -22,6 +22,7 @@
     <script src="../LayoutService.js"></script>
     <script src="../ng-google-chart.js"></script>
     <script src="superViz.js"></script>
+    <script src="MetricMakerSrvc.js"></script>
     <script src="svOptionsPanel.js"></script>
     <script src="testChartContainer.js"></script>
 
@@ -36,9 +37,15 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
+    <script type="text/javascript">
+        appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
+            $scope.MetricMakerSrvc=MetricMakerSrvc;
+        })
+    </script>
+
     <title></title>
 </head>
-<body ng-app="AppCreateReport">
+<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
 <style>
     h4 {
         font-size: large;
@@ -92,21 +99,40 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
         <p>The datatype should propagate throughout the entire shared scope in
             scope.propertyBag.clearthreaddatatype.</p>
     </li>
-</ul>
-
-
-<h4>Services</h4>
-<ul>
     <li><p>The superViz directive contains references to the ReportDataSrvc and MetricMakerSrvc services.</p>
         <img src="https://www.lucidchart.com/publicSegments/view/54249488-92f8-4377-8ec6-2aa30a00c60b/image.png"
              width="400"/>
 
     </li>
-    <li>The MetricMakerSrvc service contains logic for defining options to display metrics as visualizations</li>
-    <li>The ReportDataSrvc service provides access to all data endpoints on the server. This includes questions,
-        metricresults, locations, saved uioptions, etc...
+</ul>
+
+<!--------------METRICMAKERSRVC---------------------->
+
+<h4>MetricMakerSrvc</h4>
+<ul>
+
+    <li>Supported Visualization Types (MetricMakerSrvc.visualizationTypes):
+        <ul>
+<li ng-repeat="vt in MetricMakerSrvc.visualizationTypes">{{vt}}</li>
+        </ul>
+    </li>
+
+    <li>CTDataTypes  and corresponding Visualization Types (MetricMakerSrvc.legalVisualizations):
+        <ul>
+            <li ng-repeat="lv in MetricMakerSrvc.legalVisualizations">{{lv.ctdatatype}}
+                <ul><li ng-repeat="v in lv.legalvisualiations">{{v}}</li> </ul>
+            </li>
+        </ul>
     </li>
 </ul>
+
+<!--------------OPTIONS PANEL---------------------->
+
+<h4>ReportDataSrvc</h4>
+<ul><li>The ReportDataSrvc service provides access to all data endpoints on the server. This includes questions,
+    metricresults, locations, saved uioptions, etc...
+</li></ul>
+
 <!--------------OPTIONS PANEL---------------------->
 
 <h4>svOptionsPanel</h4>

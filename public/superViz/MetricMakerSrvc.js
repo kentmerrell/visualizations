@@ -1,10 +1,11 @@
 /**
  * Created by Kent on 9/25/2014.
  */
-appCreateReport.factor('MetricMakerSrvc',function(){
+appCreateReport.factory('MetricMakerSrvc',function(){
     "use strict";
     return{
         visualizationTypes:['linechart','verticalbarchart','horizontalbarchart','piechart','termcloud','map','text','image','donut'],
+        //todo: Legal visualizations are really more a function of the selected metric than the base datatype.
         legalVisualizations:[
             {ctdatatype:"address",legalvisualiations:["termcloud"]},
             {ctdatatype:"alphanumber",legalvisualiations:["termcloud"]},
