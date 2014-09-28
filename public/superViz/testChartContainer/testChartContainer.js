@@ -6,7 +6,7 @@ appCreateReport.directive('testChartContainer', function () {
     return{
         restrict: 'E',
         scope: true,
-        templateUrl:'partials/test-chart-container.html',
+        templateUrl:'http://localhost:63342/visualizations/public/superViz/testChartContainer/test-chart-container.html',
         link: function (scope, el, attrs) {
             scope.propertyBag={};
             scope.mywidth = attrs.width;

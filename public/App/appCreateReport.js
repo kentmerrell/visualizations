@@ -10,7 +10,7 @@ appCreateReport.config(['$httpProvider', function ($httpProvider) {
 
 
 
-appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService,chartservice) {
+appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService) {
 
     $scope.spots = layoutservice.allSpots;
     $scope.reportdataservice = ReportDataService;

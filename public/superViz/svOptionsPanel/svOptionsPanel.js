@@ -5,6 +5,6 @@ appCreateReport.directive('svOptionsPanel',function(){
     "use strict";
     return{
         restrict:'E',
-        templateUrl:'partials/sv-options-panel.html'
+        templateUrl:'http://localhost:63342/visualizations/public/superViz/svOptionsPanel/sv-options-panel.html'
     }
 })
