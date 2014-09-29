@@ -26,7 +26,7 @@ kdmDevToolsApp.directive('kdmNavItem', function () {
         replace:true,
         template: '<span style="color:red;"><a href="{{pathandname}}">{{title}}</a></span>',
         link: function (scope, el, attrs) {
-            scope.pathandname = baseurl +"//" +  attrs.pathandname;
+            scope.pathandname = baseurl +"/" +  attrs.pathandname;
             scope.description = attrs.description;
             scope.title=attrs.title;
         }
