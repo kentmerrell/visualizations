@@ -3,9 +3,10 @@
  */
 appCreateReport.directive('superViz',function(){
     "use strict";
+    var baseurl = window.location.protocol + "//" + window.location.host;
     return{
         restrict:'E',
-        templateUrl: 'partials/super-viz.html'
+        templateUrl: baseurl+  '/visualizations/public/superViz/super-viz.html'
     }
 })
 

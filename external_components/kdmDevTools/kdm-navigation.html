@@ -1,0 +1,32 @@
+<style>
+    .kdm-navigation-expanded {
+        /*width: 300px;*/
+        height: 600px;
+        opacity: .85;
+        position: absolute;
+        overflow: auto;
+        background-color: beige;
+        display: inline-block;
+        float: left;
+        left: 0px;
+        top: 0px
+    }
+    .kdm-navigation-contracted {
+        width: 100px;
+        height: 20px;
+        opacity: .85;
+        position: absolute;
+        overflow: hidden;
+        background-color: beige;
+        display: inline-block;
+        float: left;
+        left: 0px;
+        top: 0px
+    }
+</style>
+
+<span ng-class="{'kdm-navigation-expanded':show, 'kdm-navigation-contracted':show==false}">
+    <span style="width:100%;height:20px; position: absolute; background-color: #726d6d; opacity: 1;" ng-click="show=!show">Dev Documentation</span>
+    kdm-navigation <ng-include
+        src='tocDocument'></ng-include>
+</span>

@@ -1,8 +1,10 @@
 visualizations
 ==============
 
-1) dynamic field of spot containers 
-2) apply a chart to a spot,
-3) edit chart type and configurations
+> dynamic field of spot containers 
 
+> apply a chart to a spot,
+
+> edit chart type and configurations
+<a href="http://www.cnn.com">cnn</a>
 Using angular
