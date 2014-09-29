@@ -3,15 +3,16 @@
  */
 appCreateReport.directive('testChartContainer', function () {
     "use strict";
+    var baseurl = window.location.protocol + "//" + window.location.host;
     return{
         restrict: 'E',
         scope: true,
-        templateUrl:'http://localhost:63342/visualizations/public/superViz/testChartContainer/test-chart-container.html',
+        templateUrl: baseurl + '/visualizations/public/superViz/testChartContainer/test-chart-container.html',
         link: function (scope, el, attrs) {
-            scope.propertyBag={};
+            scope.propertyBag = {};
             scope.mywidth = attrs.width;
             scope.myheight = attrs.height;
-            scope.propertyBag.clearthreaddatatype=attrs.ctdatatype;
+            scope.propertyBag.clearthreaddatatype = attrs.ctdatatype;
 
         }
     }

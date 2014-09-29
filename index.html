@@ -33,6 +33,8 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
+    <script src="external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -44,28 +46,17 @@
             font-weight: bold;
         }
 
-        body {
-            padding: 50px
-        }
+
 
         li {
             margin-top: 30px;
         }
     </style>
 </head>
-<body>
+<body ng-app="kdmDevTools">
 <h1>ClearThread Report</h1>
+<kdm-navigation></kdm-navigation>
 <h5>Isolated Client Development</h5>
-<h4>Dynamic Layout</h4>
-<ul>
-    <li><p>Dynamic Layout Diagram</p>
-        <a href="https://www.lucidchart.com/invitations/accept/180c725a-599b-4891-91da-301841fdd31c">
-        <img src="https://www.lucidchart.com/publicSegments/view/542733cf-1bc0-46de-aae9-11410a0090b1/image.png" width="800"></a>
-    </li>
-    <li><p>Layout Service</p>
-        <img src="https://www.lucidchart.com/publicSegments/view/54273889-c500-4e47-91dd-7a050a0048fd/image.png" width="800">
-    </li>
-</ul>
 <p>The spotContainer directive is </p>
 </body>
 </html>
