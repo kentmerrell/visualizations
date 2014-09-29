@@ -1,21 +1,10 @@
 <style>
-    .kdm-navigation-expanded {
-        /*width: 300px;*/
-        height: 600px;
-        opacity: .85;
-        position: absolute;
-        overflow: auto;
-        background-color: beige;
-        display: inline-block;
-        float: left;
-        left: 0px;
-        top: 0px
-    }
+
     .kdm-navigation-contracted {
-        width: 100px;
+        width: 90px;
         height: 20px;
-        opacity: .85;
-        position: absolute;
+        opacity: .5;
+        position: fixed;
         overflow: hidden;
         background-color: beige;
         display: inline-block;
@@ -23,10 +12,37 @@
         left: 0px;
         top: 0px
     }
+
+    .kdm-navigation-expanded {
+        width: 300px;
+        height: 600px;
+        opacity: .95;
+        position: fixed;
+        overflow: auto;
+        background-color: beige;
+        display: inline-block;
+        float: left;
+        left: 0px;
+        top: 0px;
+
+    }
+
+    .kdm-navigation-content{
+        /*background-color: green;*/
+        padding:5px;
+
+    }
+
+    .kdm-navigation-content h2{
+        font-size: 14px;
+        background-color: #3b83de;
+        color:#f5f5f5;
+        padding:5px;
+        display: block;
+    }
 </style>
 
-<span ng-class="{'kdm-navigation-expanded':show, 'kdm-navigation-contracted':show==false}">
-    <span style="width:100%;height:20px; position: absolute; background-color: #726d6d; opacity: 1;" ng-click="show=!show">Dev Documentation</span>
-    kdm-navigation <ng-include
-        src='tocDocument'></ng-include>
+<span ng-class="{'kdm-navigation-expanded':show, 'kdm-navigation-contracted':show==false}" ng-mouseleave="show=false">
+    <span style="width:100%;height:20px; position: absolute; background-color: #f43b0e; color:#e8e8e8;" ng-mouseover="show=true" ng-click="show=!show">Dev Docs</span>
+     <span class="kdm-navigation-content"><ng-include src='tocDocument'></ng-include></span>
 </span>
