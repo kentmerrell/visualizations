@@ -1,4 +1,4 @@
-var appCreateReport = angular.module('AppCreateReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource', 'kdmDevTools']);
+var appCreateReport = angular.module('AppCreateReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource','ngAnimate', 'kdmDevTools']);
 
 //configurations to enable cors
 appCreateReport.config(['$httpProvider', function ($httpProvider) {

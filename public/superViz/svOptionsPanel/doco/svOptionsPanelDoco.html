@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../../App/css/CTV2_Common.css">
+    <link rel="stylesheet" href="../../../App/css/CreateReport.css">
+    <link rel="stylesheet" href="../../../../bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+    <script src="../../../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../../../bower_components/underscore/underscore.js"></script>
+    <script src="../../../../bower_components/angular/angular.js"></script>
+
+    <script src="../../../../external_components/angular-dragdrop.min.js"></script>
+    <script src="../../../../external_components/draganddrop.js"></script>
+    <script src="../../../App/appCreateReport.js"></script>
+    <script src="../../../App/ReportDataService.js"></script>
+
+
+    <script src="../../../../external_components/ng-google-chart.js"></script>
+    <script src="../../superViz.js"></script>
+    <script src="../../../App/MetricMakerSrvc.js"></script>
+    <script src="../svOptionsPanel.js"></script>
+    <script src="../../testChartContainer/testChartContainer.js"></script>
+
+    <script src="../../../../external_components/textAngular.js"></script>
+    <script src="../../../../external_components/textAngular-sanitize.js"></script>
+    <script src="../../../../external_components/textAngularSetup.js"></script>
+    <script src="../../../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../../../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <script src="../../../../external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script type="text/javascript">
+        appCreateReport.controller('superVisTestCtrl', function ($scope, MetricMakerSrvc) {
+            $scope.MetricMakerSrvc = MetricMakerSrvc;
+        })
+
+
+    </script>
+
+    <title></title>
+    <style>
+        h4 {
+            font-size: large;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        body {
+            padding: 50px
+        }
+
+        li {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
+<h2>Animations and Icons</h2>
+Animations and icons are ui elements/behaviors that are sprinkled throughout the application and warrant a standardized
+approach.
+<h4>Examples</h4>
+<style>
+    .kdmtestanimate1{position: relative; display: block;width: 100px; height: 200px; vertical-align: middle; background-color:#eee8aa }
+    .kdmtestanimate1.ng-show-add, .kdmtestanimate1.ng-show-remove{
+        -webkit-transition:all linear 0.5s;
+        -moz-transition:all linear 0.5s;
+        -o-transition:all linear 0.5s;
+        transition:all linear 0.5s;
+        display:block!important;
+    }
+    .kdmtestanimate1.ng-hide-add.ng-hide-add-active,
+    .kdmtestanimate1.ng-hide-remove {
+        opacity:0;
+    }
+
+    .kdmtestanimate1.animate-enter,
+    .kdmtestanimate1.animate-leave {
+        opacity:1;
+    }
+</style>
+<script type="text/javascript">
+    appCreateReport.directive("kdmTestAnimate1", function () {
+        return{
+            restrict: 'E',
+            template: '<span><button ng-init="showpanel=false" ng-click="showpanel=!showpanel">toggle showpanel</button> showpanel={{showpanel}}' +
+                    '<span class="kdmtestanimate1 ng-hide" ng-animate="{enter: \'animate-enter\', leave: \'animate-leave\'}"  ng-show="showpanel" style="clear:both;">This is the panel content</span>' +
+                    '</span>',
+            scope:{},
+            link:function(scope,el,attrs){
+            }
+        }
+    })
+</script>
+
+<ul>
+    <li><p>ng-show -- In this case, an html span element uses the ng-show directive to display itself only if the showpanel property is true.</p>
+    <kdm-test-animate1></kdm-test-animate1>
+    </li>
+    <li></li>
+</ul>
+<h4>Explanations - Opening an Isolated Control-Panel</h4>
+
+<p>This is a pattern for opening and closing a control-panel as in the case of svOptionsPanel directive displaying
+    svOptions[visualizationType]. This is an isolated control-panel (not a general control-panel,
+    because there can be many of these active at a time and you can look at visualization options for two charts
+    simultaneously).</p>
+
+<p>A control-panel may have a closed state and an open state. These two states can be expressed in a single boolean
+    variable exposed in the scope, which we will call "show".</p>
+
+<ul>
+    <li><p>Closed</p><img
+            src="https://www.lucidchart.com/publicSegments/view/5429cf92-9dc0-4772-8348-48b30a008ac6/image.png"
+            width="650"/></li>
+    <li><p>Open</p><img
+            src="https://www.lucidchart.com/publicSegments/view/5429cfcc-6688-4059-8408-32460a0090b1/image.png"
+            width="650" alt=""/></li>
+    <li>
+
+        <p>Super-simple stripped down case -- This is an actual directive</p>
+
+        <table>
+            <tr>
+                <td style="padding-right: 50px;">
+                    <pre style="width:400px"><code>&lt;kdm-test-animate1>&lt;/kdm-test-animate1></code></pre>
+
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+
+    </li>
+</ul>
+
+<kdm-navigation></kdm-navigation>
+</body>
+</html>

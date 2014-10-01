@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../App/css/CTV2_Common.css">
+    <link rel="stylesheet" href="../../App/css/CreateReport.css">
+    <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+    <script src="../../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../../bower_components/underscore/underscore.js"></script>
+    <script src="../../../bower_components/angular/angular.js"></script>
+
+    <script src="../../../external_components/angular-dragdrop.min.js"></script>
+    <script src="../../../external_components/draganddrop.js"></script>
+    <script src="../../App/appCreateReport.js"></script>
+    <script src="../../App/ReportDataService.js"></script>
+
+
+    <script src="../../../external_components/ng-google-chart.js"></script>
+    <script src="../superViz.js"></script>
+    <script src="../../App/MetricMakerSrvc.js"></script>
+    <script src="../svOptionsPanel/svOptionsPanel.js"></script>
+    <script src="../testChartContainer/testChartContainer.js"></script>
+
+    <script src="../../../external_components/textAngular.js"></script>
+    <script src="../../../external_components/textAngular-sanitize.js"></script>
+    <script src="../../../external_components/textAngularSetup.js"></script>
+    <script src="../../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <script src="../../../external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script type="text/javascript">
+        appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
+            $scope.MetricMakerSrvc=MetricMakerSrvc;
+        })
+    </script>
+
+    <title></title>
+    <style>
+        h4 {
+            font-size: large;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        body {
+            padding: 50px
+        }
+
+        li {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
+
+
+<!--------------SUPERVIZ DIRECTIVE---------------------->
+
+<h2>superViz directive</h2>
+The super-viz directive hosts any type of visualization supported by clearthread reports. It is a child of the
+chartContainer directive, which provides placement (drag/drop/delete/size) services to it.
+
+
+<!--------------GENERAL CASE---------------------->
+
+<h4>General Case</h4>
+<ul>
+    <li>
+        <test-chart-container width="400" height="400"></test-chart-container>
+    </li>
+</ul>
+
+
+<!--------------RULES FOR SCOPE---------------------->
+<h4>Rules for Scope</h4>
+<ul>
+    <li>
+        <p>Scope Diagram</p>
+        <a href="https://www.lucidchart.com/invitations/accept/49216738-f3a8-4469-93c0-343cba0db27d">
+            <img src="https://www.lucidchart.com/publicSegments/view/5424330c-54c0-4c6d-a554-197d0a0099df/image.png"
+                 width="600px"></a>
+    </li>
+    <li>propertyBag is an object declared in chartContainer (testChartContainer in isolateddev) that holds dynamically
+        created properties available to all components within the shared scope.
+    </li>
+    <li><p>Scope can be tested by injecting a string representation of datatype it into the testChartContainer directive
+        via
+        a ctdatatype attribute.</p>
+        <pre style="width:700px"><code>&lt;test-chart-container width="400" height="200" ctdatatype="Boolean">&lt;/test-chart-container></code></pre>
+        <p>The datatype should propagate throughout the entire shared scope in
+            scope.propertyBag.clearthreaddatatype.</p>
+    </li>
+    <li><p>The superViz directive contains references to the ReportDataSrvc and MetricMakerSrvc services.</p>
+        <img src="https://www.lucidchart.com/publicSegments/view/54249488-92f8-4377-8ec6-2aa30a00c60b/image.png"
+             width="400"/>
+
+    </li>
+</ul>
+
+
+<!--------------OPTIONS PANEL---------------------->
+
+<h4>ReportDataSrvc</h4>
+<ul>
+    <li>The ReportDataSrvc service provides access to all data endpoints on the server. This includes questions,
+        metricresults, locations, saved uioptions, etc...
+    </li>
+</ul>
+
+<!--------------OPTIONS PANEL---------------------->
+
+<h4>svOptionsPanel</h4>
+<ul>
+    <li>
+        <p>The svOptionsPanel directive is a child of the superViz directive. It is responsible for displaying options
+            that are specific to the datatype assigned to it's parent superViz.
+        </p></li>
+
+    <li><p>The svOptionsPanel shares scope with it's parent superViz.
+    </li>
+    <li><p>The datatype associated with a svOptionsPanel (or a superViz, for that matter) never changes. If a user wants
+        a different
+        datatype associated with a chart, s/he must delete the chart and drag a different question onto the
+        grid.</p>
+    </li>
+    <li>The visualization type associated with a svOptionsPanel <i>can</i> change, since a user may choose to change a
+        vizualization between different types (say, from verticalbar to linechart).
+    </li>
+    <li><p>The svOptionsPanel is the parent of svOptions[visualization type]. This means that depending on the datatype
+        associated with the current
+        chartContainer, a corresponding svOptionsPanel[visualization type] directive is instanciated. For example, if
+        the current datatype is SingleChoice, and the default visualization type for
+        SingleChoice is PieChart, the svOptionsPanel will instanciate a child sv-options-piechart directive.</p>
+        <a href="https://www.lucidchart.com/invitations/accept/cb3b4fb7-febe-4507-8dad-97a65eaa648b">
+            <img src="https://www.lucidchart.com/publicSegments/view/542489e2-1608-4ec0-8b67-46310a009686/image.png"
+                 width="400"/></a>
+    </li>
+    <li><p>svOptionsPanel Sizing --
+        Most of the time the svOptionsPanel is hidden. When it is activated it should float along the upper inside
+        right edge of the parent superViz directive. </p>
+    </li>
+</ul>
+
+
+
+<!--------------BEHAVIOR ATTRIBUTES---------------------->
+<h4>Behavior Attributes</h4>
+<ul>
+    <li>Multiple instances of directive should be isolated from each other. Changes in one should not affect any
+        other.
+    </li>
+    <li>Should have a control panel that opens on mouseover</li>
+</ul>
+
+<kdm-navigation></kdm-navigation>
+</body>
+</html>
