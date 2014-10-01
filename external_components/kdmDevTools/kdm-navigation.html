@@ -1,7 +1,21 @@
 <style>
 
+    .kdm-navigation-expanded {
+        width: 300px;
+        height: 600px;
+        opacity: 1;
+        position: fixed;
+        overflow: auto;
+        background-color: beige;
+        display: inline-block;
+        float: left;
+        left: 0px;
+        top: 0px;
+        border: #000000  solid 1px;
+    }
+
     .kdm-navigation-contracted {
-        width: 90px;
+        width: 150px;
         height: 20px;
         opacity: .5;
         position: fixed;
@@ -11,20 +25,6 @@
         float: left;
         left: 0px;
         top: 0px
-    }
-
-    .kdm-navigation-expanded {
-        width: 300px;
-        height: 600px;
-        opacity: .95;
-        position: fixed;
-        overflow: auto;
-        background-color: beige;
-        display: inline-block;
-        float: left;
-        left: 0px;
-        top: 0px;
-
     }
 
     .kdm-navigation-content{
@@ -43,6 +43,8 @@
 </style>
 
 <span ng-class="{'kdm-navigation-expanded':show, 'kdm-navigation-contracted':show==false}" ng-mouseleave="show=false">
-    <span style="width:100%;height:20px; position: absolute; background-color: #f43b0e; color:#e8e8e8;" ng-mouseover="show=true" ng-click="show=!show">Dev Docs</span>
+    <span style="display: block; position:absolute; right:0px;left:0px;
+    background-color: #f43b0e; color:#e8e8e8;"
+        ng-mouseover="show=true" ng-click="show=!show">Kent's Dev Docs</span>
      <span class="kdm-navigation-content"><ng-include src='tocDocument'></ng-include></span>
 </span>

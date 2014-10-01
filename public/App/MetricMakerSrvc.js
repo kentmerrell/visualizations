@@ -4,12 +4,12 @@
 appCreateReport.factory('MetricMakerSrvc',function(){
     "use strict";
     return{
-        visualizationTypes:['linechart','verticalbarchart','horizontalbarchart','piechart','termcloud','map','text','image','donut'],
+        visualizationTypes:['linechart','verticalbarchart','horizontalbarchart','piechart','termcloud','map','text','image','donutchart'],
 
         preMadeMetrics:[
             {name:'ListOfLocations',validVisualizations:["map","termcloud"],  description:'Simple list of the locations (address or geolocation) for all instances of a template. Format is {seriesname:"somename",["value"]}' },
             {name:'ListOfResponses',validVisualizations:["termcloud"],  description:'Simple list of the values of a single question for all instances of a template. Format is {seriesname:"somename",["value"]}' },
-            {name:'CountOfValues',validVisualizations:["linechart","verticalbarchart","horizontalbarchart","piechart","termcloud","map","text","image","donut"],description:'The number of times each value occurs within all instances of a template (count aggragate). Format is {seriesname:"somename",[{value:"somevalue",count:"somecount"}]}'}
+            {name:'CountOfValues',validVisualizations:["linechart","verticalbarchart","horizontalbarchart","piechart","termcloud","map","text","image","donutchart"],description:'The number of times each value occurs within all instances of a template (count aggragate). Format is {seriesname:"somename",[{value:"somevalue",count:"somecount"}]}'}
         ],
 
         defaultVisualizations:[

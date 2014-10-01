@@ -1,8 +1,12 @@
 /**
  * Created by Kent on 9/28/2014.
  */
-var kdmDevToolsApp = angular.module('kdmDevTools', []);
+var kdmDevToolsApp = angular.module('kdmDevTools', ['ngAnimate']);
 
+kdmDevToolsApp.controller('kdmDevToolsController',function($scope,ClearThreadReportProjectSrvc){
+    "use strict";
+    $scope.ClearThreadReportProjectSrvc=ClearThreadReportProjectSrvc;
+})
 kdmDevToolsApp.directive('kdmNavigation', function () {
     "use strict";
     var baseurl = window.location.protocol + "//" + window.location.host;
@@ -18,6 +22,29 @@ kdmDevToolsApp.directive('kdmNavigation', function () {
     }
 })
 
+kdmDevToolsApp.factory('ClearThreadReportProjectSrvc',function(){
+    "use strict";
+    var _estimatedCompletionDate='11/15/2014';
+    return{
+        estimatedCompletionDate:_estimatedCompletionDate
+    }
+})
+
+kdmDevToolsApp.directive('kdmDevToolProjectSrvc', function (ClearThreadReportProjectSrvc) {
+    "use strict";
+
+    var baseurl = window.location.protocol + "//" + window.location.host;
+    return{
+        restrict: 'E',
+        scope:{},
+        replace:true,
+        template: '<span>{{output}}</span>',
+        link: function (scope, el, attrs) {
+            scope.output= ClearThreadReportProjectSrvc.estimatedCompletionDate;
+        }
+    }
+})
+
 kdmDevToolsApp.directive('kdmNavItem', function () {
     "use strict";
 
@@ -26,12 +53,13 @@ kdmDevToolsApp.directive('kdmNavItem', function () {
         restrict: 'E',
         scope:{},
         replace:true,
-        template: '<span style="color:red; position: relative; display: inline-block;margin-left:20px"><a href="{{pathandname}}">{{title}}</a></span>',
+        templateUrl: baseurl + "/visualizations/external_components/kdmDevTools/kdm-nav-item.html",
+
+        template: '',
         link: function (scope, el, attrs) {
             scope.pathandname = baseurl +"/" +  attrs.pathandname;
             scope.description = attrs.description;
             scope.title=attrs.title;
         }
     }
-
 })

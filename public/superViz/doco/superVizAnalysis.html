@@ -41,8 +41,8 @@
     <script>hljs.initHighlightingOnLoad();</script>
 
     <script type="text/javascript">
-        appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
-            $scope.MetricMakerSrvc=MetricMakerSrvc;
+        appCreateReport.controller('superVisTestCtrl', function ($scope, MetricMakerSrvc) {
+            $scope.MetricMakerSrvc = MetricMakerSrvc;
         })
     </script>
 
@@ -75,10 +75,15 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 
 <!--------------GENERAL CASE---------------------->
 
-<h4>General Case</h4>
+<h4>Parent Scope</h4>
 <ul>
     <li>
-        <test-chart-container width="400" height="400"></test-chart-container>
+        ChartContainer directive -- Used in production environment, but not in dev. This is because the prod version of
+        the chartContainer directive is crowded with a lot of code that supports dynamic instantiation and drag and
+        drop.
+    </li>
+    <li>TestChartContainer directive -- lightweight directive that provides necessary scope and context for testing
+        sub-components (i.e., the superViz directive).
     </li>
 </ul>
 
@@ -112,11 +117,14 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 
 <!--------------OPTIONS PANEL---------------------->
 
-<h4>ReportDataSrvc</h4>
+<h4>Service Dependencies</h4>
 <ul>
-    <li>The ReportDataSrvc service provides access to all data endpoints on the server. This includes questions,
-        metricresults, locations, saved uioptions, etc...
+    <li>ReportDataSrvc -- The ReportDataSrvc service provides access to all <i>report</i> data endpoints on the server.
+        This includes questions, locations, saved uioptions, etc...
     </li>
+    <li>MetricMakerSrvc -- The MetricMakerSrvc service provides the logic that supports creating and editing metrics.
+    </li>
+
 </ul>
 
 <!--------------OPTIONS PANEL---------------------->
@@ -127,7 +135,8 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
         <p>The svOptionsPanel directive is a child of the superViz directive. It is responsible for displaying options
             that are specific to the datatype assigned to it's parent superViz.
         </p></li>
-
+    <li>The svOptionsPanel is the parent of the visuzlizationtype-specific directive, sv-options-[visualizationtype].
+    </li>
     <li><p>The svOptionsPanel shares scope with it's parent superViz.
     </li>
     <li><p>The datatype associated with a svOptionsPanel (or a superViz, for that matter) never changes. If a user wants
@@ -152,7 +161,6 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
         right edge of the parent superViz directive. </p>
     </li>
 </ul>
-
 
 
 <!--------------BEHAVIOR ATTRIBUTES---------------------->

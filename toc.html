@@ -1,53 +1,128 @@
+<!---------------UNDER THE HOOD--------------->
+<h2>Under the Hood </h2>
+<span style="font-size: 12px;font-weight: bold; display: block;position: relative;
+top: -5px; padding-left: 10px;">
+    Est Compl Dt: <kdm-dev-tool-project-srvc></kdm-dev-tool-project-srvc>
+</span>
 
-<h2>Project Management</h2>
+<kdm-nav-item title="Estimates"
+              pathandname="visualizations/project/Estimates.html"
+              description="List of tasks, level of effort, est. completion date."></kdm-nav-item>
 
-<kdm-nav-item pathandname="visualizations/public/TaskList.html"
-              title="Task List"
+<kdm-nav-item title="Build Process"
+              pathandname="visualizations/project/BuildProcess.html"
+              description="Rationale for isolated development.  How to user Grunt to integrate application elements into production host"></kdm-nav-item>
+
+<kdm-nav-item title="Storyboard"
+              pathandname="visualizations/Project/UserExperience/screenDimensions.html"
+              description="High-level requirements.  The process a user will use to create a report."></kdm-nav-item>
+
+<kdm-nav-item title="Styling/css"
+              pathandname="visualizations/Project/UserExperience/screenDimensions.html"
+              description="General layout"></kdm-nav-item>
+
+<kdm-nav-item title="Icons"
+              pathandname="visualizations/public/UserExperience/animationsAndIcons.html"
+              description="Specific icons used and how to use them"></kdm-nav-item>
+
+<kdm-nav-item title="Animation"
+              pathandname="visualizations/project/UserExperience/animation.html"
+              description="General approach for animating"></kdm-nav-item>
+
+<kdm-nav-item title="Drag/Drop"
+              pathandname="visualizations/public/UserExperience/draggingAndDropping.html"
+              description="How drag/drop is implemented"></kdm-nav-item>
+
+<kdm-nav-item title="Restful Api"
+              pathandname="visualizations/public/UserExperience/screenDimensions.html"
+              description="Working with Restful Web API resources, promises in angularjs."></kdm-nav-item>
+
+<kdm-nav-item title="Doco"
+              pathandname="visualizations/Project/DocoSystem.html"
+              description="How this documentation system is organized."></kdm-nav-item>
+
+<!------------LAYOUT--------------------->
+<h2>Layout</h2>
+
+<kdm-nav-item title="QuestionSelector"
+              pathandname="visualizations/Project/template.html"
               description="."></kdm-nav-item>
+<kdm-nav-item title="SpotContainer"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="Spot"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+
 
 
 <!------------ANGULAR SERVICES--------------------->
-
 <h2>Angular Services</h2>
 
-
-<kdm-nav-item pathandname="visualizations/public/App/doco/MetricMakerSrvc.html"
-              title="MetricMakerSrvc"
+<kdm-nav-item title="MetricMakerSrvc"
+              pathandname="visualizations/public/App/doco/MetricMakerSrvc.html"
               description="."></kdm-nav-item>
-<kdm-nav-item pathandname="visualizations/public/App/doco/MetricMakerSrvc.html"
-              title="ReportDataSrvc"
+<kdm-nav-item title="ReportDataSrvc"
+              pathandname="visualizations/public/App/doco/MetricMakerSrvc.html"
               description="."></kdm-nav-item>
-<kdm-nav-item pathandname="visualizations/public/App/doco/MetricMakerSrvc.html"
-              title="LayoutService"
+<kdm-nav-item title="LayoutService"
+              pathandname="visualizations/public/App/doco/MetricMakerSrvc.html"
               description="."></kdm-nav-item>
 
 <!------------SUPERVIZ DIRECTIVE--------------------->
 <h2>SuperViz Directive</h2>
 
-<kdm-nav-item pathandname="visualizations/public/superVizAnalysis.html"
-        title="superViz Analysis"
-        description="."></kdm-nav-item>
+<kdm-nav-item title="Analysis"
+              pathandname="visualizations/public/superViz/doco/superVizAnalysis.html"
+              description="Overview of the superViz directive, responsible for all types of visualizations supported by application."></kdm-nav-item>
 
-<kdm-nav-item pathandname="visualizations/public/superVizOutput.html"
-              title="superViz Output"
+<kdm-nav-item title="Output"
+              pathandname="visualizations/public/superViz/doco/superVizOutput.html"
+              description="View actual output of superViz directive in several scope contexts."></kdm-nav-item>
+
+<kdm-nav-item title="svOptionsPanel"
+              pathandname="visualizations/public/superViz/svOptionsPanel/doco/svOptionsPanelDoco.html"
               description="."></kdm-nav-item>
 
-<kdm-nav-item pathandname="visualizations/public/superVizSvOptionsPanel.html"
-              title="svOptionsPanel"
+<kdm-nav-item title="VisualizationType"
+              pathandname="visualizations/public/superVizSvOptionsPanel.html"
               description="."></kdm-nav-item>
 
-<!------------User Experience--------------------->
+<!------------VISUALIZATIONS--------------------->
+<h2>Visualizations</h2>
 
-<h2>User Experience</h2>
-
-<kdm-nav-item pathandname="visualizations/public/UserExperience/animationsAndIcons.html"
-              title="Animations and Icons"
+<kdm-nav-item title="donutchart"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="horizontalbarchart"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="image"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="linechart"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="linechart"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="map"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="piechart"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="termcloud"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="text"
+              pathandname="visualizations/Project/template.html"
+              description="."></kdm-nav-item>
+<kdm-nav-item title="verticalbarchart"
+              pathandname="visualizations/Project/template.html"
               description="."></kdm-nav-item>
 
-<kdm-nav-item pathandname="visualizations/public/UserExperience/draggingAndDropping.html"
-              title="Dragging and Dropping"
-              description="."></kdm-nav-item>
 
-<kdm-nav-item pathandname="visualizations/public/UserExperience/screenDimensions.html"
-              title="Screen Dimensions"
-              description="."></kdm-nav-item>
+
+
+

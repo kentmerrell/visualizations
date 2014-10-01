@@ -64,61 +64,40 @@
             margin-top: 10px;
         }
     </style>
+    <script>
+        appCreateReport.controller('svOptionPanelDocoCtrl',function($scope,MetricMakerSrvc){
+            $scope.MetricMakerSrvc=MetricMakerSrvc;
+            $scope.propertyBag={};
+            $scope.propertyBag.visualizationType="linechart";
+        })
+    </script>
 </head>
-<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
-<h2>Animations and Icons</h2>
-Animations and icons are ui elements/behaviors that are sprinkled throughout the application and warrant a standardized
-approach.
-<h4>Examples</h4>
-<style>
-    .kdmtestanimate1{position: relative; display: block;width: 100px; height: 200px; vertical-align: middle; background-color:#eee8aa }
-    .kdmtestanimate1.ng-show-add, .kdmtestanimate1.ng-show-remove{
-        -webkit-transition:all linear 0.5s;
-        -moz-transition:all linear 0.5s;
-        -o-transition:all linear 0.5s;
-        transition:all linear 0.5s;
-        display:block!important;
-    }
-    .kdmtestanimate1.ng-hide-add.ng-hide-add-active,
-    .kdmtestanimate1.ng-hide-remove {
-        opacity:0;
-    }
 
-    .kdmtestanimate1.animate-enter,
-    .kdmtestanimate1.animate-leave {
-        opacity:1;
-    }
-</style>
-<script type="text/javascript">
-    appCreateReport.directive("kdmTestAnimate1", function () {
-        return{
-            restrict: 'E',
-            template: '<span><button ng-init="showpanel=false" ng-click="showpanel=!showpanel">toggle showpanel</button> showpanel={{showpanel}}' +
-                    '<span class="kdmtestanimate1 ng-hide" ng-animate="{enter: \'animate-enter\', leave: \'animate-leave\'}"  ng-show="showpanel" style="clear:both;">This is the panel content</span>' +
-                    '</span>',
-            scope:{},
-            link:function(scope,el,attrs){
-            }
-        }
-    })
-</script>
+<body ng-app="AppCreateReport" ng-controller="svOptionPanelDocoCtrl">
 
-<ul>
-    <li><p>ng-show -- In this case, an html span element uses the ng-show directive to display itself only if the showpanel property is true.</p>
-    <kdm-test-animate1></kdm-test-animate1>
-    </li>
-    <li></li>
-</ul>
-<h4>Explanations - Opening an Isolated Control-Panel</h4>
-
-<p>This is a pattern for opening and closing a control-panel as in the case of svOptionsPanel directive displaying
-    svOptions[visualizationType]. This is an isolated control-panel (not a general control-panel,
-    because there can be many of these active at a time and you can look at visualization options for two charts
-    simultaneously).</p>
+<h2>svOptionsPanel Directive</h2>
 
 <p>A control-panel may have a closed state and an open state. These two states can be expressed in a single boolean
     variable exposed in the scope, which we will call "show".</p>
 
+<h4>Usage</h4>
+<ul>
+    <li>Code:
+        <pre style="width:400px"><code>&lt;sv-options-panel>&lt;/sv-options-panel></code></pre>
+    </li>
+    <li>Output
+        <p><sv-options-panel></sv-options-panel></p>
+    </li>
+</ul>
+<h4>Scope-level Properties</h4>
+<ul>
+    <li><p>panelExpanded</p><p>TRUE | FALSE  -- If true, expand (show) the panel.  Otherwise, contract (hide) it.  Trigger animation to expand | contract</p></li>
+    <li><p>visualizationType</p>
+        <p>String corresponding to valid visualization type defined in MetricMakerSrvc.visualizationTypes
+        <pre><code>MetricMakerSrvc.visualizationTypes={{MetricMakerSrvc.visualizationTypes}}</code></pre>
+
+</ul>
+<h4>Diagrams</h4>
 <ul>
     <li><p>Closed</p><img
             src="https://www.lucidchart.com/publicSegments/view/5429cf92-9dc0-4772-8348-48b30a008ac6/image.png"
@@ -126,23 +105,7 @@ approach.
     <li><p>Open</p><img
             src="https://www.lucidchart.com/publicSegments/view/5429cfcc-6688-4059-8408-32460a0090b1/image.png"
             width="650" alt=""/></li>
-    <li>
 
-        <p>Super-simple stripped down case -- This is an actual directive</p>
-
-        <table>
-            <tr>
-                <td style="padding-right: 50px;">
-                    <pre style="width:400px"><code>&lt;kdm-test-animate1>&lt;/kdm-test-animate1></code></pre>
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
-        </table>
-
-    </li>
 </ul>
 
 <kdm-navigation></kdm-navigation>
