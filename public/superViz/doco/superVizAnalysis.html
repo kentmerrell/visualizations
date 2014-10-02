@@ -130,37 +130,12 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
 <!--------------OPTIONS PANEL---------------------->
 
 <h4>svOptionsPanel</h4>
-<ul>
-    <li>
-        <p>The svOptionsPanel directive is a child of the superViz directive. It is responsible for displaying options
-            that are specific to the datatype assigned to it's parent superViz.
-        </p></li>
-    <li>The svOptionsPanel is the parent of the visuzlizationtype-specific directive, sv-options-[visualizationtype].
-    </li>
-    <li><p>The svOptionsPanel shares scope with it's parent superViz.
-    </li>
-    <li><p>The datatype associated with a svOptionsPanel (or a superViz, for that matter) never changes. If a user wants
-        a different
-        datatype associated with a chart, s/he must delete the chart and drag a different question onto the
-        grid.</p>
-    </li>
-    <li>The visualization type associated with a svOptionsPanel <i>can</i> change, since a user may choose to change a
-        vizualization between different types (say, from verticalbar to linechart).
-    </li>
-    <li><p>The svOptionsPanel is the parent of svOptions[visualization type]. This means that depending on the datatype
-        associated with the current
-        chartContainer, a corresponding svOptionsPanel[visualization type] directive is instanciated. For example, if
-        the current datatype is SingleChoice, and the default visualization type for
-        SingleChoice is PieChart, the svOptionsPanel will instanciate a child sv-options-piechart directive.</p>
-        <a href="https://www.lucidchart.com/invitations/accept/cb3b4fb7-febe-4507-8dad-97a65eaa648b">
-            <img src="https://www.lucidchart.com/publicSegments/view/542489e2-1608-4ec0-8b67-46310a009686/image.png"
-                 width="400"/></a>
-    </li>
-    <li><p>svOptionsPanel Sizing --
-        Most of the time the svOptionsPanel is hidden. When it is activated it should float along the upper inside
-        right edge of the parent superViz directive. </p>
-    </li>
-</ul>
+The documentation for options panel is on it's own page.
+<kdm-nav-item title="see svOptionsPanel page"
+              pathandname="visualizations/public/superViz/svOptionsPanel/doco/svOptionsPanelDoco.html"
+              description="."></kdm-nav-item>
+
+
 
 
 <!--------------BEHAVIOR ATTRIBUTES---------------------->

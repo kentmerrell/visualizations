@@ -65,10 +65,10 @@
         }
     </style>
     <script>
-        appCreateReport.controller('svOptionPanelDocoCtrl',function($scope,MetricMakerSrvc){
-            $scope.MetricMakerSrvc=MetricMakerSrvc;
-            $scope.propertyBag={};
-            $scope.propertyBag.visualizationType="linechart";
+        appCreateReport.controller('svOptionPanelDocoCtrl', function ($scope, MetricMakerSrvc) {
+            $scope.MetricMakerSrvc = MetricMakerSrvc;
+            $scope.propertyBag = {};
+            $scope.propertyBag.visualizationType = "linechart";
         })
     </script>
 </head>
@@ -82,24 +82,73 @@
 
 <h4>Usage</h4>
 <ul>
-    <li>Code:
-        <pre style="width:400px"><code>&lt;sv-options-panel>&lt;/sv-options-panel></code></pre>
+    <li>Code:<pre style="width:600px"><code>&lt;!--Within the scope of the superVis directive include the following:-->
+
+        &lt;sv-options-panel-trigger>&lt;/sv-options-panel-trigger>
+        &lt;sv-options-panel>&lt;/sv-options-panel></code></pre>
     </li>
-    <li>Output
+    <li>svOptionsPanelTrigger Output
+        <p>
+            <sv-options-panel-trigger></sv-options-panel-trigger>
+
+        </p>
+    </li>
+    <li>svOpotionsPanel Output (This is contracted by default. Click the trigger button above to expand.)
         <p><sv-options-panel></sv-options-panel></p>
     </li>
+
 </ul>
-<h4>Scope-level Properties</h4>
+<h4>Rules</h4>
 <ul>
-    <li><p>panelExpanded</p><p>TRUE | FALSE  -- If true, expand (show) the panel.  Otherwise, contract (hide) it.  Trigger animation to expand | contract</p></li>
+    <li>
+        <p>The svOptionsPanel directive is a child of the superViz directive. It is responsible for displaying options
+            that are specific to the datatype assigned to it's parent superViz.
+        </p></li>
+    <li>The svOptionsPanel is the parent of the visuzlizationtype-specific directive, sv-options-[visualizationtype].
+    </li>
+    <li><p>The svOptionsPanel shares scope with it's parent superViz.
+    </li>
+    <li><p>The datatype associated with a svOptionsPanel (or a superViz, for that matter) never changes. If a user wants
+        a different
+        datatype associated with a chart, s/he must delete the chart and drag a different question onto the
+        grid.</p>
+    </li>
+    <li>The visualization type associated with a svOptionsPanel <i>can</i> change, since a user may choose to change a
+        vizualization between different types (say, from verticalbar to linechart).
+    </li>
+    <li><p>The svOptionsPanel is the parent of svOptions[visualization type]. This means that depending on the datatype
+        associated with the current
+        chartContainer, a corresponding svOptionsPanel[visualization type] directive is instanciated. For example, if
+        the current datatype is SingleChoice, and the default visualization type for
+        SingleChoice is PieChart, the svOptionsPanel will instanciate a child sv-options-piechart directive.</p>
+        <a href="https://www.lucidchart.com/invitations/accept/cb3b4fb7-febe-4507-8dad-97a65eaa648b">
+            <img src="https://www.lucidchart.com/publicSegments/view/542489e2-1608-4ec0-8b67-46310a009686/image.png"
+                 width="400"/></a>
+    </li>
+    <li><p>svOptionsPanel Sizing --
+        Most of the time the svOptionsPanel is hidden. When it is activated it should float along the upper inside
+        right edge of the parent superViz directive. </p>
+    </li>
+</ul>
+
+<h4>superVis Scope-level Properties - The scope.propertyBag object</h4>
+The shared properties within the superVis directive (and all it's children) should be appended to the propertyBag object.  This is originally added to the superViz directive.
+<ul>
+    <li><p>panelExpanded</p>
+
+        <p>TRUE | FALSE -- If true, expand (show) the panel. Otherwise, contract (hide) it. Trigger animation to expand
+            | contract</p></li>
     <li><p>visualizationType</p>
+
         <p>String corresponding to valid visualization type defined in MetricMakerSrvc.visualizationTypes
         <pre><code>MetricMakerSrvc.visualizationTypes={{MetricMakerSrvc.visualizationTypes}}</code></pre>
 
 </ul>
 <h4>Diagrams</h4>
 <ul>
-    <li><p>Closed</p><img
+    <li><p>svOptionsPanelTrigger directive -- provides the mechanism to trigger the expansion of the OptionsPanel. This
+        is a seperate directive so it can be placed in a SuperViz header while the panel is placed somewhere else. As
+        long as they share the same scope it will work.</p><img
             src="https://www.lucidchart.com/publicSegments/view/5429cf92-9dc0-4772-8348-48b30a008ac6/image.png"
             width="650"/></li>
     <li><p>Open</p><img

@@ -1,6 +1,6 @@
-<span>
-    <style>
+<span ng-show="propertyBag.panelExpanded">
 
+    <style>
         sv-options-panel{
             position: relative;
             display: inline-block;
@@ -8,10 +8,23 @@
             background-color: rosybrown;
             right: 0px;
             top:0px;
+            width:100px;
+        }
+        .panelbutton{
+            position: relative;
+            display: inline-block;
+            width:75px;
+            border:1px solid gray;
         }
 
     </style>
-    <span>sv-options-panel.html</span>
-<p>datatype:{{propertyBag.clearthreaddatatype}}</p>
+
+
+    <span class="panelbutton">data</span>
+    <span class="panelbutton">colors</span>
+    <span class="panelbutton">metric</span>
+    <span class="panelbutton"></span>
+    <p>datatype:{{propertyBag.clearthreaddatatype}}</p>
     <p>visualizationType:{{propertyBag.visualizationType}}</p>
-    </span>
+{{propertyBag}}
+</span>
