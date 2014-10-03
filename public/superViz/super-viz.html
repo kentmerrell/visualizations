@@ -1,10 +1,16 @@
 <span style="width:100%;height: 100%; background-color: lightblue;display: inline-block;position: relative">
-        super-viz directive
-    <p>datatype:{{propertyBag.clearthreaddatatype}}</p>
 
-        <span ng-switch="propertyBag.clearthreaddatatype" >
-            <span ng-switch-when="Barcode">show me a Barcode!</span>
-            <span ng-switch-default>show me default{{propertyBag.clearthreaddatatype}}</span>
+    <p>datatype:{{propertyBag.clearthreaddatatype}}</p>
+    <p>visualizationType:{{propertyBag.visualizationType}}</p>
+        <span ng-switch="propertyBag.visualizationType">
+            <span ng-switch-when="linechart">show me a linechart!</span>
+            <span ng-switch-when="barchart">show me a barchart!</span>
+            <span ng-switch-when="piechart">show me a piechart!</span>
+            <span ng-switch-when="termcloud">show me a termcloud!</span>
+            <span ng-switch-when="map">show me a map!</span>
+            <span ng-switch-when="text">show me a text!</span>
+            <span ng-switch-when="image">show me a image!</span>
+            <span ng-switch-default>show me default{{propertyBag}}</span>
             <sv-options-panel-trigger></sv-options-panel-trigger>
             <sv-options-panel></sv-options-panel>
         </span>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../../public/App/css/CTV2_Common.css">
+    <link rel="stylesheet" href="../../public/App/css/CreateReport.css">
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../bower_components/underscore/underscore.js"></script>
+    <script src="../../bower_components/angular/angular.js"></script>
+
+    <script src="../../external_components/angular-dragdrop.min.js"></script>
+    <script src="../../external_components/draganddrop.js"></script>
+    <script src="../../public/App/appCreateReport.js"></script>
+    <script src="../../public/App/ReportDataService.js"></script>
+
+
+    <script src="../../external_components/ng-google-chart.js"></script>
+    <script src="../../public/superViz/superViz.js"></script>
+    <script src="../../public/App/MetricMakerSrvc.js"></script>
+    <script src="../../public/superViz/svOptionsPanel/svOptionsPanel.js"></script>
+    <script src="../../public/superViz/testChartContainer/testChartContainer.js"></script>
+
+    <script src="../../external_components/textAngular.js"></script>
+    <script src="../../external_components/textAngular-sanitize.js"></script>
+    <script src="../../external_components/textAngularSetup.js"></script>
+    <script src="../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <script src="../../external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script type="text/javascript">
+        appCreateReport.controller('superVisTestCtrl', function ($scope, MetricMakerSrvc) {
+            $scope.MetricMakerSrvc = MetricMakerSrvc;
+            $scope.baseurl = window.location.protocol + "//" + window.location.host;
+            $scope.icons = [ 'copy8', 'delete30', 'excel2', 'filter16', 'graph7', 'graphical6', 'growing', 'interface9', 'magnifier12', 'maths', 'minus6', 'new10', 'note32', 'pdf17', 'rounded3', 'share21', 'small58','fog17','placeholder8'];
+        })
+
+
+    </script>
+
+    <title></title>
+    <style>
+        h4 {
+            font-size: large;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        body {
+            padding: 50px
+        }
+
+        li {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
+
+<h2>Icons</h2>
+
+
+<ul>
+    <li>
+        <span ng-repeat="icn in icons" style="position: relative; display:block">
+            <span style="margin-right: 20px;">{{$index}}</span>
+            <img ng-src="/visualizations/external_components/icons/svg/{{icn}}.svg" width="50" height="50"/><span>{{baseurl}}/visualizations/external_components/icons/svg/{{icn}}.svg<hr/></span>
+        </span>
+    </li>
+    <li><p>With a background color:</p>
+
+        <div style="background-color: silver;padding:20px"><span ng-repeat="icn in icons" style="position: relative; display:inline-block">
+            <span style="margin-right: 20px;">{{$index}}</span>
+            <img ng-src="/visualizations/external_components/icons/svg/{{icn}}.svg" width="50" height="50"/>
+        </span>
+
+        </div>
+    </li>
+    <li><p>20 px:</p>
+
+        <div><span ng-repeat="icn in icons" style="position: relative; display:inline-block">
+            <span style="margin-right: 20px;">{{$index}}</span>
+            <img ng-src="/visualizations/external_components/icons/svg/{{icn}}.svg" width="20" height="20"/>
+        </span>
+
+        </div>
+    </li>
+    <li>Collection on flaticon.com: <a href="http://www.flaticon.com/collection/54073ec94982f645708b4584" target="info">link:
+        "http://www.flaticon.com/collection/54073ec94982f645708b4584</a></li>
+</ul>
+<ul>
+    <li><p>Powershell script to get string array of icons in use:</p>
+<code><pre>cls
+#location of png files
+$fileLocation = "C:\Users\kmerrell\Documents\visual studio 2013\Projects\CTV2Prototype\CTV2Prototype\Content\icons\png"
+
+$lin=""
+foreach($f in dir $fileLocation)
+{
+    $lin=$lin + " '" + $f.BaseName + "',"
+}
+$lin</pre></code>
+    </li>
+</ul>
+<kdm-navigation></kdm-navigation>
+</body>
+</html>

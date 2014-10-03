@@ -1,0 +1,174 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+    
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+padding:1px;
+/*margin-left: 20px;*/
+}.flaticon-add:before {
+	content: "\e000";
+    cursor:pointer;
+}
+.flaticon-photo:before {
+	content: "\e001";
+}
+.flaticon-comment:before {
+	content: "\e002";
+}
+.flaticon-copy:before {
+	content: "\e003";
+    cursor:pointer;
+}
+.flaticon-delete:before {
+	content: "\e004";
+    cursor:pointer;
+}
+.flaticon-excel-export:before {
+	content: "\e005";
+    cursor:pointer;
+}
+.flaticon-filter:before {
+	content: "\e006";
+    cursor:pointer;
+}
+.flaticon-flag:before {
+	content: "\e007";
+}
+.flaticon-pie-chart:before {
+	content: "\e008";
+}
+.flaticon-presentation-mode:before {
+	content: "\e009";
+}
+.flaticon-bar-chart:before {
+	content: "\e00a";
+}
+.flaticon-publish:before {
+	content: "\e00b";
+}
+.flaticon-big-search:before {
+	content: "\e00c";
+    cursor:pointer;
+}
+.flaticon-line-chart:before {
+	content: "\e00d";
+}
+.flaticon-minimize:before {
+	content: "\e00e";
+}
+.flaticon-create-report:before {
+	content: "\e00f";
+}
+.flaticon-edit:before {
+	content: "\e010";
+}
+.flaticon-pdf-export:before {
+	content: "\e011";
+}
+.flaticon-run-report:before {
+	content: "\e012";
+}
+.flaticon-share:before {
+	content: "\e013";
+}
+.flaticon-calendar:before {
+	content: "\e014";
+}
+.flaticon-required:before {
+	content: "\e015";
+}
+
+
+.selected-icon{
+    color:#000;
+}
+.default-button-color{
+    color:#9f9c9c;
+}
+
+
+
+.flaticon-add:hover {
+	color:#000;
+    cursor:pointer;
+}
+.flaticon-photo:hover {
+	color:#000;
+}
+.flaticon-comment:hover {
+	color:#000;
+}
+.flaticon-copy:hover {
+	color:#000;
+    cursor:pointer;
+}
+.flaticon-delete:hover {
+	color:#000;
+}
+.flaticon-excel-export:hover {
+	color:#000;
+}
+.flaticon-filter:hover {
+	color:#000;
+}
+.flaticon-flag:hover {
+	color:#000;
+}
+.flaticon-pie-chart:hover {
+	color:#000;
+}
+.flaticon-presentation-mode:hover {
+	color:#000;
+}
+.flaticon-bar-chart:hover {
+	color:#000;
+}
+.flaticon-publish:hover {
+	color:#000;
+}
+.flaticon-big-search:hover {
+	color:#428bca;
+}
+.flaticon-line-chart:hover {
+	color:#000;
+}
+.flaticon-minimize:hover {
+	color:#000;
+}
+.flaticon-create-report:hover {
+	color:#000;
+}
+.flaticon-edit:hover {
+	color:#000;
+    cursor:pointer;
+}
+.flaticon-pdf-export:hover {
+	color:#000;
+}
+.flaticon-run-report:hover {
+	color:#000;
+}
+.flaticon-share:hover {
+	color:#000;
+}
+.flaticon-calendar:hover {
+	color:#000;
+}
+.flaticon-required:hover {
+	color:#000;
+}
+
+}.flaticon-drop:before {
+	content: "\e000";
+}

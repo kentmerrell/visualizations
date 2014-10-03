@@ -4,12 +4,47 @@
 
 
 /*--------------SV-OPTIONS-PANEL-------------------*/
-appCreateReport.directive('svOptionsPanel',function(){
+appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc){
     "use strict";
     var baseurl = window.location.protocol + "//" + window.location.host;
+
     return{
         restrict:'E',
-        templateUrl:baseurl + '/visualizations/public/superViz/svOptionsPanel/sv-options-panel.html'
+        templateUrl:baseurl + '/visualizations/public/superViz/svOptionsPanel/sv-options-panel.html',
+        link:function(scope,el,attrs){
+            //todo: getdefaultmetric dynamically based on clearthreaddatatype
+            var defaultmetric = "CountOfValues";
+            if(scope.propertyBag.clearthreaddatatype=="address"||scope.propertyBag.clearthreaddatatype=="geolocation")
+            {
+                defaultmetric = "ListOfLocations";
+            }
+            if(scope.propertyBag.clearthreaddatatype=="complex"
+                ||scope.propertyBag.clearthreaddatatype=="configurable"
+                ||scope.propertyBag.clearthreaddatatype=="group"
+                ||scope.propertyBag.clearthreaddatatype=="measurement1d"
+                ||scope.propertyBag.clearthreaddatatype=="measurement2d"
+                ||scope.propertyBag.clearthreaddatatype=="measurement3d"
+                ||scope.propertyBag.clearthreaddatatype=="pole"
+                )
+            {
+                defaultmetric = "unknown";
+            }
+
+            scope.propertyBag.buttonSet=MetricMakerSrvc.getbuttonset(defaultmetric);
+
+            scope.clickme=function(buttonname,cmd){
+                if(cmd=="changeVisualizationType"){
+                    scope.propertyBag.visualizationType=buttonname;
+                }
+                if(cmd=="configureFilter") {
+                    alert('Filter');
+                }
+                if(cmd=="excelExport"){
+                    alert('export to excel');
+                }
+            };
+
+        }
     }
 })
 

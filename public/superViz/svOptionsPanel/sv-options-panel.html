@@ -1,30 +1,35 @@
 <span ng-show="propertyBag.panelExpanded">
 
     <style>
-        sv-options-panel{
+        sv-options-panel {
             position: relative;
-            display: inline-block;
-            border:1px solid rosybrown;
-            background-color: rosybrown;
+            display:inline-block;
+            float: right;
+            border: none;
+            background-color: #ddebeb;
             right: 0px;
-            top:0px;
-            width:100px;
-        }
-        .panelbutton{
-            position: relative;
-            display: inline-block;
-            width:75px;
-            border:1px solid gray;
+            top: 0px;
+            width: 40px;
         }
 
+        .panelbutton {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            border: 1px solid gray;
+            padding: 4px;
+        }
+
+        .panelbutton:hover {
+            background-color: #c7d4d4;
+            cursor: pointer;
+        }
     </style>
 
 
-    <span class="panelbutton">data</span>
-    <span class="panelbutton">colors</span>
-    <span class="panelbutton">metric</span>
-    <span class="panelbutton"></span>
-    <p>datatype:{{propertyBag.clearthreaddatatype}}</p>
-    <p>visualizationType:{{propertyBag.visualizationType}}</p>
-{{propertyBag}}
+    <span ng-repeat="pb in propertyBag.buttonSet" class="panelbutton">
+    <img ng-click="clickme(pb.name,pb.command)" ng-src="/visualizations/external_components/icons/svg/{{pb.icon}}.svg"
+         width="30" height="30"/>
+    </span>
+
 </span>
