@@ -42,10 +42,8 @@ appCreateReport.factory('MetricMakerSrvc', function () {
         ],
 
         getDefaultVizualization: function (ctdatatype) {
-            if(typeof ctdatatype != 'undefined') {
-                console.log('this', this);
-                console.log('ctdatatype', ctdatatype);
-                return _.where(this.defaultVisualizations, {ctdatatype: ctdatatype})[0].defaultvisualization;
+            if (ctdatatype) {
+               return _.where(this.defaultVisualizations, {ctdatatype: ctdatatype})[0].defaultvisualization;
             }
         },
 
@@ -59,6 +57,7 @@ appCreateReport.factory('MetricMakerSrvc', function () {
                 ]
             }
             ;
+
             if (defaultmetric == "unknown") {
                 return [
                     {name: "filter", icon: "filter16", command: "configureFilter"},

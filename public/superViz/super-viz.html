@@ -1,17 +1,19 @@
-<span style="width:100%;height: 100%; background-color: lightblue;display: inline-block;position: relative">
+<span style="width:100%;height: 100%; background-color: #f5f5f5;display: block;position: relative">
 
     <p>datatype:{{propertyBag.clearthreaddatatype}}</p>
     <p>visualizationType:{{propertyBag.visualizationType}}</p>
-        <span ng-switch="propertyBag.visualizationType">
-            <span ng-switch-when="linechart">show me a linechart!<sv-line-chart></sv-line-chart></span>
-            <span ng-switch-when="barchart">show me a barchart!<sv-bar-chart></sv-bar-chart></span>
-            <span ng-switch-when="piechart">show me a piechart!<sv-pie-chart></sv-pie-chart></span>
-            <span ng-switch-when="termcloud">show me a termcloud!<sv-term-cloud></sv-term-cloud></span>
-            <span ng-switch-when="map">show me a map!<sv-map></sv-map></span>
-            <span ng-switch-when="text">show me a text!<sv-text></sv-text></span>
+            <sv-options-panel-trigger></sv-options-panel-trigger>
+
+        <span ng-switch="propertyBag.visualizationType" style="display: inline-block;position: relative;right: 30px;left: 0px; background-color: red;">
+            <span ng-switch-when="linechart"><sv-line-chart></sv-line-chart></span>
+            <span ng-switch-when="barchart"><sv-bar-chart></sv-bar-chart></span>
+            <span ng-switch-when="piechart"><sv-pie-chart></sv-pie-chart></span>
+            <span ng-switch-when="termcloud"><sv-term-cloud></sv-term-cloud></span>
+            <span ng-switch-when="map"><sv-map></sv-map></span>
+            <span ng-switch-when="text"><sv-text></sv-text></span>
             <span ng-switch-when="image">show me a image!</span>
             <span ng-switch-default>show me default{{propertyBag}}</span>
-            <sv-options-panel-trigger></sv-options-panel-trigger>
-            <sv-options-panel></sv-options-panel>
+
         </span>
+         <sv-options-panel></sv-options-panel>
     </span>

@@ -380,3 +380,34 @@ h3 {
   right: 0;
   top: 15px;
 }
+.sv-options-panel-trigger {
+  position: absolute;
+  display: inline-block;
+  border: 1px solid rosybrown;
+  background-color: lightgray;
+  right: 0px;
+  top: 0px;
+  width: 80px;
+  text-align: center;
+}
+sv-options-panel {
+  position: absolute;
+  display: inline-block;
+  float: right;
+  border: none;
+  background-color: #ddebeb;
+  right: 0px;
+  top: 20px;
+  width: 40px;
+}
+sv-options-panel .panelbutton {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  border: 1px solid gray;
+  padding: 4px;
+}
+sv-options-panel .panelbutton:hover {
+  background-color: #c7d4d4;
+  cursor: pointer;
+}
