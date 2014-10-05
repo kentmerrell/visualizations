@@ -5,13 +5,13 @@
 
     <link rel="stylesheet" href="../public/App/css/CTV2_Common.css">
     <link rel="stylesheet" href="../public/App/css/CreateReport.css">
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
 
     <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/underscore/underscore.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
 
     <script src="../external_components/angular-dragdrop.min.js"></script>
@@ -20,7 +20,7 @@
     <script src="../public/App/ReportDataService.js"></script>
 
 
-    <script src="../external_components/ng-google-chart.js"></script>
+    <script src="../external_components/ng-google-chart-kdm.js"></script>
     <script src="../public/superViz/superViz.js"></script>
     <script src="../public/App/MetricMakerSrvc.js"></script>
     <script src="../public/superViz/svOptionsPanel/svOptionsPanel.js"></script>
@@ -67,9 +67,78 @@
 </head>
 <body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
 <h2>Build Process</h2>
-Rationale for isolated development.
+A project optimized for development is very different than a project optimized
+for production.
 
+<h4>Directory Structure</h4>
 
+<ul>
+    <li>Dev Directory Structure -- The directory structure makes a big difference in the ease and efficiency of
+        development.
+        <ul>
+            <li>Organized by feature.</li>
+
+            <li>Quickly and liberally add new files.</li>
+            <li>Isolated development -- SOLID</li>
+
+        </ul>
+    </li>
+    <li>
+        <p>Prod Directory Structure</p>
+    </li>
+</ul>
+
+<h4>Grunt</h4>
+
+<p>See <a href="http://g00glen00b.be/angular-grunt/" target="info">http://g00glen00b.be/angular-grunt/</a> for a good
+    write-up on this.</p>
+<ul>
+    <li>Directive Templates -- combine into a single javascript file with the html2js grunt plug-in.</li>
+    <li>Javascript file -- concatenate all javascript into a single file. Very simple deployment procedure</li>
+    <li>Synchronize script and link tags. (see <a href="https://www.npmjs.org/package/grunt-script-link-tags"
+                                                  target="info">https://www.npmjs.org/package/grunt-script-link-tags</a>
+    </li>
+</ul>
+
+<h4>External Libraries</h4>
+<ul>
+    <li>NPM
+        <ul>
+            <li>npm install -- installs all devdependencies (libraries) listed in package.json</li>
+            <li>package.json -- At time of this writing devDependencies include:<br/> {
+
+                "bootstrap": "^3.2.0",
+                "grunt": "^0.4.5",
+                "grunt-bower-task": "~0.3.4",
+                "grunt-contrib-clean": "~0.5.0",
+                "grunt-contrib-compress": "~0.9.1",
+                "grunt-contrib-concat": "~0.4.0",
+                "grunt-contrib-connect": "~0.8.0",
+                "grunt-contrib-jshint": "~0.10.0",
+                "grunt-contrib-uglify": "^0.6.0",
+                "grunt-contrib-watch": "~0.6.1",
+                "grunt-karma": "~0.8.0",
+                "jquery": "^2.1.1",
+                "karma": "~0.12.0",
+                "karma-jasmine": "~0.1.0",
+                "karma-ng-html2js-preprocessor": "~0.1.0",
+                "karma-phantomjs-launcher": "~0.1.4",
+                "underscore": "^1.7.0"
+                }
+            </li>
+        </ul>
+    </li>
+    <li>Bower
+        <ul>
+            <li>Angular libraries -- The angular team preffers to NOT publish via NPM. They solely use Bower.</li>
+            <li>bower install angular-bootstrap<br/> bower install angular-resource<br/>
+                bower install angular-animate<br/>bower install angular#1.2.26  </li>
+        </ul>
+    </li>
+</ul>
+<h4>Source Control</h4>
+The external libraries need not be tracked in source control for this project. Since they can be easily installed
+from their own repositories, vc systems that are tracking this project can be configured to simply ignore them.
 <kdm-navigation></kdm-navigation>
 </body>
 </html>
