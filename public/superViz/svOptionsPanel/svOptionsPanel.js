@@ -42,6 +42,7 @@ appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc){
                 if(cmd=="excelExport"){
                     alert('export to excel');
                 }
+                scope.propertyBag.panelExpanded=false;
             };
 
         }
