@@ -30,7 +30,8 @@ appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc,svConfigSrvc
                 defaultmetric = "unknown";
             }
 
-            scope.propertyBag.buttonSet=MetricMakerSrvc.getbuttonset(defaultmetric);
+            //scope.propertyBag.buttonSet=MetricMakerSrvc.getbuttonset(defaultmetric);
+            scope.propertyBag.buttonSet=MetricMakerSrvc.getbuttonsetFromDataType(scope.propertyBag.clearthreaddatatype);
 
             scope.clickme=function(buttonname,cmd){
                 if(cmd=="changeVisualizationType"){
