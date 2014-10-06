@@ -1,0 +1,11 @@
+<span ng-switch="svConfigSrvc.VizInConfigType" style="display: inline-block;position: fixed;right: 20px;width:300px; border:1px solid lightslategray;padding:15px; ">
+    <h1>configurator</h1>
+            <span ng-switch-when="linechart"><sv-line-chart-config></sv-line-chart-config></span>
+            <span ng-switch-when="barchart"><sv-bar-chart-config></sv-bar-chart-config></span>
+            <span ng-switch-when="piechart"><sv-pie-chart-config></sv-pie-chart-config></span>
+            <span ng-switch-when="termcloud"><sv-term-cloud-config></sv-term-cloud-config></span>
+            <span ng-switch-when="map"><sv-map-config></sv-map-config></span>
+            <span ng-switch-when="text"><sv-text-config></sv-text-config></span>
+            <span ng-switch-when="image"><sv-image-config></sv-image-config></span>
+            <span ng-switch-default>unknown</span>
+</span>

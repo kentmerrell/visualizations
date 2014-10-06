@@ -4,7 +4,7 @@
 
 
 /*--------------SV-OPTIONS-PANEL-------------------*/
-appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc){
+appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc,svConfigSrvc){
     "use strict";
     var baseurl = window.location.protocol + "//" + window.location.host;
 
@@ -35,6 +35,7 @@ appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc){
             scope.clickme=function(buttonname,cmd){
                 if(cmd=="changeVisualizationType"){
                     scope.propertyBag.visualizationType=buttonname;
+                    svConfigSrvc.VizInConfigType=scope.propertyBag.visualizationType;
                 }
                 if(cmd=="configureFilter") {
                     alert('Filter');
