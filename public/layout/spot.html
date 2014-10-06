@@ -1,0 +1,22 @@
+<span class="spot"
+      ng-class="{'invisible':overwritten}"
+      ng-mouseenter="mouseenterwhileselecting()"
+      ng-mousedown="mousedownstartselecting()"
+      ng-mouseup="mouseupstopselecting()"
+      ng-click="clickonspot()">
+        <span class="panelarea1"
+              ng-class="{
+              'rspan1':rowspan==1,
+              'rspan2':rowspan==2,
+              'rspan3':rowspan==3,
+              'rspan4':rowspan==4,
+              'cspan1':colspan==1,
+              'cspan2':colspan==2,
+              'cspan3':colspan==3,
+              'cspan4':colspan==4,
+              'spothighlight':isHighlighted}"
+              data-drop="true"
+              jqyoui-droppable="jquuidroppable"
+              data-jqyoui-options="jqyouioptions">
+        </span>
+</span>

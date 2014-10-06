@@ -16,7 +16,7 @@ module.exports = function (grunt) {
         },
         uglify: {
             dist: {
-                src: 'public/App/appCreateReport.js',
+                src: 'public/app/appCreateReport.js',
                 dest: 'appCreateReport.min.js'
             }
         }
