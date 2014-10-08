@@ -13,15 +13,16 @@ appCreateReport.directive("chartcontainer", function (layoutservice, chartServic
         },
         templateUrl:  baseurl + '/visualizations/public/layout/chartcontainer.html',
         link: function (scp, el, attr) {
+            //propertyBag is used for all superViz components
+            scp.propertyBag = {};
+            scp.ctdatatype=scp.questionsel.DataType.toLowerCase();
             el.attr("Id", guid());
-            var defaultCharttype = scp.questionsel.defaultChartType;
-            var chartData = scp.questionsel.data;
             var payloadparent = $(el).find('.payload');
 
             //append a chart to the payloadparent element
-            chartService.buildChart(payloadparent, scp.questionsel);
+            //chartService.buildChart(payloadparent, scp.questionsel);
 
-            console.log('chartcontainer scope', scp, scp.questionsel.qtext, 'spot', scp.spot)
+            console.log('chartcontainer scope.questionsel', scp, scp.questionsel, 'spot', scp.spot)
 
             scp.startdragging = function () {
 
