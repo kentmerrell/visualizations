@@ -1,16 +1,40 @@
 var appCreateReport = angular.module('AppCreateReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource','ngAnimate', 'kdmDevTools']);
 
 //configurations to enable cors
-appCreateReport.config(['$httpProvider', function ($httpProvider) {
-    $.support.cors = true;
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//appCreateReport.config(['$httpProvider', function ($httpProvider) {
+//    $.support.cors = true;
+//    $httpProvider.defaults.useXDomain = true;
+//    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+//}]);
+//
+
+appCreateReport.config(['$provide', function($provide){
+    // this demonstrates how to register a new tool and add it to the default toolbar
+    $provide.decorator('taOptions', ['$delegate', function(taOptions){
+        // $delegate is the taOptions we are decorating
+        // here we override the default toolbars and classes specified in taOptions.
+        taOptions.toolbar = [
+
+            ['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
+            ['justifyLeft','justifyCenter','justifyRight'],
+            ['html', 'insertImage', 'insertLink', 'unlink']
+        ];
+        taOptions.classes = {
+            focussed: 'focussed',
+            toolbar: 'btn-toolbar',
+            toolbarGroup: 'btn-group',
+            toolbarButton: 'btn btn-default',
+            toolbarButtonActive: 'active',
+            disabled: 'disabled',
+            textEditor: 'form-control',
+            htmlEditor: 'form-control'
+        };
+        return taOptions; // whatever you return will be the taOptions
+    }]);
+
 }]);
 
-
-
-
-appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService) {
+appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService,chartService) {
 
     $scope.spots = layoutservice.allSpots;
     $scope.reportdataservice = ReportDataService;
@@ -23,7 +47,7 @@ appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, 
             $scope.allQuestions = ReportDataService.getAllQuestions(ReportDataService.surveyTemplateId);
             //console.log($scope.allQuestions);
         });
-    $scope.chartsvc = chartservice;
+    $scope.chartsvc = chartService;
     $scope.questionfiltertest = function (item) {
         if (item.qtext.toLowerCase().indexOf($scope.questionFilter.toLowerCase()) > -1)
             return true;
@@ -31,190 +55,8 @@ appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, 
 });
 
 
-/*---------------------- QUESTION-SELECTOR DIRECTIVE ---------------------
-*   Each question in the survey shows up as a question-selector directive.
-*   question-selector directives are dragged and dropped on spot-container directives.
-*                                                                           */
-appCreateReport.directive('questionSelector', function (layoutservice) {
-    return {
-        restrict: "E",
-        replace: true,
-        scope: { question: "=" },
-        templateUrl: "questionSelector.html",
-        link: function (scp, el, attrs) {
-            console.log("questionSelector.question", scp.question, scp);
-            scp.jqoptions = { revert: 'invalid' };
-
-            scp.startdragging = function () {
-                alert('dragging');
-                console.log('scp.startdragging', arguments, scp.question);
-                angular.copy(scp.question, layoutservice.questionInDrag)
-            };
-
-            scp.testme=function(){
-                alert('hello');
-            }
-        }
-    }
-});
 
 
-/* -----------------SPOT-CONTAINER DIRECTIVE-----------------
-*The spotContainer directive sets up the initial grid.
-*                                                             */
-appCreateReport.directive('spotContainer', function ($compile, $rootScope, layoutservice) {
-    return {
-        restrict: "E",
-        scope: {
-            y: '=y'
-        },
-        templateUrl: "SpotContainer.html",
-        link: function (scp, el, attrs) {
-            console.log("rows", parseInt(attrs.rows), 'columns', parseInt(attrs.columns))
-            scp.rows = 0;
-            scp.columns = parseInt(attrs.columns);
-
-            scp.$watch(function () {
-                return layoutservice.layoutmode
-            }, function (val) {
-                scp.layoutmode = val;
-            });
-            //let layoutservice know how many columns to expect (for layoutindicator logic)
-            layoutservice.registercolumncount(scp.columns);
-            scp.addRow = function () {
-                scp.rows++;
-                //add a spot for each column 
-                var row = $("<span/>").addClass("row");
-                for (var colnum = 1; colnum <= parseInt(attrs.columns); colnum++) {
-                    var newscope = $rootScope.$new(true);
-                    //newscope.rownumber=scp.rows;
-                    var newspot = $compile("<spot rownumber='" + scp.rows + "' columnnumber='" + colnum + "'></spot>")(scp);
-                    layoutservice.registerspot(scp.rows, colnum);
-                    row.append(newspot);
-                }
-                el.find('.ChildrenArea').append(row);
-                //console.log(layoutservice.getallspots());
-            };
-
-            for (var j = 1; j <= parseInt(attrs.rows); j++) {
-                scp.addRow();
-            }
-
-            scp.togglelayoutmode = function () {
-                layoutservice.layoutmode = !layoutservice.layoutmode; // !layoutservice.layoutmode;
-            }
-        }
-    }
-});
-
-
-appCreateReport.directive('spot', function (layoutservice, $compile, $rootScope, chartservice) {
-    return {
-        restrict: "E",
-        replace: true,
-        scope: {
-            rownumber: '@',
-            columnnumber: '@'
-        },
-        templateUrl: 'spot.html',
-        link: function (scp, elem, attrs) {
-            scp.$watch(
-                function () {
-                    return layoutservice.getspot(scp.rownumber, scp.columnnumber)
-                },
-                function (spt) {
-                    scp.rowspan = spt.rowspan;
-                    scp.colspan = spt.colspan;
-                    scp.overwritten = spt.overwritten;
-                    scp.isHighlighted = spt.isHighlighted;
-                    //if overwritten, disable drop events
-                    if (scp.overwritten) {
-                        scp.jquuidroppable = {}
-                    }
-                    else {
-                        scp.jquuidroppable = { onDrop: "dropquestionselectorhere()" }
-                    }
-                },
-                true);
-            scp.jquuidroppable = { onDrop: "dropquestionselectorhere()" }
-            scp.jqyouioptions = {
-                accept: '.questionselector, .chartcontainer', revert: true
-            };
-
-
-            scp.mousedownstartselecting = function () {
-                if (layoutservice.layoutmode) {
-                    layoutservice.selectingmode = true;
-                    layoutservice.startselecting(scp.rownumber, scp.columnnumber)
-                }
-            }
-
-            scp.mouseupstopselecting = function () {
-                if (layoutservice.layoutmode) {
-                    layoutservice.stopselecting(scp.rownumber, scp.columnnumber)
-                    layoutservice.selectingmode = false;
-                }
-            }
-
-            scp.mouseenterwhileselecting = function () {
-                if ((layoutservice.layoutmode == true) && (layoutservice.selectingmode == true)) {
-                    layoutservice.buildselection(scp.rownumber, scp.columnnumber)
-                }
-            }
-
-            scp.clickonspot = function () {
-                //provide a way to un-highlight any highlighted chart(s) 
-                $('.chartcontainer').removeClass('highlighted');
-                chartservice.chartInEdit = {};
-                if (layoutservice.layoutmode) {
-                    layoutservice.deleteexpansionset(scp.rownumber, scp.columnnumber)
-                }
-            }
-
-            scp.dropquestionselectorhere = function (a, b) {
-                //A Spot can accept a drag from .questionselector or a .chartcontainer
-                console.log('spot dropquestionselectorhere', a, b, scp.rownumber, scp.columnnumber, scp, layoutservice.questionInDrag, layoutservice.sourceChartContainer())
-
-                var originator = "questionselector"
-                if (arguments[1].draggable.hasClass("chartcontainer")) {
-                    originator = "chartcontainer"
-                }
-                //if this spot is in an expansionset AND is not the first cell then disregard (this method is called by the expansionsetoriginator's spanned panel area AND the underlying spot that is hidden)
-                if (layoutservice.spotIsTheOriginatoryInAnExpansionset(scp.rownumber, scp.columnnumber)) {
-                    if (originator == "questionselector") {
-                        var newscope = $rootScope.$new(true);
-                        newscope.questionsel = angular.copy(layoutservice.questionInDrag);
-                        newscope.spot = angular.copy(layoutservice.getspot(scp.rownumber, scp.columnnumber))
-                        newscope.rowspan = scp.rowspan;
-                        newscope.colspan = scp.colspan;
-                        if (newscope.questionsel.qtext == "Text Panel") {
-                            el.append($compile("<textlabel questionsel='questionsel'></textlabel>")(newscope));
-                        }
-                        else {
-                            layoutservice.instanciateChartContainer(layoutservice.questionInDrag.defaultChartType, elem, newscope);
-                        }
-                    }
-                    if (originator == "chartcontainer") {
-                        var thischartcontainer = elem.find('.chartcontainer');
-                        // if thischartcontainer is an empty object, then move the chart to this location
-                        if (thischartcontainer.length == 0) {
-                            layoutservice.moveChartToLocation(layoutservice.sourceChartContainer(), elem.find('.panelarea1'));
-
-                        }
-                        else {
-                            //if thischartcontainer is an actual object, swap locations.
-                            layoutservice.swapChartContainers(layoutservice.sourceChartContainer(), thischartcontainer)
-                        }
-                        $(thischartcontainer).css('z-index', '1');
-                        //layoutservice.sourceChartContainer().remove();
-                    }
-                }
-                return false;
-            };
-
-        }
-    }
-})
 
 
 appCreateReport.directive("textlabel", function () {
@@ -237,54 +79,7 @@ appCreateReport.directive("textlabel", function () {
 })
 
 
-appCreateReport.directive("chartcontainer", function (layoutservice, chartservice) {
-    return {
-        restrict: "E",
-        replace: true,
-        scope: {
-            spot: "=hostspot",
-            questionsel: "="
-        },
-        templateUrl: "chartcontainer.html",
-        link: function (scp, el, attr) {
-            el.attr("Id", guid());
-            var defaultCharttype = scp.questionsel.defaultChartType;
-            var chartData = scp.questionsel.data;
-            var payloadparent = $(el).find('.payload');
 
-            //append a chart to the payloadparent element
-            chartservice.buildChart(payloadparent, scp.questionsel);
-
-            console.log('chartcontainer scope', scp, scp.questionsel.qtext, 'spot', scp.spot)
-
-            scp.startdragging = function () {
-
-                el.addClass('currentlydragging')
-
-                console.log('chartcontainer scp.startdragging', arguments, scp, el)
-                angular.copy(scp.questionsel, layoutservice.questionInDrag)
-
-            }
-
-            scp.stopdragging = function () {
-                console.log('scp.stopdragging called in chartcontainer', 'arguments', arguments, 'scope', scp)
-                el.removeClass('currentlydragging')
-            }
-            scp.deleteme = function () {
-                el.remove();
-                angular.copy({}, chartservice.chartInEdit)
-            }
-            scp.editchart = function () {
-                //remove highlighted from any ChartContainers that have it.
-                $('.chartcontainer').removeClass('highlighted');
-                el.addClass("highlighted")
-                chartservice.chartInEdit = $(el).find('.payload').find('.ng-scope').scope().chart;// angular.copy($(el).find('.payload').find('.ng-scope').scope().chart)
-                console.log('chartservice.chartInEdit', chartservice.chartInEdit);//.children[0].scope().node
-
-            }
-        }
-    }
-})
 
 
 appCreateReport.directive("paneloptions", function (layoutservice, $rootScope) {

@@ -1,0 +1,14 @@
+<div class="SpotContainer">
+    <div class="ChildrenArea"></div>
+    <div class="spotcontainercontrollpanel">
+        <button class="layoutmodeswitch" ng-click="togglelayoutmode()" ng-class="{'layoutmodeselected': layoutmode==true, 'layoutmodenotselected':layoutmode==false}">Layout</button>
+                    <span ng-class="{'invisible':layoutmode==false}">
+                        <span class="label">Rows:</span><span class="value">{{rows}}</span>
+                        <button ng-click="addRow()">Add Row</button>
+                        <span class="label">Columns:</span><span class="value">{{columns}}</span>
+                    </span>
+
+
+    </div>
+
+</div>

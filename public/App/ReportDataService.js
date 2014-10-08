@@ -4,7 +4,7 @@ appCreateReport.factory('ReportDataService', function ($resource, $http) {
     var _allQuestions = [
         {"qtext": "abc"}
     ];
-    var _surveyTemplateId = 10041;
+    var _surveyTemplateId = 10136;
     var _survey = {
         getAllQuestions: {
             method: 'Get',
@@ -24,9 +24,9 @@ appCreateReport.factory('ReportDataService', function ($resource, $http) {
        getAllQuestions: function (surveytemplateid) {
             console.log('inside getAllQuestions');
             //LIVE
-            //$http({ method: 'GET', url: 'http://dv-estoredev-01:8081/CTV2API/api/Template/' + _surveyTemplateId }).
+            $http({ method: 'GET', url: 'http://dv-estoredev-01:8081/CTV2API/api/Template/' + _surveyTemplateId }).
             //TEST AGAINST LOCAL JSON FILE
-            $http({ method: 'GET', url: '../SampleData/template.json'}).
+            //$http({ method: 'GET', url: 'public/app/sampleData/template.json'}).
                 success(function (data, status, headers, config) {
 
                     while (_allQuestions.length > 0) {

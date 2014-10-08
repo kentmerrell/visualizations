@@ -182,6 +182,7 @@
                     }
 
                     function draw() {
+                        console.log('ng-google-chart-kdm draw() has been evoked',$scope.chart);
                         if (!draw.triggered && ($scope.chart != undefined)) {
                             draw.triggered = true;
                             $timeout(function () {
@@ -224,9 +225,6 @@
                                     $scope.chartWrapper.setDataTable($scope.chart.data);
                                     $scope.chartWrapper.setView($scope.chart.view);
                                     $scope.chartWrapper.setOptions($scope.chart.options);
-
-                                    
-                                    
                                 }
 
 

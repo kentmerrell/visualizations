@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!------------------------- CSS ------------------------------->
+    <link rel="stylesheet" href="../../../App/css/CTV2_Common.css">
+    <link rel="stylesheet" href="../../../App/css/CreateReport.css">
+    <link rel="stylesheet" href="../../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+    <!------------------- EXTERNAL COMPONENTS ---------------------->
+    <script src="../../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../../node_modules/underscore/underscore.js"></script>
+    <script src="../../../../bower_components/jqcloud2/dist/jqcloud.js"></script>
+    <link rel="stylesheet" href="../../../../bower_components/jqcloud2/dist/jqcloud.css">
+    <script src="../../../../bower_components/angular/angular.js"></script>
+    <script src="../../../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../../../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+    <!--<script src="../../../external_components/ng-google-chart-kdm.js"></script>-->
+    <script src="../../../../external_components/textAngular.js"></script>
+    <script src="../../../../external_components/textAngular-sanitize.js"></script>
+    <script src="../../../../external_components/textAngularSetup.js"></script>
+
+    <!------------CREATEREPORT APPLICATION AND SERVICES--------------->
+    <script src="../../../App/appCreateReport.js"></script>
+    <script src="../../../App/ReportDataService.js"></script>
+    <script src="../../../App/MetricMakerSrvc.js"></script>
+    <script src="../../../App/angular-jqcloud-kdm.js"></script>
+    <script src="../../../App/ng-google-chart-kdm.js"></script>
+
+    <!---------------------SUPERVIZ DIRECTIVES------------------------>
+    <script src="../../testChartContainer/testChartContainer.js"></script>
+    <script src="../../svOptionsPanel/svOptionsPanel.js"></script>
+    <script src="../../superViz.js"></script>
+    <script src="../../Visualizers/svBarChart.js"></script>
+    <script src="../../Visualizers/svLineChart.js"></script>
+    <script src="../../Visualizers/svMap.js"></script>
+    <script src="../../Visualizers/svPieChart.js"></script>
+    <script src="../../Visualizers/svTermCloud.js"></script>
+    <script src="../../Visualizers/svText.js"></script>
+
+    <!------------------- KDM DEV TOOLS ------------------------------>
+    <script src="../../../../external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    <script type="text/javascript">
+        appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
+            $scope.MetricMakerSrvc=MetricMakerSrvc;
+        })
+    </script>
+
+    <title></title>
+    <style>
+        h4 {
+            font-size: large;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        body {
+            padding: 50px
+        }
+
+        li {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
+
+
+<!--------------svConfigurator DIRECTIVE---------------------->
+
+<h2>svConfiguratorParent</h2>
+The active visualization is able to be configured.  This directive provides the UI for that capability.  It is the parent
+directive to the specific directives that actual edit the configuration.
+
+
+
+<!------------ svConfigSrvc SERVICE------------>
+<h4>svConfigSrvc</h4>
+<ul>
+    <li>VizInConfigType -- string corresponding to the visualization type of the currently selected visualization.
+        Must be a value in MetricMakerSrvc.visualizationTypes
+    </li>
+    <li>VizInConfigModel --the model of the visualization currently selected. </li>
+
+</ul>
+<h4>VisualizationType-specific Configurator Directives</h4>
+<ul>
+    <li>svBarChartConfig directive</li>
+    <li>svImageConfig directive</li>
+    <li>svLineChartConfig directive</li>
+    <li>svMapConfig directive</li>
+    <li>svPieChartConfig directive</li>
+    <li>svTermCloudConfig directive</li>
+    <li>svTextConfig directive</li>
+</ul>
+
+
+<kdm-navigation></kdm-navigation>
+</body>
+</html>
