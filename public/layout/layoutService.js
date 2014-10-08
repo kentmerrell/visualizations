@@ -245,7 +245,9 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
             newparent.append(chartcontainer1.removeClass('currentlydragging').css('left', '').css('top', '').css('z-index', ''));
             var parent1 = $(chartcontainer1).parent();
             var chart1scope = parent1.find('.payload').find('div').scope();
+            console.log('layoutService.moveChartToLocation has been evoked about to set chart1scope.chart.redraw  ')
             chart1scope.chart.redraw = !chart1scope.chart.redraw;
+
         },
         swapChartContainers: function (chartcontainer1, chartcontainer2) {
 
@@ -290,12 +292,14 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
             //    container.append($compile("<panelpiedirective questionsel='questionsel'></paneldirective>")(newscope));
         },
         triggerChartRedraw: function (rownumber, columnnumber) {
+            console.log('chart Redraw has been triggered in layoutService',rownumber,columnnumber)
             var chartcontainer = _getChartContainer(rownumber, columnnumber);
             //(there may not be a chartcontainer on thespot)
             if (chartcontainer) {
                 parent1 = chartcontainer.parent();
                 var chart1scope = parent1.find('.payload').find('div').scope();
-                chart1scope.chart.redraw = !chart1scope.chart.redraw;
+                console.log('chart1scope is:',chart1scope)
+                chart1scope.chart.redraw = !chart1scope.chart.redraw;//this works because there is a watch in the ng-google-chart directive
             }
         }
     }
