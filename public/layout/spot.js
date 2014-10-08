@@ -77,7 +77,8 @@ appCreateReport.directive('spot', function (layoutservice, $compile, $rootScope,
                 if (arguments[1].draggable.hasClass("chartcontainer")) {
                     originator = "chartcontainer"
                 }
-                //if this spot is in an expansionset AND is not the first cell then disregard (this method is called by the expansionsetoriginator's spanned panel area AND the underlying spot that is hidden)
+                //if this spot is in an expansionset AND is not the first cell then disregard (this method is called by
+                // the expansionsetoriginator's spanned panel area AND the underlying spot that is hidden)
                 if (layoutservice.spotIsTheOriginatoryInAnExpansionset(scp.rownumber, scp.columnnumber)) {
                     if (originator == "questionselector") {
                         var newscope = $rootScope.$new(true);
