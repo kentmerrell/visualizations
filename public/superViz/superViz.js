@@ -8,9 +8,10 @@ appCreateReport.directive('superViz', function (MetricMakerSrvc, svConfigSrvc) {
         restrict: 'E',
         templateUrl: baseurl + '/visualizations/public/superViz/super-viz.html',
         link: function (scope, el, attrs) {
-            scope.propertyBag = {};
+            //scope.propertyBag = {}; //this should already be defined in parent scope
             scope.propertyBag.clearthreaddatatype = attrs.ctdatatype;
             scope.propertyBag.visualizationType = MetricMakerSrvc.getDefaultVizualization(scope.propertyBag.clearthreaddatatype);
+
             scope.clickheader = function () {
                 svConfigSrvc.VizInConfigType=scope.propertyBag.visualizationType;
             }
