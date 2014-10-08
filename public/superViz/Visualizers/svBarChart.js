@@ -11,7 +11,7 @@ appCreateReport.directive('svBarChart',function(){
         link: function (scope, el, attrs) {
             scope.chart = {
                 "type": "ColumnChart",
-                /* "cssStyle": "height:200px; width:300px;",*/
+//                 "cssStyle": "height:500px; width:200px;",
                 "data": {
                     "cols": [
                         {
