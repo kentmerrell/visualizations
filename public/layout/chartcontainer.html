@@ -2,24 +2,20 @@
       data-drag="true"
       data-jqyoui-options="{revert: 'invalid', appendTo:'body',zIndex: 10}"
       jqyoui-draggable=" {onStart: 'startdragging()',onStop:'stopdragging()'}">
-                <span class="chartcontainercontrolbox paneldraghandle"
+
+                <span class="paneldraghandle"
                       ng-click="editchart();
                       $event.stopPropagation();">
 
                      <span class="qid">{{questionsel.HierarchyId}}</span>
 
-                     <span>{{questionsel.Name}}</span>
+                     <!--<span>{{questionsel.Name}}</span>-->
 
-                     <span class="delete" ng-click="deleteme()">X</span>
+                    <!-- <span class="delete" ng-click="deleteme()">X</span>-->
                 </span>
 
-                <span class="IconsContainer">
-                    <span>LC</span>
-                    <span>BC</span>
-                    <span>PC</span>
-                    <span>CS</span>
-                    <span>DT</span>
-                </span>
+                <span class="payload" ng-click="editchart(); $event.stopPropagation();">
+                    <super-viz ctdatatype="{{ctdatatype}}"></super-viz>
 
-                <span class="payload" ng-click="editchart(); $event.stopPropagation();"></span>
+                </span>
             </span>
