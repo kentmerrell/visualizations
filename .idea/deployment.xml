@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="Davaco Staging">
-    <option name="myAutoUpload" value="ALWAYS" />
+  <component name="PublishConfigData" serverName="LocalDev">
+    <serverData>
+      <paths name="LocalDev">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/visualizations" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
   </component>
 </project>
 
