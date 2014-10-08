@@ -10,10 +10,16 @@ appCreateReport.directive('superViz', function (MetricMakerSrvc, svConfigSrvc) {
         link: function (scope, el, attrs) {
             //scope.propertyBag = {}; //this should already be defined in parent scope
             scope.propertyBag.clearthreaddatatype = attrs.ctdatatype;
-            scope.propertyBag.visualizationType = MetricMakerSrvc.getDefaultVizualization(scope.propertyBag.clearthreaddatatype);
 
+            //text labels are not actually ctdatatypes.
+            if (scope.propertyBag.clearthreaddatatype == 'text') {
+                scope.propertyBag.visualizationType = 'text'
+            }
+            else {
+                scope.propertyBag.visualizationType = MetricMakerSrvc.getDefaultVizualization(scope.propertyBag.clearthreaddatatype);
+            }
             scope.clickheader = function () {
-                svConfigSrvc.VizInConfigType=scope.propertyBag.visualizationType;
+                svConfigSrvc.VizInConfigType = scope.propertyBag.visualizationType;
             }
         }
     }

@@ -10,3 +10,4 @@ appCreateReport.directive('svText',function(){
         templateUrl: baseurl+  '/visualizations/public/superViz/Visualizers/sv-text.html'
     }
 })
+

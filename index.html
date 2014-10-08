@@ -158,7 +158,7 @@
                     <span class="searchcontainer">
                         Search <input ng-model="questionFilter" class="questionfilter"/>
                     </span>
-                <question-selector question="{qtext:'Text Panel'}"></question-selector>
+                <question-selector question="{Name:'Text Label',DataType:'text'}"></question-selector>
                 <question-selector ng-repeat="qst in reportdataservice.allQuestions | filter:questionFilter"
                                    question="qst"></question-selector>
 
