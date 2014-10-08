@@ -9,7 +9,7 @@
 
 
     <!------------------------- CSS ------------------------------->
-    <link rel="stylesheet" href="public/App/css/CTV2_Common.css">
+    <link rel="stylesheet" href="./public/App/css/CTV2_Common.css">
     <link rel="stylesheet" href="public/App/css/CreateReport.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
@@ -26,7 +26,6 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
-    <!--<script src="../../../external_components/ng-google-chart-kdm.js"></script>-->
     <script src="external_components/textAngular.js"></script>
     <script src="external_components/textAngular-sanitize.js"></script>
     <script src="external_components/textAngularSetup.js"></script>
@@ -99,78 +98,78 @@
         }
     </style>
 </head>
-<body ng-app="AppCreateReport" ng-controller="CreateReportCtrl">
+<body>
 
 
-<div id="createReport" ng-app="AppCreateReport">
-    <h3>Create Report</h3>
-    <span data-drag="true" jqyoui-draggable>So you think you can drag</span>
-    <div class="row" ng-controller="CreateReportCtrl">
-
-        <div class="panelcontainer">
-            <span class="ReportHeader">{{reportdataservice.reportname}}<span class="presentationModeIcon"><svg-icon
-                    p="connecting7"></svg-icon></span></span>
-            <spot-container rows="4" columns="2"></spot-container>
-            <div style="margin-top:50px;"> &nbsp;</div>
-        </div>
+<div id="createReport" ng-app="AppCreateReport" ng-controller="CreateReportCtrl">
 
 
-        <div class="ReportControlPanelContainer">
 
-            <accordion id="left-nav" close-others="true">
+    <div class="panelcontainer">
 
-                <!--------------Report Settings ------------ -->
-                <accordion-group>
-                    <accordion-heading id="qproperties">
-
-                        <div>Report Settings</div>
-
-                    </accordion-heading>
-                    <div>Report Name: <input ng-model="reportdataservice.reportname"/></div>
-                </accordion-group>
-
-
-                <!--------------Chart Settings ------------ -->
-                <accordion-group>
-                    <accordion-heading id="qpropertieschartsettings">
-
-                        <div>Chart Settings</div>
-
-                    </accordion-heading>
-                    <div>Chart Container Settings: {{}}</div>
-                    <div>Chart Settings: {{chartsvc.chartInEdit}}</div>
-                </accordion-group>
-
-
-                <!-------------- Questions ------------------>
-                <accordion-group>
-
-                    <accordion-heading id="qproperties1">
-
-                        <div>Questions</div>
-
-                    </accordion-heading>
-
-                    <span class="searchcontainer">
-                        Search Questions
-                        <input ng-model="questionFilter" class="questionfilter"/>
-                    </span>
-                    <question-selector question="{qtext:'Text Panel'}"></question-selector>
-                    <hr/>
-                    <question-selector ng-repeat="qst in reportdataservice.allQuestions | filter:questionFilter"
-                                       question="qst"></question-selector>
-
-                </accordion-group>
-
-            </accordion>
-
-        </div>
-
+            <span class="ReportHeader">{{reportdataservice.reportname}}
+                <span class="presentationModeIcon">
+                        <img ng-click="clickme()" src="/visualizations/external_components/icons/svg/graphical6.svg"
+                             width="24" height="24" title="Show Presentation" />
+                </span></span>
+        <spot-container rows="3" columns="2"></spot-container>
+        <div style="margin-top:50px;"> &nbsp;</div>
     </div>
 
+
+    <div class="ReportControlPanelContainer">
+        <div><span style="font-weight:normal;font-size: 24px;">Create</span>
+            <span style="position:relative;display: inline-block;left:-4px; font-weight:bold;font-size: 24px">Report</span></div>
+
+
+        <accordion id="left-nav" close-others="true">
+
+            <!--------------Report Settings ------------ -->
+            <accordion-group>
+                <accordion-heading id="qproperties">
+                    <div>Report Settings</div>
+                </accordion-heading>
+
+                <div>Report Name: <input ng-model="reportdataservice.reportname"/></div>
+
+            </accordion-group>
+
+
+            <!--------------Chart Settings ------------ -->
+            <accordion-group>
+                <accordion-heading id="qpropertieschartsettings">
+                    <div>Chart Settings</div>
+                </accordion-heading>
+
+                <div>
+                    <sv-configurator-parent></sv-configurator-parent>
+                </div>
+
+            </accordion-group>
+
+
+            <!-------------- Questions ------------------>
+            <accordion-group>
+
+                <accordion-heading id="qproperties1">
+                    <div>Questions</div>
+                </accordion-heading>
+
+                    <span class="searchcontainer">
+                        Search <input ng-model="questionFilter" class="questionfilter"/>
+                    </span>
+                <question-selector question="{qtext:'Text Panel'}"></question-selector>
+                <question-selector ng-repeat="qst in reportdataservice.allQuestions | filter:questionFilter"
+                                   question="qst"></question-selector>
+
+            </accordion-group>
+
+        </accordion>
+
+
+    </div>
+    <kdm-navigation></kdm-navigation>
 </div>
 
-
-<kdm-navigation></kdm-navigation>
 </body>
 </html>
