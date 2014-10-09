@@ -1,10 +1,13 @@
-appCreateReport.factory('ReportDataService', function ($resource, $http) {
+appCreateReport.factory('ReportDataService', function ($resource, $http,$location) {
     console.log('in ReportDataService');
     var _reportname = 'My Report';
     var _allQuestions = [
         {"qtext": "abc"}
     ];
-    var _surveyTemplateId = 10136;
+    var _surveyTemplateId = 10136; //6, 10083
+    if(($location.search()).templateId){
+        _surveyTemplateId=($location.search()).templateId
+    }
     var _survey = {
         getAllQuestions: {
             method: 'Get',

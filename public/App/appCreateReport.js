@@ -1,38 +1,43 @@
 var appCreateReport = angular.module('AppCreateReport', ['ngDragDrop', 'textAngular', 'googlechart', 'ui.bootstrap', 'ngResource','ngAnimate', 'kdmDevTools']);
 
 //configurations to enable cors
-//appCreateReport.config(['$httpProvider', function ($httpProvider) {
-//    $.support.cors = true;
-//    $httpProvider.defaults.useXDomain = true;
-//    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-//}]);
-//
-
-appCreateReport.config(['$provide', function($provide){
-    // this demonstrates how to register a new tool and add it to the default toolbar
-    $provide.decorator('taOptions', ['$delegate', function(taOptions){
-        // $delegate is the taOptions we are decorating
-        // here we override the default toolbars and classes specified in taOptions.
-        taOptions.toolbar = [
-
-            ['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
-            ['justifyLeft','justifyCenter','justifyRight'],
-            ['html', 'insertImage', 'insertLink', 'unlink']
-        ];
-        taOptions.classes = {
-            focussed: 'focussed',
-            toolbar: 'btn-toolbar',
-            toolbarGroup: 'btn-group',
-            toolbarButton: 'btn btn-default',
-            toolbarButtonActive: 'active',
-            disabled: 'disabled',
-            textEditor: 'form-control',
-            htmlEditor: 'form-control'
-        };
-        return taOptions; // whatever you return will be the taOptions
-    }]);
-
+appCreateReport.config(['$httpProvider', function ($httpProvider) {
+    $.support.cors = true;
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
+
+
+//appCreateReport.config(['$provide', function($provide){
+//    // this demonstrates how to register a new tool and add it to the default toolbar
+//    $provide.decorator('taOptions', ['$delegate', function(taOptions){
+//        // $delegate is the taOptions we are decorating
+//        // here we override the default toolbars and classes specified in taOptions.
+//        taOptions.toolbar = [
+//
+//            ['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
+//            ['justifyLeft','justifyCenter','justifyRight'],
+//            ['html', 'insertImage', 'insertLink', 'unlink']
+//        ];
+//        taOptions.classes = {
+//            focussed: 'focussed',
+//            toolbar: 'btn-toolbar',
+//            toolbarGroup: 'btn-group',
+//            toolbarButton: 'btn btn-default',
+//            toolbarButtonActive: 'active',
+//            disabled: 'disabled',
+//            textEditor: 'form-control',
+//            htmlEditor: 'form-control'
+//        };
+//        return taOptions; // whatever you return will be the taOptions
+//    }]);
+//
+//}]);
+
+appCreateReport.config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
+
+});
 
 appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService,chartService) {
 

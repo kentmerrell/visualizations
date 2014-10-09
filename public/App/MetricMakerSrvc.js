@@ -61,6 +61,14 @@ appCreateReport.factory('MetricMakerSrvc', function () {
                 }
 
                 if (
+                    ctdatatype == "text"
+                    ) {
+                    return [
+
+                    ];
+                }
+
+                if (
                     ctdatatype == "currency" ||
                     ctdatatype == "date"
                     ) {

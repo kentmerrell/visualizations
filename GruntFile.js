@@ -14,6 +14,21 @@ module.exports = function (grunt) {
                 }
             }
         },
+        html2js:{
+            dist:{
+                src:['public/**/*.html','!public/**/*doco.html','!public/**/*Doco.html'],
+                dest:'dist/templates.js'
+            }
+        },
+        concat:{
+            options:{
+                separator:';'
+            },
+            dist:{
+                src:['public/app/appCreateReport.js','public/**/*.js'],
+                dest:'dist/app.js'
+            }
+        },
         uglify: {
             dist: {
                 src: 'public/app/appCreateReport.js',

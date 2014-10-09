@@ -86,14 +86,50 @@ for production.
         <p>Prod Directory Structure</p>
     </li>
 </ul>
+<img src="https://www.lucidchart.com/publicSegments/view/5436c5f7-1154-4b31-a880-2f020a00caaf/image.png"  width="500"alt=""/>
 
+
+<!------------------------------ GRUNT BUILD ----------------------------------->
 <h4>Grunt</h4>
 
 <p>See <a href="http://g00glen00b.be/angular-grunt/" target="info">http://g00glen00b.be/angular-grunt/</a> for a good
     write-up on this.</p>
 <ul>
-    <li>Directive Templates -- combine into a single javascript file with the html2js grunt plug-in.</li>
-    <li>Javascript file -- concatenate all javascript into a single file. Very simple deployment procedure</li>
+    <li>Compile Angular Partials -- Use html2js plugin to wrap all html partials in javascript and inject into angular module that is makes them availabe in $templateCache. (Don't include *doco.html files
+    <pre><code>html2js:{
+        dist:{
+                src:['public/superViz/**/*.html','!public/superViz/**/*doco.html','!public/superViz/**/*Doco.html'],
+                dest:'tmp/templates.js'
+            }
+        },</code></pre>
+    then run "grunt html2js" in terminal.
+    </li>
+
+    <li>Concatenate all javascript files (modules, directives, services) into a single javascript file.
+    <pre><code>concat:{
+        options:{
+            separator:';'
+        },
+        dist:{
+            src:['public/app/appCreateReport.js','public/**/*.js'],
+            dest:'dist/app.js'
+        }
+    },</code></pre>
+        then run "grunt concat" in terminal.
+    </li>
+
+    <li>Copy index.html to dist folder</li>
+    <li>Delete the folowing sections in the head
+        <ul>
+            <li>CREATEREPORT APPLICATION AND SERVICES</li>
+            <li>SUPERVIZ DIRECTIVES</li>
+            <li>LAYOUT DIRECTIVES</li>
+            <li>KDM DEV TOOLS</li>
+            <li>LOCAL TEST CONTROLLER</li>
+            <li>Other local script and css</li>
+        </ul></li>
+    <li>Inser references to the newly generated app.js and templates.js files</li>
+
     <li>Synchronize script and link tags. (see <a href="https://www.npmjs.org/package/grunt-script-link-tags"
                                                   target="info">https://www.npmjs.org/package/grunt-script-link-tags</a>
     </li>

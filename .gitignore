@@ -10,6 +10,7 @@ idea/dataSources.xml
 idea/sqlDataSources.xml
 bower_components
 node_modules
+dist
 
 ## File-based project format
 *.ipr
