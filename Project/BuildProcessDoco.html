@@ -89,7 +89,7 @@ for production.
 <img src="https://www.lucidchart.com/publicSegments/view/5436c5f7-1154-4b31-a880-2f020a00caaf/image.png"  width="500"alt=""/>
 
 
-<!------------------------------ GRUNT BUILD ----------------------------------->
+<!--------------------------------- GRUNT BUILD ------------------------------------->
 <h4>Grunt</h4>
 
 <p>See <a href="http://g00glen00b.be/angular-grunt/" target="info">http://g00glen00b.be/angular-grunt/</a> for a good
@@ -112,7 +112,7 @@ for production.
         },
         dist:{
             src:['public/app/appCreateReport.js','public/**/*.js'],
-            dest:'dist/app.js'
+            dest:'dist/createReport.js'
         }
     },</code></pre>
         then run "grunt concat" in terminal.
@@ -128,11 +128,34 @@ for production.
             <li>LOCAL TEST CONTROLLER</li>
             <li>Other local script and css</li>
         </ul></li>
-    <li>Inser references to the newly generated app.js and templates.js files</li>
+    <li>Insert references to the newly generated app.js and templates.js files</li>
 
     <li>Synchronize script and link tags. (see <a href="https://www.npmjs.org/package/grunt-script-link-tags"
                                                   target="info">https://www.npmjs.org/package/grunt-script-link-tags</a>
     </li>
+</ul>
+
+<!------------------------------ ASP.NET INTEGRATION----------------------------------->
+
+<h4>ASP.NET INTEGRATION</h4>
+<ul>
+    <li>Report.cshtml --
+        <ul>
+            <li>copy the guts of index.html into report.html. Basically, everything inside the body tag needs
+                to be replaced. This will be the &lt;div id="createReport" ng-app="AppCreateReport"
+                ng-controller="CreateReportCtrl"> tag and all it's contents.</li>
+            <li>Copy insert link to app.js in the <code>@section JavaScript {... </code>
+
+            </li>
+            <li>Update CreateReport.css with content from webstorm.
+
+            </li>
+            <li></li>
+        </ul>
+    </li>
+    <li></li>
+    <li></li>
+    <li></li>
 </ul>
 
 <h4>External Libraries</h4>

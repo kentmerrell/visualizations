@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             },
             dist:{
                 src:['public/app/appCreateReport.js','public/**/*.js'],
-                dest:'dist/app.js'
+                dest:'dist/createReport.js'
             }
         },
         uglify: {
