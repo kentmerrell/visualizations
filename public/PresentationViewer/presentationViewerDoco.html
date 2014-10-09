@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!---------THE KING (JQUERY) COMES FIRST (Using CDN to accommodate dragdrop.   Why?  Maybe a bug.)------------->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+
+    <!------------------------- CSS ------------------------------->
+    <link rel="stylesheet" href="../app/css/CTV2_Common.css">
+    <link rel="stylesheet" href="../app/css/CreateReport.css">
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+
+    <!------------------- EXTERNAL COMPONENTS ---------------------->
+    <script src="../../node_modules/underscore/underscore.js"></script>
+    <script src="../../bower_components/jqcloud2/dist/jqcloud.js"></script>
+    <link rel="stylesheet" href="../../bower_components/jqcloud2/dist/jqcloud.css">
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../../bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+    <script src="../../external_components/textAngular.js"></script>
+    <script src="../../external_components/textAngular-sanitize.js"></script>
+    <script src="../../external_components/textAngularSetup.js"></script>
+
+
+    <!------------CREATEREPORT APPLICATION AND SERVICES--------------->
+    <script src="../app/appCreateReport.js"></script>
+    <script src="../app/ReportDataService.js"></script>
+    <script src="../app/ChartService.js"></script>
+    <script src="../app/MetricMakerSrvc.js"></script>
+    <script src="../app/angular-jqcloud-kdm.js"></script>
+    <script src="../app/ng-google-chart-kdm.js"></script>
+
+
+    <!---------------------SUPERVIZ DIRECTIVES------------------------>
+    <script src="../superViz/testChartContainer/testChartContainer.js"></script>
+    <script src="../superViz/svOptionsPanel/svOptionsPanel.js"></script>
+    <script src="../superViz/superViz.js"></script>
+    <script src="../superViz/Visualizers/svBarChart.js"></script>
+    <script src="../superViz/Visualizers/svLineChart.js"></script>
+    <script src="../superViz/Visualizers/svMap.js"></script>
+    <script src="../superViz/Visualizers/svPieChart.js"></script>
+    <script src="../superViz/Visualizers/svTermCloud.js"></script>
+    <script src="../superViz/Visualizers/svText.js"></script>
+    <script src="../superViz/svConfigurator/svConfigSrvc.js"></script>
+    <script src="../superViz/svConfigurator/svConfiguratorParent.js"></script>
+    <script src="../superViz/svConfigurator/svBarChartConfig.js"></script>
+    <script src="../superViz/svConfigurator/svImageConfig.js"></script>
+    <script src="../superViz/svConfigurator/svLineChartConfig.js"></script>
+    <script src="../superViz/svConfigurator/svMapConfig.js"></script>
+    <script src="../superViz/svConfigurator/svPieChartConfig.js"></script>
+    <script src="../superViz/svConfigurator/svTermCloudConfig.js"></script>
+    <script src="../superViz/svConfigurator/svTextConfig.js"></script>
+
+
+    <!---------------------LAYOUT DIRECTIVES------------------------>
+    <script src="../layout/layoutService.js"></script>
+    <script src="../layout/spot.js"></script>
+    <script src="../layout/chartcontainer.js"></script>
+    <script src="../layout/spotContainer.js"></script>
+    <script src="../layout/questionSelector.js"></script>
+
+    <!-----------------PRESENTATION VIEWER--------------------->
+    <script src="presentationViewer.js"></script>
+
+    <!------------------- KDM DEV TOOLS ------------------------------>
+    <script src="../../external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+    <link rel="stylesheet" href="../../external_components/kdmDevTools/highlight.js.min.css">
+    <script src="../../external_components/kdmDevTools/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+    <!------------------- LOCAL TEST CONTROLLER ------------------------------>
+    <script type="text/javascript">
+        appCreateReport.controller('TestCtrl', function ($scope,$modal) {
+
+            $scope.invokeModal=function(){
+                var modalInstance=$modal.open({
+                    templateUrl:'presentationViewer.html',
+                    controller:'ModalInstanceCtrl'
+                })
+            }
+        })
+        appCreateReport.controller('ModalInstanceCtrl', function ($scope,$modalInstance) {
+            $scope.chartsInReport=['chart1','chart2'];
+            console.log('ModalInstanceCtrl.scope',$scope);
+        })
+    </script>
+
+    <title></title>
+    <style>
+        h4 {
+            font-size: large;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        body {
+            padding: 50px
+        }
+
+        li {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<style>
+
+    @media (min-width: 768px) {
+        .modal-dialog {
+            width: 600px;
+            margin: 10% ;
+        }
+    }
+</style>
+<div id="createReport" ng-app="AppCreateReport" ng-controller="TestCtrl">
+
+There is a presentationViewer here:<button ng-click="invokeModal()">invokeModal</button>
+    <!--<presentation-viwer></presentation-viwer>-->
+
+    <kdm-navigation></kdm-navigation>
+</div>
+
+</body>
+</html>
