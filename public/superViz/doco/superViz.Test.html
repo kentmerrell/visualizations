@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!---------THE KING (JQUERY) COMES FIRST (Using CDN to accommodate dragdrop.   Why?  Maybe a bug.)------------->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+
+    <!------------------------- CSS ------------------------------->
+    <link rel="stylesheet" href="../../app/css/CTV2_Common.css">
+    <link rel="stylesheet" href="../../app/css/CreateReport.css">
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+
+
+    <!------------------- EXTERNAL COMPONENTS ---------------------->
+    <script src="../../../node_modules/underscore/underscore.js"></script>
+    <script src="../../../bower_components/jqcloud2/dist/jqcloud.js"></script>
+    <link rel="stylesheet" href="../../../bower_components/jqcloud2/dist/jqcloud.css">
+    <script src="../../../bower_components/angular/angular.js"></script>
+    <script src="../../../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../../../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../../../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="../../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../../../bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+    <script src="../../../external_components/textAngular.js"></script>
+    <script src="../../../external_components/textAngular-sanitize.js"></script>
+    <script src="../../../external_components/textAngularSetup.js"></script>
+
+
+    <!------------CREATEREPORT APPLICATION AND SERVICES--------------->
+    <script src="../../app/appCreateReport.js"></script>
+    <script src="../../app/ReportDataService.js"></script>
+    <script src="../../app/ChartService.js"></script>
+    <script src="../../app/MetricMakerSrvc.js"></script>
+    <script src="../../app/angular-jqcloud-kdm.js"></script>
+    <script src="../../app/ng-google-chart-kdm.js"></script>
+
+
+    <!---------------------SUPERVIZ DIRECTIVES------------------------>
+    <script src="../testChartContainer/testChartContainer.js"></script>
+    <script src="../svOptionsPanel/svOptionsPanel.js"></script>
+    <script src="../superViz.js"></script>
+    <script src="../Visualizers/svBarChart.js"></script>
+    <script src="../Visualizers/svLineChart.js"></script>
+    <script src="../Visualizers/svMap.js"></script>
+    <script src="../Visualizers/svPieChart.js"></script>
+    <script src="../Visualizers/svTermCloud.js"></script>
+    <script src="../Visualizers/svText.js"></script>
+    <script src="../svConfigurator/svConfigSrvc.js"></script>
+    <script src="../svConfigurator/svConfiguratorParent.js"></script>
+    <script src="../svConfigurator/svBarChartConfig.js"></script>
+    <script src="../svConfigurator/svImageConfig.js"></script>
+    <script src="../svConfigurator/svLineChartConfig.js"></script>
+    <script src="../svConfigurator/svMapConfig.js"></script>
+    <script src="../svConfigurator/svPieChartConfig.js"></script>
+    <script src="../svConfigurator/svTermCloudConfig.js"></script>
+    <script src="../svConfigurator/svTextConfig.js"></script>
+
+
+    <!---------------------LAYOUT DIRECTIVES------------------------>
+    <script src="../../layout/layoutService.js"></script>
+    <script src="../../layout/spot.js"></script>
+    <script src="../../layout/chartcontainer.js"></script>
+    <script src="../../layout/spotContainer.js"></script>
+    <script src="../../layout/questionSelector.js"></script>
+
+
+    <!------------------- KDM DEV TOOLS ------------------------------>
+    <script src="../../../external_components/kdmDevTools/kdmDevToolsApp.js"></script>
+    <link rel="stylesheet" href="../../../external_components/kdmDevTools/highlight.js.min.css">
+    <script src="../../../external_components/kdmDevTools/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+    <script type="text/javascript">
+        appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
+            $scope.MetricMakerSrvc=MetricMakerSrvc;
+        })
+    </script>
+
+    <title></title>
+    <style>
+        h4 {
+            font-size: large;
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        body {
+            padding: 50px
+        }
+
+        li {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body ng-app="AppCreateReport" ng-controller="superVisTestCtrl">
+
+<sv-configurator-parent></sv-configurator-parent>
+<!--------------SUPERVIZ DIRECTIVE---------------------->
+
+<h2>superViz directive Output</h2>
+This page provides various scenarios for output of a superViz directive.  The surrounding context is provided by a testChartContainer directive.
+
+
+
+<!--------------ITERATE THROUGH ALL CLEARTHREAD DATATYPES---------------------->
+
+<h4>Iterate Through all ClearThread Datatypes</h4>
+<ul>
+    <li>
+        <p>Iterate through each of the clearthread datatypes and see what the rendered superViz directive looks like.</p>
+
+        <div ng-repeat='dv in MetricMakerSrvc.defaultVisualizations'><p style="margin-top: 40px; color:darkolivegreen; font-weight: bold">Datatype: {{dv.ctdatatype}}</p>
+            <test-chart-container width="400" height="300" ctdatatype="{{dv.ctdatatype}}"></test-chart-container>
+            <div style="font-size: smaller">* the panel should be appropriate for {{dv.defaultmetric}} metric.</div>
+        </div>
+
+
+    </li>
+</ul>
+
+
+
+<!------------USAGE------------>
+<h4>Usage</h4>
+<ul>
+    <li>This page uses a special testChartContainer directive that wraps the superViz directive in a postioned
+        (and dynamically sized) span element. It looks like this:
+    <pre style="width:900px"><code>&lt;test-chart-container width="200" height="200" ctdatatype="SingleLineText" >&lt;/test-chart-container>
+    </code></pre>
+    </li>
+    <li><p>In the production environment, use a chartContainer instead of a testChartContainer. <br/><br/>
+        <span style="font-style: italic">* Width and Height attributes are not specified on the chartContainer directive</span> </p>
+        <pre style="width:900px"><code>&lt;chart-container ctdatatype="SingleLineText" >&lt;/chart-container>
+        </code></pre>
+    </li>
+
+</ul>
+
+<!--------------BEHIND THE CURTAIN----------->
+<H4>Behind the Curtain</H4>
+<ul>
+    <li>
+        This is a listing of the testChartContainer directive to show how it is merely a wrapper around the superViz
+        directive.
+<pre style="width:900px"><code>
+    appCreateReport.directive('testChartContainer', function () {
+    "use strict";
+    return{
+    restrict: 'E',
+    scope: true,
+    templateUrl:'test-container.html',
+    link: function (scope, el, attrs) {
+    scope.mywidth = attrs.width;
+    scope.myheight = attrs.height;
+    scope.clearthreaddatatype=attrs.ctdatatype;
+    }
+    }
+    })
+</code></pre>
+    </li>
+    <li>
+        <p>And the associated template, test-container.html (inline styling used because this will never be deployed in
+            prod)</p>
+ <pre style="width:900px"><code>
+     &lt;span style="border:1px solid lightgray; padding: 5px; position:relative; display: inline-block;">
+     &lt;span style="position:relative; display:inline-block; font-size:smaller; top:-8px; color:silver; ">
+     this testChartContainer directive mimics a chartContainer directive&lt;/span>
+     &lt;span style="margin-bottom: -6px; position: relative; display:block;">
+     width:&lt;input ng-model="mywidth" style="width:50px;height:20px;margin-right:10px;
+     border: 1px lightgray solid;">
+     height:&lt;input ng-model="myheight" style="width:50px; height:20px;border: 1px lightgray solid;"
+     clearthreaddatatype="test">&lt;/span>&lt;br>
+     &lt;span ng-style="{width:mywidth,height:myheight}" style="position: relative; display: inline-block;">
+     &lt;super-viz>&lt;/super-viz>
+     &lt;/span>
+     &lt;/span>
+ </code></pre>
+    </li>
+</ul>
+
+<!--------------SIZING---------------------->
+
+<h4>Sizing</h4>
+<ul>
+    <li>Should dynamically adjust size to fill it's parent container. This is a test container with default dimensions
+        set to 200x200.<br/>
+        <test-chart-container width="200" height="200"></test-chart-container>
+    </li>
+    <li>An empty host (positioned div (200x200) with no child superViz directive)<br/>
+
+        <div style="display: inline-block; position:relative; background-color: pink; height: 200px; width:200px;">
+            host
+        </div>
+    </li>
+
+    <li>A host with a child superViz directive (positioned div (400x400))<br/>
+
+        <div style="display: inline-block; position:relative; background-color: pink; height: 400px; width:400px;">
+
+            <super-viz ></super-viz>
+        </div>
+    </li>
+    <li>A host with a superViz directive for "map" datatype
+        <div style="display: inline-block; position:relative; background-color: pink; height: 400px; width:400px;">
+            <super-viz clearthreaddatatype="map"></super-viz>
+
+        </div>
+    </li>
+    <li>A superViz directive that is not wrapped in a host looks like this<br/>
+        <super-viz></super-viz>
+    </li>
+</ul>
+
+<kdm-navigation></kdm-navigation>
+</body>
+</html>
