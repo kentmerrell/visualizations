@@ -4,11 +4,10 @@
 
 appCreateReport.directive('svLineChart', function () {
     "use strict";
-    var baseurl = window.location.protocol + "//" + window.location.host;
     return{
         restrict: 'E',
         scope: {},
-        templateUrl: baseurl + '/visualizations/public/superViz/Visualizers/sv-line-chart.html',
+        templateUrl: 'public/superViz/Visualizers/sv-line-chart.html',
         link: function (scope, el, attrs) {
             scope.chart = {
                 "type": "LineChart",

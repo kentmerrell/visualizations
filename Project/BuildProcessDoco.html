@@ -95,7 +95,7 @@ for production.
 <p>See <a href="http://g00glen00b.be/angular-grunt/" target="info">http://g00glen00b.be/angular-grunt/</a> for a good
     write-up on this.</p>
 <ul>
-    <li>Compile Angular Partials -- Use html2js plugin to wrap all html partials in javascript and inject into angular module that is makes them availabe in $templateCache. (Don't include *doco.html files
+    <li>Compile Angular Partials -- Use <a src="https://github.com/karlgoldstein/grunt-html2js.html" target="_blank">html2js</a> plugin to wrap all html partials in javascript and inject into angular module that is makes them availabe in $templateCache. (Don't include *doco.html files
     <pre><code>html2js:{
         dist:{
                 src:['public/superViz/**/*.html','!public/superViz/**/*doco.html','!public/superViz/**/*Doco.html'],

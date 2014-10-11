@@ -16,7 +16,7 @@ module.exports = function (grunt) {
         },
         html2js:{
             dist:{
-                src:['public/**/*.html','!public/**/*doco.html','!public/**/*Doco.html'],
+                src:['public/**/*.html','!public/**/*doco.html','!public/**/*Doco.html','!test.*.html'],
                 dest:'dist/templates.js'
             }
         },

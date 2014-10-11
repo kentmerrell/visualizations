@@ -5,14 +5,12 @@
 
 
 appCreateReport.directive('spotContainer', function ($compile, $rootScope, layoutservice) {
-    var baseurl = window.location.protocol + "//" + window.location.host;
-
-    return {
+  return {
         restrict: "E",
         scope: {
             y: '=y'
         },
-        templateUrl: baseurl + '/visualizations/public/layout/SpotContainer.html',
+        templateUrl: 'public/layout/SpotContainer.html',
         link: function (scp, el, attrs) {
             console.log("rows", parseInt(attrs.rows), 'columns', parseInt(attrs.columns))
             scp.rows = 0;

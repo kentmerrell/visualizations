@@ -1,10 +1,10 @@
 <span ng-show="propertyBag.panelExpanded" ng-mouseleave="propertyBag.panelExpanded=false">
     <span ng-repeat="pb in propertyBag.buttonSet" class="panelbutton">
-    <img ng-click="clickme(pb.name,pb.command)" ng-src="/visualizations/external_components/icons/svg/{{pb.icon}}.svg"
+    <img ng-click="clickme(pb.name,pb.command)" ng-src="external_components/icons/svg/{{pb.icon}}.svg"
          width="20" height="20"/>
     </span>
     <span class="panelbutton">
-    <img ng-click="deleteme()" ng-src="/visualizations/external_components/icons/svg/delete30.svg"
+    <img ng-click="deleteme()" ng-src="external_components/icons/svg/delete30.svg"
          width="20" height="20"/>
     </span>
 </span>

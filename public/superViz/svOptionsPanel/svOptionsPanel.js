@@ -6,11 +6,9 @@
 /*--------------SV-OPTIONS-PANEL-------------------*/
 appCreateReport.directive('svOptionsPanel',function(MetricMakerSrvc,svConfigSrvc){
     "use strict";
-    var baseurl = window.location.protocol + "//" + window.location.host;
-
     return{
         restrict:'E',
-        templateUrl:baseurl + '/visualizations/public/superViz/svOptionsPanel/sv-options-panel.html',
+        templateUrl:'public/superViz/svOptionsPanel/sv-options-panel.html',
         link:function(scope,el,attrs){
             //todo: getdefaultmetric dynamically based on clearthreaddatatype
             var defaultmetric = "CountOfValues";
@@ -60,6 +58,6 @@ appCreateReport.directive('svOptionsPanelTrigger',function(){
         replace:true,
         //todo: It would be nice to allow multiple triggers, styled locally (ie, a custom span with a custom svOptionsPanel attribute attached) that just attached used the directive for the trigger behavior
         restrict:'A,E',
-        templateUrl:baseurl + '/visualizations/public/superViz/svOptionsPanel/sv-options-panel-trigger.html'
+        templateUrl:'public/superViz/svOptionsPanel/sv-options-panel-trigger.html'
     }
 })

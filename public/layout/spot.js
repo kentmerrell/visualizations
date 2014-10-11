@@ -1,15 +1,13 @@
 
 appCreateReport.directive('spot', function (layoutservice, $compile, $rootScope,chartService) {
-    var baseurl = window.location.protocol + "//" + window.location.host;
-
-    return {
+     return {
         restrict: "E",
         replace: true,
         scope: {
             rownumber: '@',
             columnnumber: '@'
         },
-        templateUrl: baseurl + '/visualizations/public/layout/spot.html',
+        templateUrl: 'public/layout/spot.html',
         link: function (scp, elem, attrs) {
             scp.$watch(
                 function () {

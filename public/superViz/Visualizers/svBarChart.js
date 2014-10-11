@@ -4,10 +4,9 @@
 
 appCreateReport.directive('svBarChart',function(){
     "use strict";
-    var baseurl = window.location.protocol + "//" + window.location.host;
     return{
         restrict:'E',
-        templateUrl: baseurl+  '/visualizations/public/superViz/Visualizers/sv-bar-chart.html',
+        templateUrl: 'public/superViz/Visualizers/sv-bar-chart.html',
         link: function (scope, el, attrs) {
             scope.chart = {
                 "type": "ColumnChart",

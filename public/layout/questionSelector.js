@@ -5,13 +5,12 @@
 
 
 appCreateReport.directive('questionSelector', function (layoutservice) {
-    var baseurl = window.location.protocol + "//" + window.location.host;
 
     return {
         restrict: "E",
         replace: true,
         scope: { question: "=" },
-        templateUrl:  baseurl + '/visualizations/public/layout/questionSelector.html',
+        templateUrl: 'public/layout/questionSelector.html',
         link: function (scp, el, attrs) {
             // console.log("questionSelector.question", scp.question, scp);
             scp.jqoptions = { revert: 'invalid' };

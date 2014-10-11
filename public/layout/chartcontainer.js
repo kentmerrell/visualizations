@@ -2,7 +2,6 @@
  * Created by kmerrell on 10/6/2014.
  */
 appCreateReport.directive("chartcontainer", function (layoutservice, chartService) {
-    var baseurl = window.location.protocol + "//" + window.location.host;
 
     return {
         restrict: "E",
@@ -11,7 +10,7 @@ appCreateReport.directive("chartcontainer", function (layoutservice, chartServic
             spot: "=hostspot",
             questionsel: "="
         },
-        templateUrl:  baseurl + '/visualizations/public/layout/chartcontainer.html',
+        templateUrl:  'public/layout/chartcontainer.html',
         link: function (scp, el, attr) {
             //propertyBag is used for all superViz components
             scp.propertyBag = {};
