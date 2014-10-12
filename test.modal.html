@@ -69,7 +69,7 @@
     <script src="public/layout/questionSelector.js"></script>
 
     <!---------------------OTHER DIRECTIVES------------------------>
-    <script src="public/presentationViewer/modal.jsx"></script>
+    <script src="public/presentationViewer/presentationViewer.js"></script>
 
 
     <!------------------- KDM DEV TOOLS ------------------------------>
@@ -85,6 +85,11 @@
         appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
             $scope.MetricMakerSrvc=MetricMakerSrvc;
         })
+function expand(){
+    console.log('expanding',$('#mymodal'))
+    $("#mymodal").leanModal();
+}
+
     </script>
 
     <title></title>
@@ -101,12 +106,24 @@
 
         li {
             margin-top: 30px;}
+
+        #lean_overlay {
+            position: fixed;
+            z-index:100;
+            top: 0px;
+            left: 0px;
+            height:100%;
+            width:100%;
+            background: silver ;
+            display: none;
+        }
     </style>
 
 </head>
-<body>
+<body ng-app="AppCreateReport">
 Now we includ a modal directive <hr>
-<modal shown="true"></modal>
-<div class="modal"hello></div>
+<presentation-viwer></presentation-viwer>
+
+
 </body>
 </html>

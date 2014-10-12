@@ -1,5 +1,55 @@
-<span style="position: relative;display: block; background-color: red;">
+<span>
+    <style>
+        .modalOverlay-active {
+            position: fixed;
+            bottom: 0px;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            opacity: .8;
+            background-color: black;
+            z-index: 100;
+        }
 
-    PRESENTATION VIEWER:
-    <p>charts in report:{{chartsInReport}}</p>
+        .modalContent-active {
+            position: fixed;
+            bottom: 20px;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            /*opacity: .5;*/
+            background-color: #ffffff;
+            z-index: 101;
+            border-radius: 5px;;
+            padding: 15px;
+        }
+
+        .modalCloseButton {
+            position: absolute;
+            display: inline-block;
+            top: 5px;
+            right: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+
+<!-------------TRIGGER------------------->
+<button ng-click="layoutservice.presentationViewerActive=true">Presentation Viewer</button>
+
+
+<!-------------OVERLAY LAYER------------------->
+<div ng-class="{'modalOverlay-active':layoutservice.presentationViewerActive}"
+     ng-click="layoutservice.presentationViewerActive=false;"></div>
+
+<!-------------CONTENT LAYER------------------->
+    <div ng-class="{'modalContent-active':layoutservice.presentationViewerActive}" ng-style="{'display': + layoutservice.presentationViewerActive==true?'':'none'}">
+
+        PRESENTATION VIEWER:
+        <p>charts in report:{{chartsInReport}}</p>
+        <!--------CLOSE BUTTON---------------->
+        <span class="modalCloseButton" ng-click="layoutservice.presentationViewerActive=false">x</span>
+    </div>
+
 </span>

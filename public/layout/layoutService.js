@@ -211,7 +211,7 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
                 return;
             }
         }
-    }
+    };
 
     _getChartContainer = function (rownumber, columnumber) {
         var spot = $('.spot[columnnumber="' + columnumber + '"][rownumber="' + rownumber + '"]');
@@ -220,7 +220,8 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
         if(chartcontainer.length>0)
             return chartcontainer
         return null;
-    }
+    };
+    //_presentationViewerActive=false;
 
     return {
         expansionSets: _expansionSets,
@@ -301,7 +302,8 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
                 console.log('chart1scope is:',chart1scope)
                 chart1scope.chart.redraw = !chart1scope.chart.redraw;//this works because there is a watch in the ng-google-chart directive
             }
-        }
+        },
+        presentationViewerActive:false
     }
 })
 
