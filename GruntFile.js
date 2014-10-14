@@ -14,19 +14,26 @@ module.exports = function (grunt) {
                 }
             }
         },
-        html2js:{
-            dist:{
-                src:['public/**/*.html','!public/**/*doco.html','!public/**/*Doco.html','!test.*.html'],
-                dest:'dist/templates.js'
+        html2js: {
+            options: {
+                base:'../dist/'//,
+                //rename: function (moduleName) {
+                //    return '/' + moduleName.replace('.html', '.tpl');
+                //}
+            },
+            dist: {
+
+                src: ['public/**/*.html', '!public/**/*doco.html', '!public/**/*Doco.html', '!test.*.html'],
+                dest: 'dist/templates.js'
             }
         },
-        concat:{
-            options:{
-                separator:';'
+        concat: {
+            options: {
+                separator: ';'
             },
-            dist:{
-                src:['public/app/appCreateReport.js','public/**/*.js'],
-                dest:'dist/createReport.js'
+            dist: {
+                src: ['public/app/appCreateReport.js', 'public/**/*.js'],
+                dest: 'dist/createReport.js'
             }
         },
         uglify: {

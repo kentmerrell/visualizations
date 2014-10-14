@@ -8,18 +8,18 @@
             right: 0px;
             opacity: .8;
             background-color: black;
-            z-index: 100;
+            z-index: 1040;
         }
 
         .modalContent-active {
             position: fixed;
             bottom: 10%;
-            top: 10%;
+            top: 180px;
             left: 10%;
             right: 10%;
             /*opacity: .5;*/
             background-color: #ffffff;
-            z-index: 101;
+            z-index: 1050;
             border-radius: 5px;;
             padding: 15px;
         }
@@ -75,7 +75,7 @@
         <button class="modalPrevButton" ng-click="SelectedChartIndex=SelectedChartIndex-1;">Previous</button>
         <button class="modalNextButton" ng-click="SelectedChartIndex=SelectedChartIndex+1;">next</button>
 
-        SelectedChartIndex:{{SelectedChartIndex}}
+
     </div>
 
 </span>

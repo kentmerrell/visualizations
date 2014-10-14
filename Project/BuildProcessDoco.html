@@ -86,7 +86,8 @@ for production.
         <p>Prod Directory Structure</p>
     </li>
 </ul>
-<img src="https://www.lucidchart.com/publicSegments/view/5436c5f7-1154-4b31-a880-2f020a00caaf/image.png"  width="500"alt=""/>
+<img src="https://www.lucidchart.com/publicSegments/view/5436c5f7-1154-4b31-a880-2f020a00caaf/image.png" width="500"
+     alt=""/>
 
 
 <!--------------------------------- GRUNT BUILD ------------------------------------->
@@ -95,31 +96,49 @@ for production.
 <p>See <a href="http://g00glen00b.be/angular-grunt/" target="info">http://g00glen00b.be/angular-grunt/</a> for a good
     write-up on this.</p>
 <ul>
-    <li>Compile Angular Partials -- Use <a src="https://github.com/karlgoldstein/grunt-html2js.html" target="_blank">html2js</a> plugin to wrap all html partials in javascript and inject into angular module that is makes them availabe in $templateCache. (Don't include *doco.html files
-    <pre><code>html2js:{
-        dist:{
-                src:['public/superViz/**/*.html','!public/superViz/**/*doco.html','!public/superViz/**/*Doco.html'],
-                dest:'tmp/templates.js'
-            }
+    <li>Compile Angular Partials -- Use <a src="https://github.com/karlgoldstein/grunt-html2js.html" target="_blank">html2js</a>
+        plugin to wrap all html partials in javascript and inject into angular module that is makes them availabe in
+        $templateCache. (Don't include *doco.html files
+    <pre><code>html2js: {
+        options: {
+        base:'../dist/'
+        },
+        dist: {
+        src: ['public/**/*.html', '!public/**/*doco.html', '!public/**/*Doco.html', '!test.*.html'],
+        dest: 'dist/templates.js'
+        }
         },</code></pre>
-    then run "grunt html2js" in terminal.
+        then run "grunt html2js" in terminal.
     </li>
 
+
+    <!-----------------PATHS TO ICONS-------------->
+    <li>In templates.js, replace
+        <p>$templateCache.put("../visualizations/public</p>
+        with
+        <p>ng-src=\"../external_components</p>
+        <p>(These are icon files where path is not already corrected by other procedures.)</p>
+    </li>
+    <li>In templates.js, replace <p>ng-src=\"external_components</p> with <p>$templateCache.put("public</p>
+
+        <p>(The templateCache key must match the templateUrl in the directive)</p>
+    </li>
     <li>Concatenate all javascript files (modules, directives, services) into a single javascript file.
     <pre><code>concat:{
         options:{
-            separator:';'
+        separator:';'
         },
         dist:{
-            src:['public/app/appCreateReport.js','public/**/*.js'],
-            dest:'dist/createReport.js'
+        src:['public/app/appCreateReport.js','public/**/*.js'],
+        dest:'dist/createReport.js'
         }
-    },</code></pre>
+        },</code></pre>
         then run "grunt concat" in terminal.
     </li>
-
+    <li>In dist/createReport.js, delete module reference to kdm-dev-tools</li>
+    <li>In dist/createReport.js, delete module reference to templates-dist</li>
     <li>Copy index.html to dist folder</li>
-    <li>Delete the folowing sections in the head
+    <li>Delete the following sections in the head
         <ul>
             <li>CREATEREPORT APPLICATION AND SERVICES</li>
             <li>SUPERVIZ DIRECTIVES</li>
@@ -127,7 +146,8 @@ for production.
             <li>KDM DEV TOOLS</li>
             <li>LOCAL TEST CONTROLLER</li>
             <li>Other local script and css</li>
-        </ul></li>
+        </ul>
+    </li>
     <li>Insert references to the newly generated app.js and templates.js files</li>
 
     <li>Synchronize script and link tags. (see <a href="https://www.npmjs.org/package/grunt-script-link-tags"
@@ -141,12 +161,15 @@ for production.
 <ul>
     <li>Report.cshtml --
         <ul>
-            <li>copy the guts of index.html into report.html. Basically, everything inside the body tag needs
+            <li>copy the guts of index.html into report.cshtml. Basically, everything inside the body tag needs
                 to be replaced. This will be the &lt;div id="createReport" ng-app="AppCreateReport"
-                ng-controller="CreateReportCtrl"> tag and all it's contents.</li>
+                ng-controller="CreateReportCtrl"> tag and all it's contents.
+            </li>
             <li>Copy insert link to app.js in the <code>@section JavaScript {... </code>
 
             </li>
+            <li>Replace contents of asp.net:createReport.js with contents of webstorm:dist/createReport.js</li>
+            <li>Replace contents of asp.net:templates.js with contents of webstorm:dist/templates.js</li>
             <li>Update CreateReport.css with content from webstorm.
 
             </li>
@@ -191,7 +214,8 @@ for production.
         <ul>
             <li>Angular libraries -- The angular team preffers to NOT publish via NPM. They solely use Bower.</li>
             <li>bower install angular-bootstrap<br/> bower install angular-resource<br/>
-                bower install angular-animate<br/>bower install angular#1.2.26  </li>
+                bower install angular-animate<br/>bower install angular#1.2.26
+            </li>
         </ul>
     </li>
 </ul>

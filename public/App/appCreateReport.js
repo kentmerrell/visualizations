@@ -61,51 +61,6 @@ appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, 
 
 
 
-
-
-appCreateReport.directive("textlabel", function () {
-    return {
-        restrict: "E",
-        replace: true,
-        scope: {
-            spot: "=",
-            questionsel: "="
-        },
-        templateUrl: "textlabel.html",
-        link: function (scp, el, attr) {
-            //
-            console.log('textlabel scope', scp)
-            scp.deleteme = function () {
-                el.remove();
-            }
-        }
-    }
-})
-
-
-
-
-
-appCreateReport.directive("paneloptions", function (layoutservice, $rootScope) {
-    return {
-        restrict: "E",
-        replace: true,
-        templateUrl: "paneloptions.html",
-        link: function (scp, el, attr) {
-            //
-            scp.ClickChartType = function (type) {
-                console.log('clicked ', type, scp)
-                var newscope = $rootScope.$new(true);
-                newscope.questionsel = angular.copy(scp.questionsel);
-                layoutservice.instanciateChartContainer(type, el, newscope)//layoutservice.questionInDrag.defaultChartType, el, newscope
-
-            }
-        }
-    }
-});
-
-
-
 var guid = function () {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
