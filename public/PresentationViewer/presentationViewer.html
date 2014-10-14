@@ -13,10 +13,10 @@
 
         .modalContent-active {
             position: fixed;
-            bottom: 20px;
-            top: 20px;
-            left: 20px;
-            right: 20px;
+            bottom: 10%;
+            top: 10%;
+            left: 10%;
+            right: 10%;
             /*opacity: .5;*/
             background-color: #ffffff;
             z-index: 101;
@@ -33,11 +33,27 @@
             cursor: pointer;
         }
 
+        .modalPrevButton {
+            position: absolute;
+            display: inline-block;
+            bottom: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .modalNextButton {
+            position: absolute;
+            display: inline-block;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
     </style>
 
 <!-------------TRIGGER------------------->
-<button ng-click="layoutservice.presentationViewerActive=true">Presentation Viewer</button>
 
+<img  ng-click="layoutservice.presentationViewerActive=true" ng-src="external_components/icons/svg/graphical6.svg" style="cursor: pointer"
+     width="24" height="24" title="Show Presentation" />
 
 <!-------------OVERLAY LAYER------------------->
 <div ng-class="{'modalOverlay-active':layoutservice.presentationViewerActive}"
@@ -46,10 +62,20 @@
 <!-------------CONTENT LAYER------------------->
     <div ng-class="{'modalContent-active':layoutservice.presentationViewerActive}" ng-style="{'display': + layoutservice.presentationViewerActive==true?'':'none'}">
 
-        PRESENTATION VIEWER:
-        <p>charts in report:{{chartsInReport}}</p>
+
+        <super-viz></super-viz>
+
         <!--------CLOSE BUTTON---------------->
-        <span class="modalCloseButton" ng-click="layoutservice.presentationViewerActive=false">x</span>
+        <span class="modalCloseButton" ng-click="layoutservice.presentationViewerActive=false">
+             <img  ng-src="external_components/icons/svg/delete30.svg"
+                  width="20" height="20"/>
+        </span>
+
+        <!--------PREVIOUS/NEXT BUTTONS---------------->
+        <button class="modalPrevButton" ng-click="SelectedChartIndex=SelectedChartIndex-1;">Previous</button>
+        <button class="modalNextButton" ng-click="SelectedChartIndex=SelectedChartIndex+1;">next</button>
+
+        SelectedChartIndex:{{SelectedChartIndex}}
     </div>
 
 </span>

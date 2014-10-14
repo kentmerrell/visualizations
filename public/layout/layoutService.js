@@ -217,13 +217,14 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
         var spot = $('.spot[columnnumber="' + columnumber + '"][rownumber="' + rownumber + '"]');
 
         var chartcontainer = $(spot).find('.chartcontainer');
-        if(chartcontainer.length>0)
+        if (chartcontainer.length > 0)
             return chartcontainer
         return null;
     };
     //_presentationViewerActive=false;
 
     return {
+        allSpots: _allSpots,
         expansionSets: _expansionSets,
         expansionsetInSelection: _expansionsetInSelection,
         spotIsTheOriginatoryInAnExpansionset: _spotIsTheOriginatoryInAnExpansionset,
@@ -277,8 +278,9 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
             //then find the spot's panelcontainer
             var container = $(spt).find(".panelarea1");
 
-            if (container.children().length > 0)
-            { container.children().remove(); }
+            if (container.children().length > 0) {
+                container.children().remove();
+            }
 
             container.append($compile("<chartcontainer questionsel='questionsel' hostspot='spot'></chartcontainer>")(newscope));
 
@@ -293,17 +295,40 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
             //    container.append($compile("<panelpiedirective questionsel='questionsel'></paneldirective>")(newscope));
         },
         triggerChartRedraw: function (rownumber, columnnumber) {
-            console.log('chart Redraw has been triggered in layoutService',rownumber,columnnumber)
+            console.log('chart Redraw has been triggered in layoutService', rownumber, columnnumber)
             var chartcontainer = _getChartContainer(rownumber, columnnumber);
             //(there may not be a chartcontainer on thespot)
             if (chartcontainer) {
                 parent1 = chartcontainer.parent();
                 var chart1scope = parent1.find('.payload').find('div').scope();
-                console.log('chart1scope is:',chart1scope)
+                console.log('chart1scope is:', chart1scope)
                 chart1scope.chart.redraw = !chart1scope.chart.redraw;//this works because there is a watch in the ng-google-chart directive
             }
         },
-        presentationViewerActive:false
+        presentationViewerActive: false,
+
+        allVisualizations: function () {
+
+            var rtrn = [];
+            var mycnt = 0;
+            _.each(this.allSpots, function (spt) {
+                var chartcontainer = _getChartContainer(spt.row, spt.col);
+                //(there may not be a chartcontainer on thespot)
+                if (chartcontainer) {
+                    questionName=chartcontainer.scope().questionsel.Name;
+
+                    parent1 = chartcontainer.parent();
+                    var chart1scope = parent1.find('.payload').find('div').scope();
+                    if(chart1scope) {
+                        var vizobj = {visualizationType: chart1scope.propertyBag.visualizationType, displayText: chartcontainer.scope().questionsel.Name};
+                        rtrn.push(vizobj)
+                    }
+                }
+
+            })
+
+            return rtrn;
+        }
     }
 })
 

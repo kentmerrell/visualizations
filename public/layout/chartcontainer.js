@@ -14,6 +14,7 @@ appCreateReport.directive("chartcontainer", function (layoutservice, chartServic
         link: function (scp, el, attr) {
             //propertyBag is used for all superViz components
             scp.propertyBag = {};
+            scp.propertyBag.userCanEdit=true;
             scp.ctdatatype=scp.questionsel.DataType.toLowerCase();
             el.attr("Id", guid());
             var payloadparent = $(el).find('.payload');

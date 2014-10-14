@@ -66,6 +66,8 @@
     <script src="public/layout/spotContainer.js"></script>
     <script src="public/layout/questionSelector.js"></script>
 
+    <!---------------------OTHER DIRECTIVES------------------------>
+    <script src="public/presentationViewer/presentationViewer.js"></script>
 
     <!------------------- KDM DEV TOOLS ------------------------------>
     <script src="external_components/kdmDevTools/kdmDevToolsApp.js"></script>
@@ -103,14 +105,13 @@
 
 <div id="createReport" ng-app="AppCreateReport" ng-controller="CreateReportCtrl">
 
-
+    allVisualizations:{{layoutservice.allVisualizations()}}
 
     <div class="panelcontainer">
 
             <span class="ReportHeader">{{reportdataservice.reportname}}
                 <span class="presentationModeIcon">
-                        <img ng-click="clickme()" src="/visualizations/external_components/icons/svg/graphical6.svg"
-                             width="24" height="24" title="Show Presentation" />
+                        <presentation-viwer></presentation-viwer>
                 </span></span>
         <spot-container rows="3" columns="2"></spot-container>
         <div style="margin-top:50px;"> &nbsp;</div>

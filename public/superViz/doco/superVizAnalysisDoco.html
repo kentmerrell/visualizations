@@ -99,6 +99,9 @@ chartContainer directive, which provides placement (drag/drop/delete/size) servi
     <li>propertyBag is an object declared in chartContainer (testChartContainer in isolateddev) that holds dynamically
         created properties available to all components within the shared scope.
     </li>
+    <li>userCanEdit -- boolean -- The superViz directive is used in CreatReport, ViewReoprt, and PresentationViewer.  It is read-only
+    in ViewReport and PresentationViewer.  If userCanEdit is false, the options panel is hidden.</li>
+    <li>displayTitle -- string -- Text to show in title panel.  By default, it is the base-question name.  It can be overridden in configurations.</li>
     <li><p>Scope can be tested by injecting a string representation of datatype it into the testChartContainer directive
         via
         a ctdatatype attribute.</p>

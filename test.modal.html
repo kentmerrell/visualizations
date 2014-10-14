@@ -82,8 +82,8 @@
 
 
     <script type="text/javascript">
-        appCreateReport.controller('superVisTestCtrl',function($scope, MetricMakerSrvc){
-            $scope.MetricMakerSrvc=MetricMakerSrvc;
+        appCreateReport.controller('tempctrl',function($scope, layoutservice){
+            $scope.layoutservice=layoutservice;
         })
 function expand(){
     console.log('expanding',$('#mymodal'))
@@ -123,7 +123,7 @@ function expand(){
 <body ng-app="AppCreateReport">
 Now we includ a modal directive <hr>
 <presentation-viwer></presentation-viwer>
-
-
+{{layoutservice.expansionSets}}
+<kdm-navigation></kdm-navigation>
 </body>
 </html>

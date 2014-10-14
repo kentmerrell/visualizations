@@ -36,11 +36,10 @@ appCreateReport.config(['$httpProvider', function ($httpProvider) {
 
 appCreateReport.config(function($locationProvider) {
     $locationProvider.html5Mode(true);
-
 });
 
 appCreateReport.controller('CreateReportCtrl', function ($scope, layoutservice, ReportDataService,chartService) {
-
+    $scope.layoutservice=layoutservice;
     $scope.spots = layoutservice.allSpots;
     $scope.reportdataservice = ReportDataService;
     $scope.allQuestions = ReportDataService.getAllQuestions;// questionservice.allquestions;
