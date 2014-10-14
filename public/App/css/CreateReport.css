@@ -47,7 +47,7 @@ h3 {
 .ReportControlPanelContainer {
   left: 80px;
   position: fixed;
-  top: 130px;
+  top: 100px;
   width: 300px;
 }
 .ReportControlPanelContainer .searchcontainer {
@@ -80,7 +80,7 @@ h3 {
   left: 350px;
   padding: 0px;
   position: relative;
-  top: 80px;
+  top: 50px;
   width: 800px;
 }
 h4.panel-title {
