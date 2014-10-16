@@ -108,18 +108,23 @@ appCreateReport.directive('svBarChart',function(){
                     ]
                 },
                 "options": {
-                    "title": "Sales per month",
-                    "isStacked": "true",
+                    legend:{position:"none"},
+                    colors:['#3399FF','#5CADFF','#3D5C99','#6699FF'],
+                    "isStacked": "false",
+                    animation:{
+                        duration: 1000,
+                        easing: 'out'
+                    },
                     "fill": 20,
                     "displayExactValues": true,
                     "vAxis": {
-                        "title": "Sales unit",
+                        "title": "Count",
                         "gridlines": {
                             "count": 6
                         }
                     },
                     "hAxis": {
-                        "title": "Date"
+                        "title": "Month"
                     }
                 },
                 "formatters": {},
