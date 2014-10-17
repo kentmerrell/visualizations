@@ -60,7 +60,7 @@ appCreateReport.directive('jqcloudKdm', function($parse) {
             $scope.colors = ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976"];
 
 
-            var options = {};
+            var options = {'shape':'rectangular','width':370,'height':265};
 
             for (var i=0, l=jqcOptions.length; i<l; i++) {
                 var opt = jqcOptions[i];

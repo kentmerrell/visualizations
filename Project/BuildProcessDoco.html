@@ -115,13 +115,13 @@ for production.
     <!-----------------PATHS TO ICONS-------------->
     <li>In templates.js, replace
         <p>$templateCache.put("../visualizations/public</p>
-        with
-        <p>ng-src=\"../external_components</p>
-        <p>(These are icon files where path is not already corrected by other procedures.)</p>
-    </li>
-    <li>In templates.js, replace <p>ng-src=\"external_components</p> with <p>$templateCache.put("public</p>
+        with <p>$templateCache.put("public</p> <p>(The templateCache key must match the templateUrl in the directive)</p>
 
-        <p>(The templateCache key must match the templateUrl in the directive)</p>
+
+    </li>
+    <li>In templates.js, replace <p>ng-src=\"external_components</p> with  <p>ng-src=\"../external_components</p>
+        <p>(These are icon files where path is not already corrected by other procedures.)</p>
+
     </li>
     <li>Concatenate all javascript files (modules, directives, services) into a single javascript file.
     <pre><code>concat:{
@@ -136,24 +136,31 @@ for production.
         then run "grunt concat" in terminal.
     </li>
     <li>In dist/createReport.js, delete module reference to kdm-dev-tools</li>
-    <li>In dist/createReport.js, delete module reference to templates-dist</li>
-    <li>Copy index.html to dist folder</li>
+    <li>In dist/createReport.js, add module reference to templates-dist</li>
+    <li>Copy index.html to test.index.html</li>
+    <li>Move test.index.html to dist directory (make sure script and link references are updated)</li>
     <li>Delete the following sections in the head
         <ul>
             <li>CREATEREPORT APPLICATION AND SERVICES</li>
             <li>SUPERVIZ DIRECTIVES</li>
             <li>LAYOUT DIRECTIVES</li>
+            <li>OTHER DIRECTIVES</li>
             <li>KDM DEV TOOLS</li>
             <li>LOCAL TEST CONTROLLER</li>
             <li>Other local script and css</li>
         </ul>
     </li>
-    <li>Insert references to the newly generated app.js and templates.js files</li>
-
-    <li>Synchronize script and link tags. (see <a href="https://www.npmjs.org/package/grunt-script-link-tags"
-                                                  target="info">https://www.npmjs.org/package/grunt-script-link-tags</a>
+    <li>Insert references to the newly generated app.js and templates.js files
+        <ul>
+            <li>    &lt;script src="createReport.js">&lt/script></li>
+                <li>&ltscript src="templates.js">&lt/script></li>
+        </ul>
     </li>
+<li>Run it in dist.  Look in firebug for network missed files.  Look at UI to be sure icons show up and everything is working.</li>
 </ul>
+Synchronize script and link tags. (see <a href="https://www.npmjs.org/package/grunt-script-link-tags"
+                                              target="info">https://www.npmjs.org/package/grunt-script-link-tags</a>
+
 
 <!------------------------------ ASP.NET INTEGRATION----------------------------------->
 
@@ -161,19 +168,25 @@ for production.
 <ul>
     <li>Report.cshtml --
         <ul>
-            <li>copy the guts of index.html into report.cshtml. Basically, everything inside the body tag needs
+            <li>copy the guts of dist.index.html into report.cshtml. Basically, everything inside the body tag (exclusive) needs
                 to be replaced. This will be the &lt;div id="createReport" ng-app="AppCreateReport"
                 ng-controller="CreateReportCtrl"> tag and all it's contents.
             </li>
-            <li>Copy insert link to app.js in the <code>@section JavaScript {... </code>
+            <li>Make sure createReport.js link exists in the MVC include page section <code>@section JavaScript {... </code>
 
             </li>
             <li>Replace contents of asp.net:createReport.js with contents of webstorm:dist/createReport.js</li>
             <li>Replace contents of asp.net:templates.js with contents of webstorm:dist/templates.js</li>
-            <li>Update CreateReport.css with content from webstorm.
-
+            <li>Replace contents of asp.net:CTV2_CreateReport.less with contents from webstorm:public/app/css/CreateReport.less.</li>
+            <li>In asp.net:templates.js, replace
+            <p>src=\"../external_components/icons/svg/"</p>
+                <p>with</p>
+            <p>src=\"./scripts/CTV2App/Report/external_components/icons/</p></li>
+            <li>Run locally from Visual Studio.  Look in firebug for errors, missing files. Look at UI for missing icons and general functionality.</li>
+            <li>Get latest version from TFS, merge any conflicts, run locally again.</li>
+            <li>Publish to Staging server (\\dv-istaging-01\c$\inetpub\wwwroot\ctv2prototype)
+            <p><a href="http://dv-istaging-01/ctv2prototype/">http://dv-istaging-01/ctv2prototype/</a></p>
             </li>
-            <li></li>
         </ul>
     </li>
     <li></li>

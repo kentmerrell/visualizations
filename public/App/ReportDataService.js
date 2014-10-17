@@ -4,7 +4,7 @@ appCreateReport.factory('ReportDataService', function ($resource, $http,$locatio
     var _allQuestions = [
         {"qtext": "abc"}
     ];
-    var _surveyTemplateId = 6; //6, 10083
+    var _surveyTemplateId = 10265; //6, 10083
     if(($location.search()).templateId){
         _surveyTemplateId=($location.search()).templateId
     }

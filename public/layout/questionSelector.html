@@ -2,8 +2,10 @@
       ng-style="{'background-color': + question.Name=='Text Label' ?'#6A6868':'#9f9c9c;'}"
       data-drag="true"
       data-jqyoui-options="{revert: 'invalid',helper:'clone'}"
-      jqyoui-draggable=" { onStart: 'startdragging()',placeholder:'keep', onStope:'stopdragging()'}">
+      jqyoui-draggable=" { onStart: 'startdragging()',placeholder:'keep', onStope:'stopdragging()'}"
+      ng-click="addVisualization()"
+        >
 
-    <span>{{question.Name}}</span>
+    <span >{{question.QNo}} - {{question.Name}}</span>
 
 </span>

@@ -13,10 +13,10 @@
 
         .modalContent-active {
             position: fixed;
-            bottom: 10%;
-            top: 180px;
-            left: 10%;
-            right: 10%;
+            bottom: 0%;
+            top: 0px;
+            left: 0%;
+            right: 0%;
             /*opacity: .5;*/
             background-color: #ffffff;
             z-index: 1050;
@@ -39,14 +39,17 @@
             bottom: 20px;
             left: 20px;
             cursor: pointer;
+            width: 34px;
         }
 
         .modalNextButton {
+
             position: absolute;
             display: inline-block;
             bottom: 20px;
             right: 20px;
             cursor: pointer;
+            width:34px;
         }
     </style>
 
@@ -72,8 +75,19 @@
         </span>
 
         <!--------PREVIOUS/NEXT BUTTONS---------------->
-        <button class="modalPrevButton" ng-click="SelectedChartIndex=SelectedChartIndex-1;">Previous</button>
-        <button class="modalNextButton" ng-click="SelectedChartIndex=SelectedChartIndex+1;">next</button>
+
+        <span class="modalPrevButton" ng-click="SelectedChartIndex=SelectedChartIndex-1;">
+            <img  ng-src="external_components/icons/svg/thick10.svg"
+                  style="cursor: pointer"
+                  width="34" height="34" title="Show Presentation" /></span>
+
+
+
+        <span class="modalNextButton" ng-click="SelectedChartIndex=SelectedChartIndex+1;">
+            <img  ng-src="external_components/icons/svg/arrow454.svg"
+                  style="cursor: pointer"
+                  width="34" height="34" title="Show Presentation" /></span>
+
 
 
     </div>

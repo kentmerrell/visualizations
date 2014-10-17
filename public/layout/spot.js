@@ -88,7 +88,7 @@ appCreateReport.directive('spot', function (layoutservice, $compile, $rootScope,
                             el.append($compile("<textlabel questionsel='questionsel'></textlabel>")(newscope));
                         }
                         else {
-                            layoutservice.instanciateChartContainer(layoutservice.questionInDrag.defaultChartType, elem, newscope);
+                            layoutservice.instanciateChartContainer( elem, newscope);
                         }
                     }
                     if (originator == "chartcontainer") {

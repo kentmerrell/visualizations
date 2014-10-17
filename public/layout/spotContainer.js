@@ -10,9 +10,9 @@ appCreateReport.directive('spotContainer', function ($compile, $rootScope, layou
         scope: {
             y: '=y'
         },
-        templateUrl: 'public/layout/SpotContainer.html',
+        templateUrl: 'public/layout/spotContainer.html',
         link: function (scp, el, attrs) {
-            console.log("rows", parseInt(attrs.rows), 'columns', parseInt(attrs.columns))
+            console.log("rows", parseInt(attrs.rows), 'columns', parseInt(attrs.columns));
             scp.rows = 0;
             scp.columns = parseInt(attrs.columns);
 
@@ -20,7 +20,7 @@ appCreateReport.directive('spotContainer', function ($compile, $rootScope, layou
                 return layoutservice.layoutmode
             }, function (val) {
                 scp.layoutmode = val;
-            })
+            });
             //let layoutservice know how many columns to expect (for layoutindicator logic)
             layoutservice.registercolumncount(scp.columns);
             scp.addRow = function () {
@@ -36,7 +36,7 @@ appCreateReport.directive('spotContainer', function ($compile, $rootScope, layou
                 }
                 el.find('.ChildrenArea').append(row);
                 //console.log(layoutservice.getallspots());
-            }
+            };
 
             for (var j = 1; j <= parseInt(attrs.rows) ; j++) {
                 scp.addRow();

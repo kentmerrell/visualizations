@@ -4,7 +4,7 @@
  *                                                                           */
 
 
-appCreateReport.directive('questionSelector', function (layoutservice) {
+appCreateReport.directive('questionSelector', function (layoutservice,$rootScope) {
 
     return {
         restrict: "E",
@@ -19,6 +19,25 @@ appCreateReport.directive('questionSelector', function (layoutservice) {
                 console.log('scp.startdragging', arguments, scp.question)
                 angular.copy(scp.question, layoutservice.questionInDrag)
             }
+
+            scp.addVisualization=function(){
+                var newscope = $rootScope.$new(true);
+                newscope.questionsel = scp.question;
+                var spot = layoutservice.openSpots()[0];
+//                newscope.rowspan = scp.rowspan;
+//                newscope.colspan = scp.colspan;
+                if (newscope.questionsel.qtext == "Text Panel") {
+                   // el.append($compile("<textlabel questionsel='questionsel'></textlabel>")(newscope));
+                }
+                else {
+                    layoutservice.instanciateChartContainerInNextAvailableSpot( spot, newscope);
+                }
+
+                //layoutservice.instanciateChartContainerInNextAvailableSpot(scp.question);
+
+            }
+
+
         }
     }
 })

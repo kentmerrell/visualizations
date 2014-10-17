@@ -268,10 +268,10 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
             var chart2scope = parent2.find('.payload').find('div').scope();
             chart2scope.chart.redraw = !chart2scope.chart.redraw;
         },
-        instanciateChartContainer: function (charttype, parent, newscope) {
+
+        instanciateChartContainer: function (parent, newscope) {
             //if there is already a chart there, delete it
             //parent.children with an id of 'panelcontainer'
-            //if panelcontainer has any children, delete them
 
             //first find the parent spot
             var spt = $(parent).closest(".spot");
@@ -284,16 +284,24 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
 
             container.append($compile("<chartcontainer questionsel='questionsel' hostspot='spot'></chartcontainer>")(newscope));
 
-            //if (charttype.toLowerCase() == "bar")
-
-            //    container.append($compile("<panelbardirective questionsel='questionsel'></paneldirective>")(newscope));
-
-            //if (charttype.toLowerCase() == "line")
-            //    container.append($compile("<paneldirective questionsel='questionsel'></paneldirective>")(newscope));
-
-            //if (charttype.toLowerCase() == "pie")
-            //    container.append($compile("<panelpiedirective questionsel='questionsel'></paneldirective>")(newscope));
         },
+
+        instanciateChartContainerInNextAvailableSpot:function(spot, newscope){
+
+            console.log('instanciateChartContainerInNextAvailableSpot',spot,newscope)
+
+
+            var container = $('.spot[columnnumber="' + spot.col + '"][rownumber="' + spot.row + '"]');
+
+            var panelArea = $(container).find(".panelarea1");
+
+            if (panelArea.children().length > 0) {
+                panelArea.children().remove();
+            }
+
+            panelArea.append($compile("<chartcontainer questionsel='questionsel' hostspot='spot'></chartcontainer>")(newscope));
+        },
+
         triggerChartRedraw: function (rownumber, columnnumber) {
             console.log('chart Redraw has been triggered in layoutService', rownumber, columnnumber)
             var chartcontainer = _getChartContainer(rownumber, columnnumber);
@@ -308,18 +316,17 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
         presentationViewerActive: false,
 
         allVisualizations: function () {
-
             var rtrn = [];
             var mycnt = 0;
             _.each(this.allSpots, function (spt) {
                 var chartcontainer = _getChartContainer(spt.row, spt.col);
                 //(there may not be a chartcontainer on thespot)
                 if (chartcontainer) {
-                    questionName=chartcontainer.scope().questionsel.Name;
+                    questionName = chartcontainer.scope().questionsel.Name;
 
                     parent1 = chartcontainer.parent();
                     var chart1scope = parent1.find('.payload').find('div').scope();
-                    if(chart1scope) {
+                    if (chart1scope) {
                         var vizobj = {visualizationType: chart1scope.propertyBag.visualizationType, displayText: chartcontainer.scope().questionsel.Name};
                         rtrn.push(vizobj)
                     }
@@ -328,7 +335,24 @@ appCreateReport.factory('layoutservice', function ($rootScope, $compile) {
             })
 
             return rtrn;
+        },
+
+        openSpots: function () {
+            //return an array of spots where:
+            // 1) spot does not have a chart located directly in it's panel area
+            // 2) spot is not overridden by a different spot's panel area.
+            var rtrn = [];
+            _.each(this.allSpots, function (spt) {
+                var chartcontainer = _getChartContainer(spt.row, spt.col);
+                //(there may not be a chartcontainer on thespot)
+                if (!chartcontainer) {
+                    rtrn.push(spt);
+                }
+            })
+
+            return rtrn;
         }
+
     }
 })
 
